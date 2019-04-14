@@ -3,19 +3,282 @@
 
 public partial class MainWindow
 {
+	private global::Gtk.Notebook notebook1;
+
+	private global::Gtk.VBox simulatorBox;
+
+	private global::Gtk.HBox menuBox;
+
+	private global::Gtk.ComboBox SchedulerCombobox;
+
+	private global::Gtk.ComboBoxEntry directoryEntry;
+
+	private global::Gtk.Button SearchButton;
+
+	private global::Gtk.VBox plotBox;
+
+	private global::Gtk.HBox mediaBox;
+
+	private global::Gtk.Button previewButton;
+
+	private global::Gtk.Button pauseButton;
+
+	private global::Gtk.Button playButton;
+
+	private global::Gtk.Button nextButton;
+
+	private global::Gtk.Label simuPageText;
+
+	private global::Gtk.VBox vbox3;
+
+	private global::Gtk.HBox hbox2;
+
+	private global::Gtk.ComboBoxEntry dirCreatorEntry;
+
+	private global::Gtk.Button saveCreatorButton;
+
+	private global::Gtk.ScrolledWindow GtkScrolledWindow;
+
+	private global::Gtk.TreeView creatorTreeView;
+
+	private global::Gtk.HBox hbox4;
+
+	private global::Gtk.Button button5;
+
+	private global::Gtk.Button button4;
+
+	private global::Gtk.Button button3;
+
+	private global::Gtk.Label creationPageText;
+
 	protected virtual void Build()
 	{
 		global::Stetic.Gui.Initialize(this);
 		// Widget MainWindow
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString("MainWindow");
-		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+		this.Title = global::Mono.Unix.Catalog.GetString("Scherduler-Sharp");
+		this.Icon = global::Stetic.IconLoader.LoadIcon(this, "stock_help", global::Gtk.IconSize.Dialog);
+		this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+		// Container child MainWindow.Gtk.Container+ContainerChild
+		this.notebook1 = new global::Gtk.Notebook();
+		this.notebook1.CanFocus = true;
+		this.notebook1.Name = "notebook1";
+		this.notebook1.CurrentPage = 1;
+		// Container child notebook1.Gtk.Notebook+NotebookChild
+		this.simulatorBox = new global::Gtk.VBox();
+		this.simulatorBox.Name = "simulatorBox";
+		this.simulatorBox.Spacing = 6;
+		// Container child simulatorBox.Gtk.Box+BoxChild
+		this.menuBox = new global::Gtk.HBox();
+		this.menuBox.Name = "menuBox";
+		this.menuBox.Spacing = 6;
+		// Container child menuBox.Gtk.Box+BoxChild
+		this.SchedulerCombobox = global::Gtk.ComboBox.NewText();
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador X"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador Y"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador Z"));
+		this.SchedulerCombobox.WidthRequest = 124;
+		this.SchedulerCombobox.Name = "SchedulerCombobox";
+		this.SchedulerCombobox.Active = 0;
+		this.menuBox.Add(this.SchedulerCombobox);
+		global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.menuBox[this.SchedulerCombobox]));
+		w1.Position = 0;
+		w1.Expand = false;
+		w1.Fill = false;
+		// Container child menuBox.Gtk.Box+BoxChild
+		this.directoryEntry = global::Gtk.ComboBoxEntry.NewText();
+		this.directoryEntry.AppendText(global::Mono.Unix.Catalog.GetString("/DiretorioDoArquivo/arquivo.json"));
+		this.directoryEntry.Name = "directoryEntry";
+		this.menuBox.Add(this.directoryEntry);
+		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.menuBox[this.directoryEntry]));
+		w2.Position = 1;
+		// Container child menuBox.Gtk.Box+BoxChild
+		this.SearchButton = new global::Gtk.Button();
+		this.SearchButton.CanFocus = true;
+		this.SearchButton.Name = "SearchButton";
+		this.SearchButton.UseUnderline = true;
+		this.SearchButton.Label = global::Mono.Unix.Catalog.GetString("Procurar");
+		global::Gtk.Image w3 = new global::Gtk.Image();
+		w3.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-file", global::Gtk.IconSize.Button);
+		this.SearchButton.Image = w3;
+		this.menuBox.Add(this.SearchButton);
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.menuBox[this.SearchButton]));
+		w4.Position = 2;
+		w4.Expand = false;
+		w4.Fill = false;
+		this.simulatorBox.Add(this.menuBox);
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.simulatorBox[this.menuBox]));
+		w5.Position = 0;
+		w5.Expand = false;
+		w5.Fill = false;
+		// Container child simulatorBox.Gtk.Box+BoxChild
+		this.plotBox = new global::Gtk.VBox();
+		this.plotBox.Name = "plotBox";
+		this.plotBox.Spacing = 6;
+		this.simulatorBox.Add(this.plotBox);
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.simulatorBox[this.plotBox]));
+		w6.Position = 1;
+		// Container child simulatorBox.Gtk.Box+BoxChild
+		this.mediaBox = new global::Gtk.HBox();
+		this.mediaBox.Name = "mediaBox";
+		this.mediaBox.Spacing = 6;
+		// Container child mediaBox.Gtk.Box+BoxChild
+		this.previewButton = new global::Gtk.Button();
+		this.previewButton.CanFocus = true;
+		this.previewButton.Name = "previewButton";
+		this.previewButton.UseUnderline = true;
+		this.previewButton.Label = global::Mono.Unix.Catalog.GetString("Retroceder");
+		global::Gtk.Image w7 = new global::Gtk.Image();
+		w7.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-previous", global::Gtk.IconSize.Button);
+		this.previewButton.Image = w7;
+		this.mediaBox.Add(this.previewButton);
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.mediaBox[this.previewButton]));
+		w8.Position = 0;
+		// Container child mediaBox.Gtk.Box+BoxChild
+		this.pauseButton = new global::Gtk.Button();
+		this.pauseButton.CanFocus = true;
+		this.pauseButton.Name = "pauseButton";
+		this.pauseButton.UseUnderline = true;
+		this.pauseButton.Label = global::Mono.Unix.Catalog.GetString("Pausa");
+		global::Gtk.Image w9 = new global::Gtk.Image();
+		w9.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-pause", global::Gtk.IconSize.Menu);
+		this.pauseButton.Image = w9;
+		this.mediaBox.Add(this.pauseButton);
+		global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.mediaBox[this.pauseButton]));
+		w10.Position = 1;
+		// Container child mediaBox.Gtk.Box+BoxChild
+		this.playButton = new global::Gtk.Button();
+		this.playButton.CanFocus = true;
+		this.playButton.Name = "playButton";
+		this.playButton.UseUnderline = true;
+		this.playButton.Label = global::Mono.Unix.Catalog.GetString("Iniciar");
+		global::Gtk.Image w11 = new global::Gtk.Image();
+		w11.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-play", global::Gtk.IconSize.Menu);
+		this.playButton.Image = w11;
+		this.mediaBox.Add(this.playButton);
+		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.mediaBox[this.playButton]));
+		w12.Position = 2;
+		// Container child mediaBox.Gtk.Box+BoxChild
+		this.nextButton = new global::Gtk.Button();
+		this.nextButton.CanFocus = true;
+		this.nextButton.Name = "nextButton";
+		this.nextButton.UseUnderline = true;
+		this.nextButton.Label = global::Mono.Unix.Catalog.GetString("Avançar");
+		global::Gtk.Image w13 = new global::Gtk.Image();
+		w13.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-next", global::Gtk.IconSize.Menu);
+		this.nextButton.Image = w13;
+		this.mediaBox.Add(this.nextButton);
+		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.mediaBox[this.nextButton]));
+		w14.Position = 3;
+		this.simulatorBox.Add(this.mediaBox);
+		global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.simulatorBox[this.mediaBox]));
+		w15.Position = 2;
+		w15.Expand = false;
+		w15.Fill = false;
+		this.notebook1.Add(this.simulatorBox);
+		// Notebook tab
+		this.simuPageText = new global::Gtk.Label();
+		this.simuPageText.Name = "simuPageText";
+		this.simuPageText.LabelProp = global::Mono.Unix.Catalog.GetString("Simulaçâo");
+		this.notebook1.SetTabLabel(this.simulatorBox, this.simuPageText);
+		this.simuPageText.ShowAll();
+		// Container child notebook1.Gtk.Notebook+NotebookChild
+		this.vbox3 = new global::Gtk.VBox();
+		this.vbox3.Name = "vbox3";
+		this.vbox3.Spacing = 6;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.hbox2 = new global::Gtk.HBox();
+		this.hbox2.Name = "hbox2";
+		this.hbox2.Spacing = 6;
+		// Container child hbox2.Gtk.Box+BoxChild
+		this.dirCreatorEntry = global::Gtk.ComboBoxEntry.NewText();
+		this.dirCreatorEntry.Name = "dirCreatorEntry";
+		this.hbox2.Add(this.dirCreatorEntry);
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.dirCreatorEntry]));
+		w17.Position = 0;
+		// Container child hbox2.Gtk.Box+BoxChild
+		this.saveCreatorButton = new global::Gtk.Button();
+		this.saveCreatorButton.CanFocus = true;
+		this.saveCreatorButton.Name = "saveCreatorButton";
+		this.saveCreatorButton.UseUnderline = true;
+		this.saveCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Salvar");
+		global::Gtk.Image w18 = new global::Gtk.Image();
+		w18.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-save", global::Gtk.IconSize.Menu);
+		this.saveCreatorButton.Image = w18;
+		this.hbox2.Add(this.saveCreatorButton);
+		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.saveCreatorButton]));
+		w19.Position = 1;
+		w19.Expand = false;
+		w19.Fill = false;
+		this.vbox3.Add(this.hbox2);
+		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox2]));
+		w20.Position = 0;
+		w20.Expand = false;
+		w20.Fill = false;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow();
+		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
+		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
+		this.creatorTreeView = new global::Gtk.TreeView();
+		this.creatorTreeView.CanFocus = true;
+		this.creatorTreeView.Name = "creatorTreeView";
+		this.GtkScrolledWindow.Add(this.creatorTreeView);
+		this.vbox3.Add(this.GtkScrolledWindow);
+		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.GtkScrolledWindow]));
+		w22.Position = 1;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.hbox4 = new global::Gtk.HBox();
+		this.hbox4.Name = "hbox4";
+		this.hbox4.Spacing = 6;
+		// Container child hbox4.Gtk.Box+BoxChild
+		this.button5 = new global::Gtk.Button();
+		this.button5.CanFocus = true;
+		this.button5.Name = "button5";
+		this.button5.UseUnderline = true;
+		this.button5.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
+		this.hbox4.Add(this.button5);
+		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button5]));
+		w23.Position = 0;
+		// Container child hbox4.Gtk.Box+BoxChild
+		this.button4 = new global::Gtk.Button();
+		this.button4.CanFocus = true;
+		this.button4.Name = "button4";
+		this.button4.UseUnderline = true;
+		this.button4.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
+		this.hbox4.Add(this.button4);
+		global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button4]));
+		w24.Position = 1;
+		// Container child hbox4.Gtk.Box+BoxChild
+		this.button3 = new global::Gtk.Button();
+		this.button3.CanFocus = true;
+		this.button3.Name = "button3";
+		this.button3.UseUnderline = true;
+		this.button3.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
+		this.hbox4.Add(this.button3);
+		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button3]));
+		w25.Position = 2;
+		this.vbox3.Add(this.hbox4);
+		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox4]));
+		w26.Position = 2;
+		w26.Expand = false;
+		w26.Fill = false;
+		this.notebook1.Add(this.vbox3);
+		global::Gtk.Notebook.NotebookChild w27 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox3]));
+		w27.Position = 1;
+		// Notebook tab
+		this.creationPageText = new global::Gtk.Label();
+		this.creationPageText.Name = "creationPageText";
+		this.creationPageText.LabelProp = global::Mono.Unix.Catalog.GetString("Criação");
+		this.notebook1.SetTabLabel(this.vbox3, this.creationPageText);
+		this.creationPageText.ShowAll();
+		this.Add(this.notebook1);
 		if ((this.Child != null))
 		{
 			this.Child.ShowAll();
 		}
-		this.DefaultWidth = 400;
-		this.DefaultHeight = 300;
+		this.DefaultWidth = 672;
+		this.DefaultHeight = 529;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 	}
