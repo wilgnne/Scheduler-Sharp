@@ -120,7 +120,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-pause Menu</property>
+                    <property name="Icon">stock:gtk-media-pause Button</property>
                     <property name="Label" translatable="yes">Pausa</property>
                     <property name="UseUnderline">True</property>
                   </widget>
@@ -134,7 +134,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-play Menu</property>
+                    <property name="Icon">stock:gtk-media-play Button</property>
                     <property name="Label" translatable="yes">Iniciar</property>
                     <property name="UseUnderline">True</property>
                   </widget>
@@ -148,7 +148,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-next Menu</property>
+                    <property name="Icon">stock:gtk-media-next Button</property>
                     <property name="Label" translatable="yes">Avançar</property>
                     <property name="UseUnderline">True</property>
                   </widget>
@@ -200,7 +200,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-save Menu</property>
+                    <property name="Icon">stock:gtk-save Button</property>
                     <property name="Label" translatable="yes">Salvar</property>
                     <property name="UseUnderline">True</property>
                   </widget>
@@ -245,7 +245,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-add Menu</property>
+                    <property name="Icon">stock:gtk-add Button</property>
                     <property name="Label" translatable="yes">Adicionar</property>
                     <property name="UseUnderline">True</property>
                   </widget>
@@ -259,7 +259,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:stock_delete Menu</property>
+                    <property name="Icon">stock:stock_delete Button</property>
                     <property name="Label" translatable="yes">Remover</property>
                     <property name="UseUnderline">True</property>
                   </widget>
