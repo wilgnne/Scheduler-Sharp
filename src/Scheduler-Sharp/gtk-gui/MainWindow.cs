@@ -43,11 +43,9 @@ public partial class MainWindow
 
 	private global::Gtk.HBox hbox4;
 
-	private global::Gtk.Button button5;
+	private global::Gtk.Button addCreatorButton;
 
-	private global::Gtk.Button button4;
-
-	private global::Gtk.Button button3;
+	private global::Gtk.Button removeCreatorButton;
 
 	private global::Gtk.Label creationPageText;
 
@@ -232,40 +230,37 @@ public partial class MainWindow
 		this.hbox4.Name = "hbox4";
 		this.hbox4.Spacing = 6;
 		// Container child hbox4.Gtk.Box+BoxChild
-		this.button5 = new global::Gtk.Button();
-		this.button5.CanFocus = true;
-		this.button5.Name = "button5";
-		this.button5.UseUnderline = true;
-		this.button5.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
-		this.hbox4.Add(this.button5);
-		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button5]));
-		w23.Position = 0;
+		this.addCreatorButton = new global::Gtk.Button();
+		this.addCreatorButton.CanFocus = true;
+		this.addCreatorButton.Name = "addCreatorButton";
+		this.addCreatorButton.UseUnderline = true;
+		this.addCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Adicionar");
+		global::Gtk.Image w23 = new global::Gtk.Image();
+		w23.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Menu);
+		this.addCreatorButton.Image = w23;
+		this.hbox4.Add(this.addCreatorButton);
+		global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.addCreatorButton]));
+		w24.Position = 0;
 		// Container child hbox4.Gtk.Box+BoxChild
-		this.button4 = new global::Gtk.Button();
-		this.button4.CanFocus = true;
-		this.button4.Name = "button4";
-		this.button4.UseUnderline = true;
-		this.button4.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
-		this.hbox4.Add(this.button4);
-		global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button4]));
-		w24.Position = 1;
-		// Container child hbox4.Gtk.Box+BoxChild
-		this.button3 = new global::Gtk.Button();
-		this.button3.CanFocus = true;
-		this.button3.Name = "button3";
-		this.button3.UseUnderline = true;
-		this.button3.Label = global::Mono.Unix.Catalog.GetString("GtkButton");
-		this.hbox4.Add(this.button3);
-		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.button3]));
-		w25.Position = 2;
+		this.removeCreatorButton = new global::Gtk.Button();
+		this.removeCreatorButton.CanFocus = true;
+		this.removeCreatorButton.Name = "removeCreatorButton";
+		this.removeCreatorButton.UseUnderline = true;
+		this.removeCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Remover");
+		global::Gtk.Image w25 = new global::Gtk.Image();
+		w25.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Menu);
+		this.removeCreatorButton.Image = w25;
+		this.hbox4.Add(this.removeCreatorButton);
+		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.removeCreatorButton]));
+		w26.Position = 1;
 		this.vbox3.Add(this.hbox4);
-		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox4]));
-		w26.Position = 2;
-		w26.Expand = false;
-		w26.Fill = false;
+		global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox4]));
+		w27.Position = 2;
+		w27.Expand = false;
+		w27.Fill = false;
 		this.notebook1.Add(this.vbox3);
-		global::Gtk.Notebook.NotebookChild w27 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox3]));
-		w27.Position = 1;
+		global::Gtk.Notebook.NotebookChild w28 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox3]));
+		w28.Position = 1;
 		// Notebook tab
 		this.creationPageText = new global::Gtk.Label();
 		this.creationPageText.Name = "creationPageText";
@@ -278,7 +273,7 @@ public partial class MainWindow
 			this.Child.ShowAll();
 		}
 		this.DefaultWidth = 672;
-		this.DefaultHeight = 529;
+		this.DefaultHeight = 488;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 	}
