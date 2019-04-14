@@ -17,7 +17,7 @@
       <widget class="Gtk.Notebook" id="notebook1">
         <property name="MemberName" />
         <property name="CanFocus">True</property>
-        <property name="CurrentPage">1</property>
+        <property name="CurrentPage">0</property>
         <child>
           <widget class="Gtk.VBox" id="simulatorBox">
             <property name="MemberName" />
@@ -48,6 +48,7 @@ Escalonador Z</property>
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
                     <property name="Items" translatable="yes">/DiretorioDoArquivo/arquivo.json</property>
+                    <property name="Active">0</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -81,7 +82,6 @@ Escalonador Z</property>
             <child>
               <widget class="Gtk.VBox" id="plotBox">
                 <property name="MemberName" />
-                <property name="Spacing">6</property>
                 <child>
                   <placeholder />
                 </child>
@@ -170,7 +170,7 @@ Escalonador Z</property>
         <child>
           <widget class="Gtk.Label" id="simuPageText">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Simulaçao</property>
+            <property name="LabelProp" translatable="yes">Simulação</property>
           </widget>
           <packing>
             <property name="type">tab</property>
@@ -188,7 +188,8 @@ Escalonador Z</property>
                   <widget class="Gtk.ComboBoxEntry" id="dirCreatorEntry">
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes" />
+                    <property name="Items" translatable="yes">/DiretorioDoArquivo/arquivo.json</property>
+                    <property name="Active">0</property>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
