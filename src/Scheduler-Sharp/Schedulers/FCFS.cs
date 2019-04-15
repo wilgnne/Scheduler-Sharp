@@ -10,7 +10,6 @@ namespace SchedulerSharp.Schedulers
 
         public override void ProcessData ()
         {
-
         }
     }
 }

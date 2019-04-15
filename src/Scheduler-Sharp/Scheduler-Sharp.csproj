@@ -40,9 +40,6 @@
       <Package>glib-sharp-2.0</Package>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="glade-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="pango-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gtk-sharp-2.0</Package>
       <SpecificVersion>False</SpecificVersion>
@@ -72,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedulers\Scheduler.cs" />
     <Compile Include="Schedulers\FCFS.cs" />
+    <Compile Include="Schedulers\Processes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
