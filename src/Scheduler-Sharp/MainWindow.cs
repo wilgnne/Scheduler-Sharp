@@ -4,11 +4,15 @@ using OxyPlot.GtkSharp;
 using OxyPlot;
 using OxyPlot.Series;
 
+using SchedulerSharp.GUI;
+
 public partial class MainWindow : Gtk.Window
 {
+    CreationView creationView;
     public MainWindow() : base(Gtk.WindowType.Toplevel)
     {
         Build();
+        creationView =  new CreationView(scrolledWindow);
 
         for (int i = 0; i < 3; i++)
         {
@@ -31,5 +35,15 @@ public partial class MainWindow : Gtk.Window
     {
         Application.Quit();
         a.RetVal = true;
+    }
+
+    protected void AddCreationEvent(object sender, EventArgs e)
+    {
+        creationView.AddNewItem();
+    }
+
+    protected void RemoveCreationEvent(object sender, EventArgs e)
+    {
+        creationView.RemoveSelectedItem();
     }
 }
