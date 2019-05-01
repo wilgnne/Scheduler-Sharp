@@ -70,12 +70,16 @@
     <Compile Include="Schedulers\Scheduler.cs" />
     <Compile Include="Schedulers\FCFS.cs" />
     <Compile Include="Schedulers\Processes.cs" />
+    <Compile Include="GUI\CreationView.cs" />
+    <Compile Include="Models\Process.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Schedulers\" />
+    <Folder Include="GUI\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

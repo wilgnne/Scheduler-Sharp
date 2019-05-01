@@ -29,19 +29,17 @@ public partial class MainWindow
 
 	private global::Gtk.Label simuPageText;
 
-	private global::Gtk.VBox vbox3;
+	private global::Gtk.VBox creatorBox;
 
-	private global::Gtk.HBox hbox2;
+	private global::Gtk.HBox cMenuBox;
 
 	private global::Gtk.ComboBoxEntry dirCreatorEntry;
 
 	private global::Gtk.Button saveCreatorButton;
 
-	private global::Gtk.ScrolledWindow GtkScrolledWindow;
+	private global::Gtk.ScrolledWindow scrolledWindow;
 
-	private global::Gtk.TreeView creatorTreeView;
-
-	private global::Gtk.HBox hbox4;
+	private global::Gtk.HBox settingsBox;
 
 	private global::Gtk.Button addCreatorButton;
 
@@ -181,22 +179,22 @@ public partial class MainWindow
 		this.notebook1.SetTabLabel(this.simulatorBox, this.simuPageText);
 		this.simuPageText.ShowAll();
 		// Container child notebook1.Gtk.Notebook+NotebookChild
-		this.vbox3 = new global::Gtk.VBox();
-		this.vbox3.Name = "vbox3";
-		this.vbox3.Spacing = 6;
-		// Container child vbox3.Gtk.Box+BoxChild
-		this.hbox2 = new global::Gtk.HBox();
-		this.hbox2.Name = "hbox2";
-		this.hbox2.Spacing = 6;
-		// Container child hbox2.Gtk.Box+BoxChild
+		this.creatorBox = new global::Gtk.VBox();
+		this.creatorBox.Name = "creatorBox";
+		this.creatorBox.Spacing = 6;
+		// Container child creatorBox.Gtk.Box+BoxChild
+		this.cMenuBox = new global::Gtk.HBox();
+		this.cMenuBox.Name = "cMenuBox";
+		this.cMenuBox.Spacing = 6;
+		// Container child cMenuBox.Gtk.Box+BoxChild
 		this.dirCreatorEntry = global::Gtk.ComboBoxEntry.NewText();
 		this.dirCreatorEntry.AppendText(global::Mono.Unix.Catalog.GetString("/DiretorioDoArquivo/arquivo.json"));
 		this.dirCreatorEntry.Name = "dirCreatorEntry";
 		this.dirCreatorEntry.Active = 0;
-		this.hbox2.Add(this.dirCreatorEntry);
-		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.dirCreatorEntry]));
+		this.cMenuBox.Add(this.dirCreatorEntry);
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.dirCreatorEntry]));
 		w17.Position = 0;
-		// Container child hbox2.Gtk.Box+BoxChild
+		// Container child cMenuBox.Gtk.Box+BoxChild
 		this.saveCreatorButton = new global::Gtk.Button();
 		this.saveCreatorButton.CanFocus = true;
 		this.saveCreatorButton.Name = "saveCreatorButton";
@@ -205,69 +203,65 @@ public partial class MainWindow
 		global::Gtk.Image w18 = new global::Gtk.Image();
 		w18.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-save", global::Gtk.IconSize.Button);
 		this.saveCreatorButton.Image = w18;
-		this.hbox2.Add(this.saveCreatorButton);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox2[this.saveCreatorButton]));
+		this.cMenuBox.Add(this.saveCreatorButton);
+		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.saveCreatorButton]));
 		w19.Position = 1;
 		w19.Expand = false;
 		w19.Fill = false;
-		this.vbox3.Add(this.hbox2);
-		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox2]));
+		this.creatorBox.Add(this.cMenuBox);
+		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.cMenuBox]));
 		w20.Position = 0;
 		w20.Expand = false;
 		w20.Fill = false;
-		// Container child vbox3.Gtk.Box+BoxChild
-		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow();
-		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
-		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
-		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.creatorTreeView = new global::Gtk.TreeView();
-		this.creatorTreeView.CanFocus = true;
-		this.creatorTreeView.Name = "creatorTreeView";
-		this.GtkScrolledWindow.Add(this.creatorTreeView);
-		this.vbox3.Add(this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.GtkScrolledWindow]));
-		w22.Position = 1;
-		// Container child vbox3.Gtk.Box+BoxChild
-		this.hbox4 = new global::Gtk.HBox();
-		this.hbox4.Name = "hbox4";
-		this.hbox4.Spacing = 6;
-		// Container child hbox4.Gtk.Box+BoxChild
+		// Container child creatorBox.Gtk.Box+BoxChild
+		this.scrolledWindow = new global::Gtk.ScrolledWindow();
+		this.scrolledWindow.CanFocus = true;
+		this.scrolledWindow.Name = "scrolledWindow";
+		this.scrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
+		this.creatorBox.Add(this.scrolledWindow);
+		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.scrolledWindow]));
+		w21.Position = 1;
+		// Container child creatorBox.Gtk.Box+BoxChild
+		this.settingsBox = new global::Gtk.HBox();
+		this.settingsBox.Name = "settingsBox";
+		this.settingsBox.Spacing = 6;
+		// Container child settingsBox.Gtk.Box+BoxChild
 		this.addCreatorButton = new global::Gtk.Button();
 		this.addCreatorButton.CanFocus = true;
 		this.addCreatorButton.Name = "addCreatorButton";
 		this.addCreatorButton.UseUnderline = true;
 		this.addCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Adicionar");
-		global::Gtk.Image w23 = new global::Gtk.Image();
-		w23.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
-		this.addCreatorButton.Image = w23;
-		this.hbox4.Add(this.addCreatorButton);
-		global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.addCreatorButton]));
-		w24.Position = 0;
-		// Container child hbox4.Gtk.Box+BoxChild
+		global::Gtk.Image w22 = new global::Gtk.Image();
+		w22.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
+		this.addCreatorButton.Image = w22;
+		this.settingsBox.Add(this.addCreatorButton);
+		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.addCreatorButton]));
+		w23.Position = 0;
+		// Container child settingsBox.Gtk.Box+BoxChild
 		this.removeCreatorButton = new global::Gtk.Button();
 		this.removeCreatorButton.CanFocus = true;
 		this.removeCreatorButton.Name = "removeCreatorButton";
 		this.removeCreatorButton.UseUnderline = true;
 		this.removeCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Remover");
-		global::Gtk.Image w25 = new global::Gtk.Image();
-		w25.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
-		this.removeCreatorButton.Image = w25;
-		this.hbox4.Add(this.removeCreatorButton);
-		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hbox4[this.removeCreatorButton]));
-		w26.Position = 1;
-		this.vbox3.Add(this.hbox4);
-		global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vbox3[this.hbox4]));
-		w27.Position = 2;
-		w27.Expand = false;
-		w27.Fill = false;
-		this.notebook1.Add(this.vbox3);
-		global::Gtk.Notebook.NotebookChild w28 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.vbox3]));
-		w28.Position = 1;
+		global::Gtk.Image w24 = new global::Gtk.Image();
+		w24.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
+		this.removeCreatorButton.Image = w24;
+		this.settingsBox.Add(this.removeCreatorButton);
+		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.removeCreatorButton]));
+		w25.Position = 1;
+		this.creatorBox.Add(this.settingsBox);
+		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.settingsBox]));
+		w26.Position = 2;
+		w26.Expand = false;
+		w26.Fill = false;
+		this.notebook1.Add(this.creatorBox);
+		global::Gtk.Notebook.NotebookChild w27 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.creatorBox]));
+		w27.Position = 1;
 		// Notebook tab
 		this.creationPageText = new global::Gtk.Label();
 		this.creationPageText.Name = "creationPageText";
 		this.creationPageText.LabelProp = global::Mono.Unix.Catalog.GetString("Criação");
-		this.notebook1.SetTabLabel(this.vbox3, this.creationPageText);
+		this.notebook1.SetTabLabel(this.creatorBox, this.creationPageText);
 		this.creationPageText.ShowAll();
 		this.Add(this.notebook1);
 		if ((this.Child != null))
@@ -278,5 +272,7 @@ public partial class MainWindow
 		this.DefaultHeight = 488;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
+		this.addCreatorButton.Clicked += new global::System.EventHandler(this.AddCreationEvent);
+		this.removeCreatorButton.Clicked += new global::System.EventHandler(this.RemoveCreationEvent);
 	}
 }
