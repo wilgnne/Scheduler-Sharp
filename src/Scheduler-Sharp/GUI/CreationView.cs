@@ -7,12 +7,15 @@ namespace SchedulerSharp.GUI
 {
     public class CreationView
     {
+        // Janela TreeView
         TreeView tree;
+        // Lista de processos para o TreeView
         ListStore processListStore;
-
+        // Lista de referencia dos itens
         public List<Process> Items { get; private set; }
-
+        // Colunas do Treeview
         List<TreeViewColumn> columns;
+        // Celulas das Colunas
         List<CellRendererText> cells;
 
         public CreationView(Container scrolledWindows)
@@ -113,7 +116,8 @@ namespace SchedulerSharp.GUI
         }
 
         // Desenha o texto da celula
-        private void RenderText (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
+        private void RenderText (TreeViewColumn column, CellRenderer cell, 
+            TreeModel model, TreeIter iter)
         {
             // Obtendo a referencia do processo apartir dos argumentos recebidos
             Process process = (Process)model.GetValue(iter, 0);

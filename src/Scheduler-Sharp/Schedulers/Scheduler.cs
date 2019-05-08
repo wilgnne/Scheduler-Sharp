@@ -13,20 +13,20 @@ namespace SchedulerSharp.Schedulers
 
         public virtual void ProcessData() { }
 
-        /*Executar Processo*/
+        // Executar Processo
         protected void RunProcess (EscalonableProcess process)
         {
-            /*Atualiza o tempo de execução do processo*/
+            // Atualiza o tempo de execução do processo
             process.Run();
-            /*Adiciona uma referencia do mesmo a lista de finalizados*/
+            // Adiciona uma referencia do mesmo a lista de finalizados
             Finish.Add(new PlotableProcess (process, clkTime));
-            /*Se o processo tiver terminado sua execução por completo o remove
-            da lista de processos para execução*/
+            /* Se o processo tiver terminado sua execução por completo o remove
+            da lista de processos para execução */
             if (process.Runtime == 0)
             {
                 forExec.Remove(process);
             }
-            /*Passa para o proximo tempo de clock*/
+            // Passa para o proximo tempo de clock
             clkTime += 1;
         }
     }

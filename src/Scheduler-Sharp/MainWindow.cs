@@ -14,7 +14,7 @@ public partial class MainWindow : Gtk.Window
         Build();
         creationView =  new CreationView(scrolledWindow);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             CreatePlot(plotBox);
         }

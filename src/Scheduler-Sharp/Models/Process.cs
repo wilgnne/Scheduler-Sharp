@@ -5,11 +5,11 @@ namespace SchedulerSharp.Models
 {
     public class Process
     {
-        //Nome do processo
+        // Nome do processo
         public string Name;
-        //Tempo de chegada do processo
+        // Tempo de chegada do processo
         public int ArrivalTime;
-        //Clocks de execução
+        // Clocks de execução
         public int Runtime;
 
         public Process(string name, int arrivalTime, int runtime)
@@ -29,9 +29,9 @@ namespace SchedulerSharp.Models
 
     public class PlotableProcess : Process
     {
-        //Tempo em que o processo foi executado
+        // Tempo em que o processo foi executado
         public int ExecTime { get; private set; }
-        //Cor no momento de execução
+        // Cor no momento de execução
         public OxyColor Color { get; private set; }
 
         public PlotableProcess(EscalonableProcess process, int execTime)
@@ -44,9 +44,9 @@ namespace SchedulerSharp.Models
 
     public class EscalonableProcess : Process
     {
-        //Cor no momento de execução
+        // Cor no momento de execução
         public OxyColor RunColor { get; private set; }
-        //Cor em espera
+        // Cor em espera
         public OxyColor WaitingColor { get; private set; }
 
         public EscalonableProcess(string name, int arrivalTime, int runtime)
@@ -60,14 +60,14 @@ namespace SchedulerSharp.Models
             Colorize();
         }
 
-        /*Executar um ciclo de clock*/
+        // Executar um ciclo de clock
         public void Run()
         {
             if (Runtime > 0)
                 Runtime -= 1;
         }
 
-        /*Gerar cores*/
+        // Gerar cores
         public void Colorize()
         {
             Random random = new Random();
