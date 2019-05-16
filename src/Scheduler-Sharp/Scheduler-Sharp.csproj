@@ -58,6 +58,9 @@
     <Reference Include="OxyPlot.GtkSharp">
       <HintPath>packages\OxyPlot.GtkSharp.1.0.0\lib\net45\OxyPlot.GtkSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -72,6 +75,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GUI\CreationView.cs" />
     <Compile Include="Models\Process.cs" />
+    <Compile Include="Models\JsonController.cs" />
+    <Compile Include="GUI\CreationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

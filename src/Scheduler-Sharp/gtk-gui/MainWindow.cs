@@ -33,9 +33,11 @@ public partial class MainWindow
 
 	private global::Gtk.HBox cMenuBox;
 
-	private global::Gtk.ComboBoxEntry dirCreatorEntry;
+	private global::Gtk.ComboBox dirCreatorEntry;
 
 	private global::Gtk.Button saveCreatorButton;
+
+	private global::Gtk.Button editCreatorButton;
 
 	private global::Gtk.ScrolledWindow scrolledWindow;
 
@@ -83,9 +85,7 @@ public partial class MainWindow
 		w1.Fill = false;
 		// Container child menuBox.Gtk.Box+BoxChild
 		this.directoryEntry = global::Gtk.ComboBoxEntry.NewText();
-		this.directoryEntry.AppendText(global::Mono.Unix.Catalog.GetString("/DiretorioDoArquivo/arquivo.json"));
 		this.directoryEntry.Name = "directoryEntry";
-		this.directoryEntry.Active = 0;
 		this.menuBox.Add(this.directoryEntry);
 		global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.menuBox[this.directoryEntry]));
 		w2.Position = 1;
@@ -187,10 +187,8 @@ public partial class MainWindow
 		this.cMenuBox.Name = "cMenuBox";
 		this.cMenuBox.Spacing = 6;
 		// Container child cMenuBox.Gtk.Box+BoxChild
-		this.dirCreatorEntry = global::Gtk.ComboBoxEntry.NewText();
-		this.dirCreatorEntry.AppendText(global::Mono.Unix.Catalog.GetString("/DiretorioDoArquivo/arquivo.json"));
+		this.dirCreatorEntry = global::Gtk.ComboBox.NewText();
 		this.dirCreatorEntry.Name = "dirCreatorEntry";
-		this.dirCreatorEntry.Active = 0;
 		this.cMenuBox.Add(this.dirCreatorEntry);
 		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.dirCreatorEntry]));
 		w17.Position = 0;
@@ -208,19 +206,33 @@ public partial class MainWindow
 		w19.Position = 1;
 		w19.Expand = false;
 		w19.Fill = false;
+		// Container child cMenuBox.Gtk.Box+BoxChild
+		this.editCreatorButton = new global::Gtk.Button();
+		this.editCreatorButton.CanFocus = true;
+		this.editCreatorButton.Name = "editCreatorButton";
+		this.editCreatorButton.UseUnderline = true;
+		this.editCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Editar");
+		global::Gtk.Image w20 = new global::Gtk.Image();
+		w20.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-edit", global::Gtk.IconSize.Menu);
+		this.editCreatorButton.Image = w20;
+		this.cMenuBox.Add(this.editCreatorButton);
+		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.editCreatorButton]));
+		w21.Position = 2;
+		w21.Expand = false;
+		w21.Fill = false;
 		this.creatorBox.Add(this.cMenuBox);
-		global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.cMenuBox]));
-		w20.Position = 0;
-		w20.Expand = false;
-		w20.Fill = false;
+		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.cMenuBox]));
+		w22.Position = 0;
+		w22.Expand = false;
+		w22.Fill = false;
 		// Container child creatorBox.Gtk.Box+BoxChild
 		this.scrolledWindow = new global::Gtk.ScrolledWindow();
 		this.scrolledWindow.CanFocus = true;
 		this.scrolledWindow.Name = "scrolledWindow";
 		this.scrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		this.creatorBox.Add(this.scrolledWindow);
-		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.scrolledWindow]));
-		w21.Position = 1;
+		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.scrolledWindow]));
+		w23.Position = 1;
 		// Container child creatorBox.Gtk.Box+BoxChild
 		this.settingsBox = new global::Gtk.HBox();
 		this.settingsBox.Name = "settingsBox";
@@ -231,32 +243,32 @@ public partial class MainWindow
 		this.addCreatorButton.Name = "addCreatorButton";
 		this.addCreatorButton.UseUnderline = true;
 		this.addCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Adicionar");
-		global::Gtk.Image w22 = new global::Gtk.Image();
-		w22.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
-		this.addCreatorButton.Image = w22;
+		global::Gtk.Image w24 = new global::Gtk.Image();
+		w24.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
+		this.addCreatorButton.Image = w24;
 		this.settingsBox.Add(this.addCreatorButton);
-		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.addCreatorButton]));
-		w23.Position = 0;
+		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.addCreatorButton]));
+		w25.Position = 0;
 		// Container child settingsBox.Gtk.Box+BoxChild
 		this.removeCreatorButton = new global::Gtk.Button();
 		this.removeCreatorButton.CanFocus = true;
 		this.removeCreatorButton.Name = "removeCreatorButton";
 		this.removeCreatorButton.UseUnderline = true;
 		this.removeCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Remover");
-		global::Gtk.Image w24 = new global::Gtk.Image();
-		w24.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
-		this.removeCreatorButton.Image = w24;
+		global::Gtk.Image w26 = new global::Gtk.Image();
+		w26.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
+		this.removeCreatorButton.Image = w26;
 		this.settingsBox.Add(this.removeCreatorButton);
-		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.removeCreatorButton]));
-		w25.Position = 1;
-		this.creatorBox.Add(this.settingsBox);
-		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.settingsBox]));
-		w26.Position = 2;
-		w26.Expand = false;
-		w26.Fill = false;
-		this.notebook1.Add(this.creatorBox);
-		global::Gtk.Notebook.NotebookChild w27 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.creatorBox]));
+		global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.removeCreatorButton]));
 		w27.Position = 1;
+		this.creatorBox.Add(this.settingsBox);
+		global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.settingsBox]));
+		w28.Position = 2;
+		w28.Expand = false;
+		w28.Fill = false;
+		this.notebook1.Add(this.creatorBox);
+		global::Gtk.Notebook.NotebookChild w29 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.creatorBox]));
+		w29.Position = 1;
 		// Notebook tab
 		this.creationPageText = new global::Gtk.Label();
 		this.creationPageText.Name = "creationPageText";
@@ -272,6 +284,9 @@ public partial class MainWindow
 		this.DefaultHeight = 488;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
+		this.dirCreatorEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
+		this.saveCreatorButton.Clicked += new global::System.EventHandler(this.SaveButtonEvent);
+		this.editCreatorButton.Clicked += new global::System.EventHandler(this.EditButtonEvent);
 		this.addCreatorButton.Clicked += new global::System.EventHandler(this.AddCreationEvent);
 		this.removeCreatorButton.Clicked += new global::System.EventHandler(this.RemoveCreationEvent);
 	}

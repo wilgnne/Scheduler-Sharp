@@ -47,8 +47,7 @@ Escalonador Z</property>
                   <widget class="Gtk.ComboBoxEntry" id="directoryEntry">
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes">/DiretorioDoArquivo/arquivo.json</property>
-                    <property name="Active">0</property>
+                    <property name="Items" translatable="yes" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -185,11 +184,11 @@ Escalonador Z</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.ComboBoxEntry" id="dirCreatorEntry">
+                  <widget class="Gtk.ComboBox" id="dirCreatorEntry">
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes">/DiretorioDoArquivo/arquivo.json</property>
-                    <property name="Active">0</property>
+                    <property name="Items" translatable="yes" />
+                    <signal name="Changed" handler="OnChangeDirEntry" />
                   </widget>
                   <packing>
                     <property name="Position">0</property>
@@ -204,9 +203,27 @@ Escalonador Z</property>
                     <property name="Icon">stock:gtk-save Button</property>
                     <property name="Label" translatable="yes">Salvar</property>
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="SaveButtonEvent" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Button" id="editCreatorButton">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-edit Menu</property>
+                    <property name="Label" translatable="yes">Editar</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="EditButtonEvent" />
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>

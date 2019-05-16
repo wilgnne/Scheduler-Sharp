@@ -7,10 +7,10 @@ namespace SchedulerSharp.GUI
 {
     public class CreationView
     {
+        public List<Process> Items { get; private set; }
+
         TreeView tree;
         ListStore processListStore;
-
-        public List<Process> Items { get; private set; }
 
         List<TreeViewColumn> columns;
         List<CellRendererText> cells;
@@ -22,8 +22,7 @@ namespace SchedulerSharp.GUI
             scrolledWindows.Add(tree);
 
             // Criando e incerindo elementos no modelo de visualização
-            processListStore = new ListStore(typeof(Process));
-            tree.Model = processListStore;
+            NewProcessListStore();
 
             // Lista com o nome das colunas
             List<string> columsName = new List<string>
@@ -67,12 +66,33 @@ namespace SchedulerSharp.GUI
             scrolledWindows.ShowAll();
         }
 
+        public void LoadItens (List<Process> processes)
+        {
+            NewProcessListStore();
+            Items = processes;
+            foreach (Process process in Items)
+            {
+                AddNewItem(process);
+            }
+        }
+
+        private void NewProcessListStore()
+        {
+            processListStore = new ListStore(typeof(Process));
+            tree.Model = processListStore;
+        }
+
         // Adiciona um novo elemento a lista de Itens e ao Visualizador
-        public void AddNewItem ()
+        public void AddNewRamdomItem ()
         {
             Random r = new Random();
-            Process newItem = new Process("Name", r.Next(0, 15), r.Next(1, 15));
+            Process newItem = new Process("PID: " + Items.Count.ToString(), r.Next(0, 15), r.Next(1, 15));
             Items.Add(newItem);
+            AddNewItem(newItem);
+        }
+
+        private void AddNewItem (Process newItem)
+        {
             processListStore.AppendValues(newItem);
         }
 
