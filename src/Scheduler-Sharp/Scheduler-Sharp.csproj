@@ -8,6 +8,7 @@
     <RootNamespace>SchedulerSharp</RootNamespace>
     <AssemblyName>Scheduler-Sharp</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ReleaseVersion>0.0.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,10 @@
       <Package>glib-sharp-2.0</Package>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="glade-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <Package>glade-sharp-2.0</Package>
+    </Reference>
     <Reference Include="pango-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gtk-sharp-2.0</Package>
       <SpecificVersion>False</SpecificVersion>
@@ -55,11 +60,16 @@
     <Reference Include="OxyPlot.GtkSharp">
       <HintPath>packages\OxyPlot.GtkSharp.1.0.0\lib\net45\OxyPlot.GtkSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Aoe_Scheduler_Icon.png" />
+    <EmbeddedResource Include="004-01-512.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -71,6 +81,8 @@
     <Compile Include="Schedulers\FCFS.cs" />
     <Compile Include="GUI\CreationView.cs" />
     <Compile Include="Models\Process.cs" />
+    <Compile Include="Models\JsonController.cs" />
+    <Compile Include="GUI\CreationController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

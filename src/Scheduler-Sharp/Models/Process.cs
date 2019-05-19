@@ -3,6 +3,9 @@ using OxyPlot;
 
 namespace SchedulerSharp.Models
 {
+    /// <summary>
+    /// Classe base para os processos
+    /// </summary>
     public class Process
     {
         // Nome do processo
@@ -12,6 +15,12 @@ namespace SchedulerSharp.Models
         // Clocks de execução
         public int Runtime;
 
+        /// <summary>
+        /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.Process"/> .
+        /// </summary>
+        /// <param name="name">Nome do processo.</param>
+        /// <param name="arrivalTime">Tempo de chegada.</param>
+        /// <param name="runtime">Tempo de execução.</param>
         public Process(string name, int arrivalTime, int runtime)
         {
             Name = name;
@@ -27,21 +36,32 @@ namespace SchedulerSharp.Models
         }
     }
 
-    public class PlotableProcess : Process
+    /// <summary>
+    /// Processo para ser exibido
+    /// </summary>
+    public class PlotableProcess : EscalonableProcess
     {
         // Tempo em que o processo foi executado
         public int ExecTime { get; private set; }
         // Cor no momento de execução
         public OxyColor Color { get; private set; }
 
+        /// <summary>
+        /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.PlotableProcess"/> .
+        /// </summary>
+        /// <param name="process">Processo base.</param>
+        /// <param name="execTime">Tempo em que foi executado.</param>
         public PlotableProcess(EscalonableProcess process, int execTime)
-        :base(process.Name, process.ArrivalTime, process.Runtime)
+        : base(process.Name, process.ArrivalTime, process.Runtime)
         {
             Color = process.RunColor;
             ExecTime = execTime;
         }
     }
 
+    /// <summary>
+    /// Processo para ser escalonado
+    /// </summary>
     public class EscalonableProcess : Process
     {
         // Cor no momento de execução
@@ -49,25 +69,45 @@ namespace SchedulerSharp.Models
         // Cor em espera
         public OxyColor WaitingColor { get; private set; }
 
+        /// <summary>
+        /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.EscalonableProcess"/> .
+        /// </summary>
+        /// <param name="name">Nome do processo.</param>
+        /// <param name="arrivalTime">Tempo de chegada.</param>
+        /// <param name="runtime">Tempo de execução.</param>
         public EscalonableProcess(string name, int arrivalTime, int runtime)
         : base(name, arrivalTime, runtime)
         {
             Colorize();
         }
-        public EscalonableProcess (Process process)
-        : base (process.Name, process.ArrivalTime, process.Runtime)
+
+        /// <summary>
+        /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.EscalonableProcess"/> .
+        /// </summary>
+        /// <param name="process">Processo base.</param>
+        public EscalonableProcess(Process process)
+        : base(process.Name, process.ArrivalTime, process.Runtime)
         {
             Colorize();
         }
 
-        // Executar um ciclo de clock
-        public void Run()
+        /// <summary>
+        /// Executar uma instancia de clock
+        /// </summary>
+        public bool Run()
         {
             if (Runtime > 0)
+            {
                 Runtime -= 1;
+                return true;
+            }
+
+            return false;
         }
 
-        // Gerar cores
+        /// <summary>
+        /// Gerar cores para o processo
+        /// </summary>
         public void Colorize()
         {
             Random random = new Random();

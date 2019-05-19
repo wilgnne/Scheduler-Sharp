@@ -7,10 +7,14 @@ namespace SchedulerSharp
     {
         public static void Main(string[] args)
         {
-            Application.Init();
-            MainWindow win = new MainWindow();
-            win.Show();
-            Application.Run();
+            //Executar GUI apenas se nao houver argumentos
+            if (args.Length == 0)
+            {
+                Application.Init();
+                MainWindow win = new MainWindow();
+                win.Show();
+                Application.Run();
+            }
         }
     }
 }
