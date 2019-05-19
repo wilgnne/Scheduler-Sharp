@@ -4,13 +4,14 @@
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
-    <widget-library name="../bin/Debug/Scheduler-Sharp.exe" internal="true" />
+    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../packages/OxyPlot.GtkSharp.1.0.0/lib/net45/OxyPlot.GtkSharp.dll" />
+    <widget-library name="../bin/Debug/Scheduler-Sharp.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="672 488">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Scherduler-Sharp</property>
-    <property name="Icon">stock:stock_help Dialog</property>
+    <property name="Icon">resource:SchedulerSharp.004-01-512.png</property>
     <property name="WindowPosition">Center</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
@@ -29,7 +30,7 @@
                 <child>
                   <widget class="Gtk.ComboBox" id="SchedulerCombobox">
                     <property name="MemberName" />
-                    <property name="WidthRequest">124</property>
+                    <property name="WidthRequest">160</property>
                     <property name="IsTextCombo">True</property>
                     <property name="Items" translatable="yes">Escalonador X
 Escalonador Y
@@ -79,6 +80,18 @@ Escalonador Z</property>
               </packing>
             </child>
             <child>
+              <widget class="Gtk.HButtonBox" id="hbuttonbox1">
+                <property name="MemberName" />
+                <property name="Size">0</property>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
               <widget class="Gtk.VBox" id="plotBox">
                 <property name="MemberName" />
                 <child>
@@ -92,7 +105,7 @@ Escalonador Z</property>
                 </child>
               </widget>
               <packing>
-                <property name="Position">1</property>
+                <property name="Position">2</property>
                 <property name="AutoSize">True</property>
               </packing>
             </child>
@@ -158,7 +171,7 @@ Escalonador Z</property>
                 </child>
               </widget>
               <packing>
-                <property name="Position">2</property>
+                <property name="Position">3</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
@@ -201,7 +214,7 @@ Escalonador Z</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-save Button</property>
-                    <property name="Label" translatable="yes">Salvar</property>
+                    <property name="Label">_OK</property>
                     <property name="UseUnderline">True</property>
                     <signal name="Clicked" handler="SaveButtonEvent" />
                   </widget>

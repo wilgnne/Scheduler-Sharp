@@ -7,6 +7,7 @@ namespace SchedulerSharp
     {
         public static void Main(string[] args)
         {
+            //Executar GUI apenas se nao houver argumentos
             if (args.Length == 0)
             {
                 Application.Init();

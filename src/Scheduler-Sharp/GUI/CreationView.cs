@@ -5,6 +5,9 @@ using SchedulerSharp.Models;
 
 namespace SchedulerSharp.GUI
 {
+    /// <summary>
+    /// Classe de criação dos nós de itens.
+    /// </summary>
     public class CreationView
     {
         public List<Process> Items { get; private set; }
@@ -15,6 +18,10 @@ namespace SchedulerSharp.GUI
         List<TreeViewColumn> columns;
         List<CellRendererText> cells;
 
+        /// <summary>
+        /// Inicializar uma nova instancia de <see cref="T:SchedulerSharp.GUI.CreationView"/> .
+        /// </summary>
+        /// <param name="scrolledWindows">Conteiner onde a arvore de nós sera criada</param>
         public CreationView(Container scrolledWindows)
         {
             Items = new List<Process>();
@@ -66,6 +73,10 @@ namespace SchedulerSharp.GUI
             scrolledWindows.ShowAll();
         }
 
+        /// <summary>
+        /// Carrega uma lista de itens para dentro do visualizador.
+        /// </summary>
+        /// <param name="processes">Itens a serem carregados.</param>
         public void LoadItens (List<Process> processes)
         {
             NewProcessListStore();
@@ -76,13 +87,18 @@ namespace SchedulerSharp.GUI
             }
         }
 
+        /// <summary>
+        /// Criar um novo visualizador limpo.
+        /// </summary>
         private void NewProcessListStore()
         {
             processListStore = new ListStore(typeof(Process));
             tree.Model = processListStore;
         }
 
-        // Adiciona um novo elemento a lista de Itens e ao Visualizador
+        /// <summary>
+        /// Adicionar um novo elemento randomico a lista de itens e ao visualizador.
+        /// </summary>
         public void AddNewRamdomItem ()
         {
             Random r = new Random();
@@ -91,12 +107,18 @@ namespace SchedulerSharp.GUI
             AddNewItem(newItem);
         }
 
+        /// <summary>
+        /// Adicionar um novo elemento a lista de itens e ao visualizador.
+        /// </summary>
+        /// <param name="newItem">Item a ser adicionado.</param>
         private void AddNewItem (Process newItem)
         {
             processListStore.AppendValues(newItem);
         }
 
-        // Remove o indice atualmente selecionado
+        /// <summary>
+        /// Remover o elemento atualmente selecionado
+        /// </summary>
         public void RemoveSelectedItem ()
         {
             tree.Selection.GetSelected(out TreeIter iter);
@@ -105,7 +127,9 @@ namespace SchedulerSharp.GUI
             Items.Remove(process);
         }
 
-        // Edita a celula
+        /// <summary>
+        /// Editar a celula de texto
+        /// </summary>
         private void EditText (object o, EditedArgs args)
         {
             // Obtendo referencia do processo apartir dos argumentos recebidos
@@ -132,7 +156,9 @@ namespace SchedulerSharp.GUI
             }
         }
 
-        // Desenha o texto da celula
+        /// <summary>
+        /// Desenhar a celula de texto
+        /// </summary>
         private void RenderText (TreeViewColumn column, CellRenderer cell, TreeModel model, TreeIter iter)
         {
             // Obtendo a referencia do processo apartir dos argumentos recebidos

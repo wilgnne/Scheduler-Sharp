@@ -14,4 +14,15 @@ Global
 		{729DDF85-FF0F-48A1-A794-E1DB428F28A7}.Release|x86.ActiveCfg = Release|x86
 		{729DDF85-FF0F-48A1-A794-E1DB428F28A7}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$0.TextStylePolicy = $2
+		$2.FileWidth = 80
+		$2.TabsToSpaces = True
+		$2.scope = text/plain
+		$0.StandardHeader = $3
+		version = 0.0.1
+	EndGlobalSection
 EndGlobal
