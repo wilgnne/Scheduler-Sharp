@@ -1,5 +1,6 @@
 ﻿using System;
 using OxyPlot;
+using System.Timers;
 
 namespace SchedulerSharp.Models
 {
@@ -110,13 +111,24 @@ namespace SchedulerSharp.Models
         /// </summary>
         public void Colorize()
         {
-            Random random = new Random();
-            byte r = (byte)random.Next(0, 255);
-            byte g = (byte)random.Next(0, 255);
-            byte b = (byte)random.Next(0, 255);
+            Random random = new Random(StringToInt(Name));
+            byte r = (byte)random.Next(100, 255);
+            byte g = (byte)random.Next(100, 255);
+            byte b = (byte)random.Next(100, 255);
 
             WaitingColor = OxyColor.FromArgb(0x7f, r, g, b);
             RunColor = OxyColor.FromArgb(0xff, r, g, b);
+        }
+
+        public int StringToInt(string str)
+        {
+            char[] vs = str.ToCharArray();
+            int acc = 0;
+            for(int i= 0; i < vs.Length; i++)
+            {
+                acc += Convert.ToInt32(Convert.ToByte(vs[i]));
+            }
+            return acc;
         }
     }
 }

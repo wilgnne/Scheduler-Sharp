@@ -1,8 +1,7 @@
 ﻿using System;
 using Gtk;
 using OxyPlot.GtkSharp;
-using OxyPlot;
-using OxyPlot.Series;
+using System.Collections.Generic;
 
 using SchedulerSharp.GUI;
 using SchedulerSharp.Models;
@@ -10,17 +9,32 @@ using SchedulerSharp.Models;
 public partial class MainWindow : Gtk.Window
 {
     CreationController creationController;
+    PlotInterface plot;
 
     public MainWindow() : base(Gtk.WindowType.Toplevel)
     {
         Build();
 
-        creationController = new CreationController(dirCreatorEntry, scrolledWindow);
+        creationController = new CreationController(new List<ComboBox> 
+            {   dirCreatorEntry, 
+                directoryEntry 
+            },
+                scrolledWindow);
+        plot = new PlotInterface(plotBox);
+    }
 
-        for (int i = 0; i < 2; i++)
+    protected List<PlotableProcess> Gerar ()
+    {
+        List<PlotableProcess> plotables = new List<PlotableProcess>();
+        List<EscalonableProcess> escalonables = new List<EscalonableProcess>();
+
+        foreach(Process process in creationController.GetItens())
         {
-            CreatePlot(plotBox);
+            EscalonableProcess eProcess = new EscalonableProcess(process);
+            plotables.Add(new PlotableProcess(eProcess, 0));
         }
+
+        return plotables;
     }
 
     protected void OnDeleteEvent(object sender, DeleteEventArgs a)
@@ -39,69 +53,40 @@ public partial class MainWindow : Gtk.Window
         creationController.RemoveCreationEvent();
     }
 
-    protected string ShowSaveDialog(string Title, string confirmText)
+    protected void SaveAsEvent (object sender, EventArgs e)
     {
-        FileFilter filter = new FileFilter
-        {
-            Name = "JSON"
-        };
-        filter.AddPattern("*.json");
-
-        string path = null;
-        FileChooserDialog saveDialog = new FileChooserDialog(Title, null, 
-            FileChooserAction.Save, "Cancelar", ResponseType.Cancel, confirmText, 
-            ResponseType.Accept)
-        {
-            Filter = filter
-        };
-        if (saveDialog.Run() == (int)Gtk.ResponseType.Accept)
-        {
-            path = saveDialog.Filename;
-
-            if (saveDialog.Filter.Name == "JSON" && saveDialog.Filename.ToLower().
-                Trim().EndsWith(".json", StringComparison.CurrentCulture) == false)
-            {
-                path = saveDialog.Filename + ".json";
-            }
-        }
-
-        saveDialog.Destroy();
-        Console.WriteLine("Path: " + path);
-        return path;
+        if(GTKUtils.ShowFileChooser(out string path,"Salvar Como...", "Salvar"))
+            creationController.SaveAsEvent(path);
     }
 
-    protected void SaveButtonEvent(object sender, EventArgs e)
+    protected void SaveEvent(object sender, EventArgs e)
     {
-        string path = ShowSaveDialog("Salvar como", "Salvar");
-        string json = JsonController.ListToJson(creationController.GetItens());
-
-        if (path != null)
-            creationController.SaveButtonEvent(json, path);
+        creationController.SaveEvent();
     }
 
     protected void EditButtonEvent(object sender, EventArgs e)
     {
-        string path = ShowSaveDialog("Editar arquivo", "Selecionar");
-        if (path != null)
+        if(GTKUtils.ShowFileChooser(out string path,"Abrir...", "Selecionar"))
             creationController.EditButtonEvent(path);
+    }
+
+    protected void NewEvent (object sender, EventArgs e)
+    {
+        creationController.NewEvent();
     }
 
     protected void OnChangeDirEntry(object sender, EventArgs e)
     {
-        creationController.OnChangeDirEntry();
+        creationController.OnChangeDirEntry((ComboBox) sender);
     }
 
-
-
-
-    protected void CreatePlot(Container container)
+    protected void PlayEvent(object sender, EventArgs e)
     {
-        var plotView = new PlotView();
-        container.Add(plotView);
-        plotView.ShowAll();
+        plot.UpdateData(Gerar());
+    }
 
-        var myModel = new PlotModel { Title = "Example 1" };
-        myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
-        plotView.Model = myModel;
+    protected void CloseEvent(object sender, EventArgs e)
+    {
+        Application.Quit();
     }
 }

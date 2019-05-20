@@ -9,321 +9,366 @@
     <widget-library name="../bin/Debug/Scheduler-Sharp.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="672 488">
+    <action-group name="Default">
+      <action id="ArquivoAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Arquivo</property>
+        <property name="ShortLabel" translatable="yes">Arquivo</property>
+      </action>
+      <action id="newAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Novo Arquivo</property>
+        <property name="ShortLabel" translatable="yes">New</property>
+        <property name="StockId">gtk-new</property>
+        <signal name="Activated" handler="NewEvent" />
+      </action>
+      <action id="openAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Abrir...</property>
+        <property name="ShortLabel" translatable="yes">Open</property>
+        <property name="StockId">gtk-open</property>
+        <signal name="Activated" handler="EditButtonEvent" />
+      </action>
+      <action id="saveAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Salvar</property>
+        <property name="ShortLabel" translatable="yes">Save</property>
+        <property name="StockId">gtk-save</property>
+        <signal name="Activated" handler="SaveEvent" />
+      </action>
+      <action id="saveAsAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Salvar Como...</property>
+        <property name="ShortLabel" translatable="yes">Save as</property>
+        <property name="StockId">gtk-save-as</property>
+        <signal name="Activated" handler="SaveAsEvent" />
+      </action>
+      <action id="SimulaoAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Simulação</property>
+        <property name="ShortLabel" translatable="yes">Simulação</property>
+      </action>
+      <action id="floppyAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Exportar</property>
+        <property name="ShortLabel" translatable="yes">Exportar</property>
+        <property name="StockId">gtk-floppy</property>
+      </action>
+      <action id="PNGAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="LogAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Log</property>
+        <property name="ShortLabel" translatable="yes">Log</property>
+      </action>
+      <action id="quitAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Fechar</property>
+        <property name="ShortLabel" translatable="yes">Fechar</property>
+        <property name="StockId">gtk-quit</property>
+        <signal name="Activated" handler="CloseEvent" />
+      </action>
+    </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">Scherduler-Sharp</property>
     <property name="Icon">resource:SchedulerSharp.004-01-512.png</property>
     <property name="WindowPosition">Center</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
-      <widget class="Gtk.Notebook" id="notebook1">
+      <widget class="Gtk.VBox" id="vbox1">
         <property name="MemberName" />
-        <property name="CanFocus">True</property>
-        <property name="CurrentPage">1</property>
+        <property name="Spacing">6</property>
         <child>
-          <widget class="Gtk.VBox" id="simulatorBox">
+          <widget class="Gtk.MenuBar" id="menubar3">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
-            <child>
-              <widget class="Gtk.HBox" id="menuBox">
-                <property name="MemberName" />
-                <property name="Spacing">6</property>
-                <child>
-                  <widget class="Gtk.ComboBox" id="SchedulerCombobox">
-                    <property name="MemberName" />
-                    <property name="WidthRequest">160</property>
-                    <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes">Escalonador X
-Escalonador Y
-Escalonador Z</property>
-                    <property name="Active">0</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.ComboBoxEntry" id="directoryEntry">
-                    <property name="MemberName" />
-                    <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes" />
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="SearchButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-file Button</property>
-                    <property name="Label" translatable="yes">Procurar</property>
-                    <property name="UseUnderline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">2</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.HButtonBox" id="hbuttonbox1">
-                <property name="MemberName" />
-                <property name="Size">0</property>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.VBox" id="plotBox">
-                <property name="MemberName" />
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-                <child>
-                  <placeholder />
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">2</property>
-                <property name="AutoSize">True</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.HBox" id="mediaBox">
-                <property name="MemberName" />
-                <property name="Spacing">6</property>
-                <child>
-                  <widget class="Gtk.Button" id="previewButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-previous Button</property>
-                    <property name="Label" translatable="yes">Retroceder</property>
-                    <property name="UseUnderline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="pauseButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-pause Button</property>
-                    <property name="Label" translatable="yes">Pausa</property>
-                    <property name="UseUnderline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="playButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-play Button</property>
-                    <property name="Label" translatable="yes">Iniciar</property>
-                    <property name="UseUnderline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">2</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="nextButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-media-next Button</property>
-                    <property name="Label" translatable="yes">Avançar</property>
-                    <property name="UseUnderline">True</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">3</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">3</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-          </widget>
-        </child>
-        <child>
-          <widget class="Gtk.Label" id="simuPageText">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Simulação</property>
+            <node name="__gtksharp_128_Stetic_Editor_ActionMenuBar" type="Menubar">
+              <node type="Menu" action="ArquivoAction">
+                <node type="Menuitem" action="newAction" />
+                <node type="Menuitem" action="openAction" />
+                <node type="Menuitem" action="saveAction" />
+                <node type="Menuitem" action="saveAsAction" />
+                <node type="Menuitem" action="quitAction" />
+              </node>
+              <node type="Menu" action="SimulaoAction">
+                <node type="Menu" action="floppyAction">
+                  <node type="Menuitem" action="PNGAction" />
+                  <node type="Menuitem" action="SVGAction" />
+                  <node type="Menuitem" action="LogAction" />
+                </node>
+              </node>
+            </node>
           </widget>
           <packing>
-            <property name="type">tab</property>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
           </packing>
         </child>
         <child>
-          <widget class="Gtk.VBox" id="creatorBox">
+          <widget class="Gtk.Notebook" id="notebook1">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
+            <property name="CanFocus">True</property>
+            <property name="CurrentPage">0</property>
             <child>
-              <widget class="Gtk.HBox" id="cMenuBox">
+              <widget class="Gtk.VBox" id="simulatorBox">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.ComboBox" id="dirCreatorEntry">
+                  <widget class="Gtk.HBox" id="menuBox">
                     <property name="MemberName" />
-                    <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes" />
-                    <signal name="Changed" handler="OnChangeDirEntry" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.ComboBox" id="SchedulerCombobox">
+                        <property name="MemberName" />
+                        <property name="WidthRequest">160</property>
+                        <property name="IsTextCombo">True</property>
+                        <property name="Items" translatable="yes">Escalonador X
+Escalonador Y
+Escalonador Z</property>
+                        <property name="Active">0</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">False</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.ComboBox" id="directoryEntry">
+                        <property name="MemberName" />
+                        <property name="IsTextCombo">True</property>
+                        <property name="Items" translatable="yes" />
+                        <signal name="Changed" handler="OnChangeDirEntry" />
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="saveCreatorButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-save Button</property>
-                    <property name="Label">_OK</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="SaveButtonEvent" />
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="editCreatorButton">
+                  <widget class="Gtk.VBox" id="plotBox">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-edit Menu</property>
-                    <property name="Label" translatable="yes">Editar</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="EditButtonEvent" />
-                  </widget>
-                  <packing>
-                    <property name="Position">2</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.ScrolledWindow" id="scrolledWindow">
-                <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="ShadowType">In</property>
-                <child>
-                  <widget class="Gtk.Viewport" id="GtkViewport">
-                    <property name="MemberName" />
-                    <property name="ShadowType">None</property>
+                    <child>
+                      <placeholder />
+                    </child>
+                    <child>
+                      <placeholder />
+                    </child>
                     <child>
                       <placeholder />
                     </child>
                   </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.HBox" id="mediaBox">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.Button" id="previewButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:gtk-media-previous Button</property>
+                        <property name="Label" translatable="yes">Retroceder</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Button" id="pauseButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:gtk-media-pause Button</property>
+                        <property name="Label" translatable="yes">Pausa</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Button" id="playButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:gtk-media-play Button</property>
+                        <property name="Label" translatable="yes">Iniciar</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="PlayEvent" />
+                      </widget>
+                      <packing>
+                        <property name="Position">2</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Button" id="nextButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:gtk-media-next Button</property>
+                        <property name="Label" translatable="yes">Avançar</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">3</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="simuPageText">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">Simulação</property>
+              </widget>
+              <packing>
+                <property name="type">tab</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.VBox" id="creatorBox">
+                <property name="MemberName" />
+                <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.HBox" id="cMenuBox">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.ComboBox" id="dirCreatorEntry">
+                        <property name="MemberName" />
+                        <property name="IsTextCombo">True</property>
+                        <property name="Items" translatable="yes" />
+                        <signal name="Changed" handler="OnChangeDirEntry" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.ScrolledWindow" id="scrolledWindow">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="ShadowType">In</property>
+                    <child>
+                      <widget class="Gtk.Viewport" id="GtkViewport">
+                        <property name="MemberName" />
+                        <property name="ShadowType">None</property>
+                        <child>
+                          <placeholder />
+                        </child>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.HBox" id="settingsBox">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.Button" id="addCreatorButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:gtk-add Button</property>
+                        <property name="Label" translatable="yes">Adicionar</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="AddCreationEvent" />
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Button" id="removeCreatorButton">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Type">TextAndIcon</property>
+                        <property name="Icon">stock:stock_delete Button</property>
+                        <property name="Label" translatable="yes">Remover</property>
+                        <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="RemoveCreationEvent" />
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">2</property>
+                    <property name="AutoSize">False</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
                 </child>
               </widget>
               <packing>
                 <property name="Position">1</property>
-                <property name="AutoSize">True</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.HBox" id="settingsBox">
+              <widget class="Gtk.Label" id="creationPageText">
                 <property name="MemberName" />
-                <property name="Spacing">6</property>
-                <child>
-                  <widget class="Gtk.Button" id="addCreatorButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-add Button</property>
-                    <property name="Label" translatable="yes">Adicionar</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="AddCreationEvent" />
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="removeCreatorButton">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:stock_delete Button</property>
-                    <property name="Label" translatable="yes">Remover</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="RemoveCreationEvent" />
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
+                <property name="LabelProp" translatable="yes">Criação</property>
               </widget>
               <packing>
-                <property name="Position">2</property>
-                <property name="AutoSize">False</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="type">tab</property>
               </packing>
             </child>
           </widget>
           <packing>
             <property name="Position">1</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="Gtk.Label" id="creationPageText">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">Criação</property>
-          </widget>
-          <packing>
-            <property name="type">tab</property>
+            <property name="AutoSize">True</property>
           </packing>
         </child>
       </widget>

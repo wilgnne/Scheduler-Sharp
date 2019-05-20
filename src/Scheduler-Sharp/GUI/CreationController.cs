@@ -1,5 +1,5 @@
-﻿using System;
-using Gtk;
+﻿using Gtk;
+using System;
 using System.Collections.Generic;
 
 using SchedulerSharp.Models;
@@ -8,7 +8,7 @@ namespace SchedulerSharp.GUI
 {
     public class CreationController
     {
-        public ComboBox hist;
+        public List<ComboBox> historicBoxs;
         public CreationView creationView;
 
         private List<string> historicStrings;
@@ -21,11 +21,11 @@ namespace SchedulerSharp.GUI
         /// </summary>
         /// <param name="hist">Combobox referente a visualição do historico.</param>
         /// <param name="conteinerCreationView">Conteiner de criação.</param>
-        public CreationController(ComboBox hist, Container conteinerCreationView)
+        public CreationController(List<ComboBox> comboBoxes,Container conteinerCreationView)
         {
-            this.hist = hist;
-            creationView = new CreationView(conteinerCreationView);
+            historicBoxs = comboBoxes;
 
+            creationView = new CreationView(conteinerCreationView);
             HistoricInitialize();
         }
 
@@ -35,11 +35,21 @@ namespace SchedulerSharp.GUI
         private void HistoricInitialize ()
         {
             string json = null;
-            JsonController.OpenJson(historicPath, ref json);
-            historicStrings = JsonController.JsonToList<string>(json);
-            foreach (string dir in historicStrings)
+            if(JsonController.OpenJson(historicPath, ref json))
             {
-                hist.AppendText(dir);
+                historicStrings = JsonController.JsonToList<string>(json);
+                foreach (string dir in historicStrings)
+                {
+                    foreach (ComboBox box in historicBoxs)
+                    {
+                        box.AppendText(dir);
+                    }
+                }
+            }
+            else
+            {
+                JsonController.SaveJson("[]", historicPath);
+                HistoricInitialize();
             }
         }
 
@@ -47,11 +57,14 @@ namespace SchedulerSharp.GUI
         /// Atualizar historico
         /// </summary>
         /// <param name="newPath">Endereçõ do novo arquivo.</param>
-        private void UpdateHistoric (string newPath)
+        /// /// <param name="box">ComboBox a ser atualizada.</param>
+        private void UpdateHistoric (ComboBox box, string newPath)
         {
             historicBuffer = newPath;
             for (int i = historicStrings.Count -1; i >= 0; i--)
-                hist.RemoveText(i);
+            {
+                box.RemoveText(i);
+            }
 
             if (historicStrings.Contains(newPath))
             {
@@ -60,9 +73,9 @@ namespace SchedulerSharp.GUI
 
                 foreach (string dir in historicStrings)
                 {
-                    hist.AppendText(dir);
+                    box.AppendText(dir);
                 }
-                hist.Active = 0;
+                box.Active = 0;
             }
             else if (String.IsNullOrEmpty(newPath) == false)
             {
@@ -70,9 +83,9 @@ namespace SchedulerSharp.GUI
 
                 foreach (string dir in historicStrings)
                 {
-                    hist.AppendText(dir);
+                    box.AppendText(dir);
                 }
-                hist.Active = 0;
+                box.Active = 0;
             }
 
             string json = JsonController.ListToJson<string>(historicStrings);
@@ -81,16 +94,50 @@ namespace SchedulerSharp.GUI
         }
 
         /// <summary>
+        /// Atualizar todas as ComboBox de historico
+        /// </summary>
+        /// <param name="newPath">Endereçõ do novo arquivo.</param>
+        private void UpdateAllHistoric(string newPath)
+        {
+            foreach(ComboBox box in historicBoxs)
+            {
+                UpdateHistoric(box, newPath);
+            }
+        }
+
+        /// <summary>
         /// Evento do botão Salvar
         /// </summary>
-        /// <param name="json">Json.</param>
-        /// <param name="path">Path.</param>
-        public void SaveButtonEvent (string json, string path)
+        public void SaveEvent ()
         {
+            if (String.IsNullOrEmpty(historicBuffer) == false)
+            {
+                string json = JsonController.ListToJson(GetItens());
+                if (JsonController.SaveJson(json, historicBuffer))
+                {
+                    Console.WriteLine(historicBuffer);
+                    UpdateAllHistoric(historicBuffer);
+                }
+            }
+            else
+            {
+                if(GTKUtils.ShowFileChooser(out string path, "Salvar como..", "Selecionar"))
+                    SaveAsEvent(path);
+            }
+
+        }
+
+        /// <summary>
+        /// Evento Salvar Como...
+        /// </summary>
+        /// <param name="path">Diretorio do arquivo.</param>
+        public void SaveAsEvent (string path)
+        {
+            string json = JsonController.ListToJson(GetItens());
             if (JsonController.SaveJson(json, path))
             {
                 Console.WriteLine(path);
-                UpdateHistoric(path);
+                UpdateAllHistoric(path);
             }
         }
 
@@ -104,13 +151,23 @@ namespace SchedulerSharp.GUI
             if (JsonController.OpenJson(path, ref json))
             {
                 creationView.LoadItens(JsonController.JsonToList<Process>(json));
-                UpdateHistoric(path);
+                UpdateAllHistoric(path);
             }
             else
             {
                 historicStrings.Remove(path);
-                UpdateHistoric(String.Empty);
+                UpdateAllHistoric(String.Empty);
             }
+        }
+
+        public void NewEvent()
+        {
+            creationView.LoadItens(new List<Process>());
+            foreach(ComboBox box in historicBoxs)
+            {
+                box.Active = -1;
+            }
+            historicBuffer = null;
         }
 
         /// <summary>
@@ -141,12 +198,12 @@ namespace SchedulerSharp.GUI
         /// <summary>
         /// Ao Alterar o diretorio
         /// </summary>
-        public void OnChangeDirEntry()
+        public void OnChangeDirEntry(ComboBox sender)
         {
-            if (historicBuffer != hist.ActiveText && 
-                String.IsNullOrEmpty(hist.ActiveText) == false)
+            if (historicBuffer != sender.ActiveText && 
+                String.IsNullOrEmpty(sender.ActiveText) == false)
             {
-                EditButtonEvent(hist.ActiveText);
+                EditButtonEvent(sender.ActiveText);
             }
         }
     }

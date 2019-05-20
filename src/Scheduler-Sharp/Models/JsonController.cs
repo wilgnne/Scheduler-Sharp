@@ -1,9 +1,10 @@
 ﻿using System;
-using Newtonsoft.Json;
 using System.IO;
 using System.Text;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
+using SchedulerSharp.GUI;
 namespace SchedulerSharp.Models
 {
     /// <summary>
@@ -45,24 +46,22 @@ namespace SchedulerSharp.Models
         /// </returns>
         public static bool SaveJson (string json, string path)
         {
-            if (String.IsNullOrEmpty(path) == false)
+            try
             {
-                try
+                using (StreamWriter outputFile = new StreamWriter(path, false, Encoding.UTF8))
                 {
-                    using (StreamWriter outputFile = new StreamWriter(path, false, Encoding.UTF8))
-                    {
-                        outputFile.WriteLine(json);
-                    }
-                }
-                catch (IOException e) //Caso ocora um erro, mostrar uma mensagem
-                {
-                    Console.WriteLine("Erro ao salvar o arquivo");
-                    Console.WriteLine(e.Message);
-                    return false;
+                    outputFile.WriteLine(json);
                 }
             }
-            else
+            catch (IOException e) //Caso ocora um erro, mostrar uma mensagem
             {
+                Console.WriteLine("Erro ao salvar o arquivo");
+                Console.WriteLine(e.Message);
+                GTKUtils.ShowDilog
+                (   "Save error!",
+                    Gtk.MessageType.Warning,
+                    e.Message
+                );
                 return false;
             }
             return true;
@@ -79,26 +78,25 @@ namespace SchedulerSharp.Models
         /// </returns>
         public static bool OpenJson (string path, ref string json)
         {
-            if (File.Exists(path))
-            {
-                try
-                {   // Abrindo arquivo usando o stream reader.
-                    using (StreamReader sr = new StreamReader(path))
-                    {
-                        // Lendo o arquivo e o salvando na string text
-                        json = sr.ReadToEnd();
-                    }
-                }
-                catch (IOException e) //Caso ocora um erro, mostrar uma mensagem
+            try
+            {   // Abrindo arquivo usando o stream reader.
+                using (StreamReader sr = new StreamReader(path))
                 {
-                    Console.WriteLine("Erro ao abrir o arquivo");
-                    Console.WriteLine(e.Message);
-                    return false;
+                    // Lendo o arquivo e o salvando na string text
+                    json = sr.ReadToEnd();
                 }
             }
-            else
+            catch (IOException e) //Caso ocora um erro, mostrar uma mensagem
             {
-                Console.WriteLine("Arquivo nao existe");
+                Console.WriteLine("Erro ao abrir o arquivo");
+                Console.WriteLine(e.Message);
+
+                GTKUtils.ShowDilog
+                (   "Open error!",
+                    Gtk.MessageType.Warning,
+                    e.Message
+                );
+
                 return false;
             }
 
