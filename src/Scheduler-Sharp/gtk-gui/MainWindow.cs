@@ -321,8 +321,11 @@ public partial class MainWindow
 		this.openAction.Activated += new global::System.EventHandler(this.EditButtonEvent);
 		this.saveAction.Activated += new global::System.EventHandler(this.SaveEvent);
 		this.saveAsAction.Activated += new global::System.EventHandler(this.SaveAsEvent);
+		this.PNGAction.Activated += new global::System.EventHandler(this.ExportPNG);
+		this.SVGAction.Activated += new global::System.EventHandler(this.ExportSVG);
 		this.quitAction.Activated += new global::System.EventHandler(this.CloseEvent);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
+		this.pauseButton.Clicked += new global::System.EventHandler(this.PauseEvent);
 		this.playButton.Clicked += new global::System.EventHandler(this.PlayEvent);
 		this.dirCreatorEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.addCreatorButton.Clicked += new global::System.EventHandler(this.AddCreationEvent);

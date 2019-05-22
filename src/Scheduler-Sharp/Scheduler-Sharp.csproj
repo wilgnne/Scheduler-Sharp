@@ -81,8 +81,10 @@
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\JsonController.cs" />
     <Compile Include="GUI\CreationController.cs" />
-    <Compile Include="GUI\PlotController.cs" />
     <Compile Include="GUI\GTKUtils.cs" />
+    <Compile Include="GUI\PlotInterface\PlotInterface.cs" />
+    <Compile Include="GUI\PlotInterface\PlotAnim.cs" />
+    <Compile Include="GUI\PlotInterface\PlotInterfacePrivate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -90,6 +92,7 @@
   <ItemGroup>
     <Folder Include="GUI\" />
     <Folder Include="Models\" />
+    <Folder Include="GUI\PlotInterface\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

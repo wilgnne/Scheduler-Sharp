@@ -58,11 +58,13 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportPNG" />
       </action>
       <action id="SVGAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportSVG" />
       </action>
       <action id="LogAction">
         <property name="Type">Action</property>
@@ -207,6 +209,7 @@ Escalonador Z</property>
                         <property name="Icon">stock:gtk-media-pause Button</property>
                         <property name="Label" translatable="yes">Pausa</property>
                         <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="PauseEvent" />
                       </widget>
                       <packing>
                         <property name="Position">1</property>

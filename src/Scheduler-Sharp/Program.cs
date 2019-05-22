@@ -6,6 +6,7 @@ namespace SchedulerSharp
     static class MainClass
     {
         public static MainWindow win;
+
         public static void Main(string[] args)
         {
             //Executar GUI apenas se nao houver argumentos

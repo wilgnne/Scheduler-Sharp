@@ -121,7 +121,7 @@ namespace SchedulerSharp.GUI
             }
             else
             {
-                if(GTKUtils.ShowFileChooser(out string path, "Salvar como..", "Selecionar"))
+                if(GTKUtils.ShowFileChooser(out string path, ".json", "Salvar como..", "Selecionar"))
                     SaveAsEvent(path);
             }
 

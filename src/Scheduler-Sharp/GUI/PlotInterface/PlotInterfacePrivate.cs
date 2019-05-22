@@ -1,46 +1,15 @@
-﻿using Gtk;
-using System;
+﻿using System;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using OxyPlot.GtkSharp;
 using System.Collections.Generic;
 
 using SchedulerSharp.Models;
 
-namespace SchedulerSharp.GUI
+namespace SchedulerSharp.GUI.PlotInterface
 {
-    public class PlotInterface
+    public partial class PlotInterface
     {
-        PlotView view;
-        PlotModel model;
-        IntervalBarSeries barSeries;
-        Container container;
-        public PlotInterface(Container container)
-        {
-            this.container = container;
-            InitializeABarSeries();
-            InitializeAModel(0);
-
-            view = new PlotView();
-            container.Add(view);
-            view.ShowAll();
-            view.Model = model;
-
-            model.Series.Add(barSeries);
-        }
-
-        public void UpdateData(List<PlotableProcess> processes)
-        {
-            view.Model = null;
-            InitializeAModel(processes.Count);
-            SetUtilizationData (processes);
-            model.Series.Add(barSeries);
-            view.Model = model;
-            view.ShowAll();
-        }
-
-
         private void SetUtilizationData(List<PlotableProcess> processes)
         {
             InitializeABarSeries();
@@ -54,6 +23,24 @@ namespace SchedulerSharp.GUI
                     CategoryIndex = index,
                     Title = process.Name,
                     Color = process.RunColor,
+                };
+                barSeries.Items.Add(item);
+            }
+        }
+
+        private void SetUtilizationData (List<Process> processes)
+        {
+            InitializeABarSeries();
+            for (int index = 0; index < processes.Count; index++)
+            {
+                Process process = processes[index];
+                IntervalBarItem item = new IntervalBarItem
+                {
+                    Start = process.ArrivalTime - 0.5f,
+                    End = process.ArrivalTime + process.Runtime + 0.5f,
+                    CategoryIndex = index,
+                    Title = process.Name,
+                    Color = ((PlotableProcess)process).RunColor,
                 };
                 barSeries.Items.Add(item);
             }
@@ -93,7 +80,7 @@ namespace SchedulerSharp.GUI
 
             // Adiciona ao eixo do plotModel
             model.Axes.Add(yAxis);
-            
+
         }
 
         public void InitializeABarSeries()
