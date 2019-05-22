@@ -144,9 +144,10 @@ public partial class MainWindow
 		this.menuBox.Spacing = 6;
 		// Container child menuBox.Gtk.Box+BoxChild
 		this.SchedulerCombobox = global::Gtk.ComboBox.NewText();
-		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador X"));
-		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador Y"));
-		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Escalonador Z"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("FCFS"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("SJF"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("RR"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Compare"));
 		this.SchedulerCombobox.WidthRequest = 160;
 		this.SchedulerCombobox.Name = "SchedulerCombobox";
 		this.SchedulerCombobox.Active = 0;

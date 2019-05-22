@@ -11,6 +11,7 @@ public partial class MainWindow : Gtk.Window
 {
     public CreationController creationController;
     public PlotInterface plot;
+    public PlotInterface escalonadPlot;
 
     public MainWindow() : base(WindowType.Toplevel)
     {
@@ -21,6 +22,7 @@ public partial class MainWindow : Gtk.Window
             },
                 scrolledWindow);
         plot = new PlotInterface(plotBox);
+        escalonadPlot = new PlotInterface(plotBox);
     }
 
     protected List<PlotableProcess> Gerar()
