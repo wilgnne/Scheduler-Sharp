@@ -13,9 +13,11 @@ namespace SchedulerSharp.GUI
         public List<Process> Items { get; private set; }
 
         TreeView tree;
+        // Lista de processos para o TreeView
         ListStore processListStore;
 
         List<TreeViewColumn> columns;
+        // Celulas das Colunas
         List<CellRendererText> cells;
 
         /// <summary>

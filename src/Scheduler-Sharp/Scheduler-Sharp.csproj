@@ -77,10 +77,14 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedulers\Scheduler.cs" />
+    <Compile Include="Schedulers\FCFS.cs" />
     <Compile Include="GUI\CreationView.cs" />
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\JsonController.cs" />
     <Compile Include="GUI\CreationController.cs" />
+    <Compile Include="Schedulers\SJF.cs" />
+    <Compile Include="Schedulers\InsetionSort.cs" />
     <Compile Include="GUI\GTKUtils.cs" />
     <Compile Include="GUI\PlotInterface\PlotInterface.cs" />
     <Compile Include="GUI\PlotInterface\PlotAnim.cs" />
@@ -90,6 +94,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Schedulers\" />
     <Folder Include="GUI\" />
     <Folder Include="Models\" />
     <Folder Include="GUI\PlotInterface\" />
