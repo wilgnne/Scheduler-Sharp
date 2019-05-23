@@ -9,9 +9,8 @@ namespace SchedulerSharp.Schedulers
         public static List<PlotableProcess> Scheduling(List<Process> processes)
         {
             List<PlotableProcess> plotableProcesses = new List<PlotableProcess>();
-            List<EscalonableProcess> interrupted = new List<EscalonableProcess>();
             List<EscalonableProcess> escalonableProcesses = new List<EscalonableProcess>();
-            int execTime = 0;
+            int execTime;
             for (int i = 0; i < processes.Count; i++)
             {
                 escalonableProcesses.Add(new EscalonableProcess(processes[i]));
