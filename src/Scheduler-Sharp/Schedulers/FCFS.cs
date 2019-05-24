@@ -5,20 +5,24 @@ namespace SchedulerSharp.Schedulers
 {
     public static class FCFS
     {
-        public static List<PlotableProcess> Schedulering(List<Process> list)
+        public static List<PlotableProcess> Scheduling(List<Process> list)
         {
-            int execTime = 0;
+            int execTime = list[0].ArrivalTime;
             List<PlotableProcess> listPlotable = new List<PlotableProcess>();
+            Queue<EscalonableProcess> escalonableProcesses = new Queue<EscalonableProcess>();
             for (int i = 0; i < list.Count; i++)
             {
-                EscalonableProcess escalonador = new EscalonableProcess(list[i]);
-                while (escalonador.Run())
+                escalonableProcesses.Enqueue(new EscalonableProcess(list[i]));
+            }
+            while (escalonableProcesses.Count > 0)
+            {
+                EscalonableProcess escalonable = escalonableProcesses.Dequeue();
+                while (escalonable.Run())
                 {
-                    listPlotable.Add(new PlotableProcess(escalonador, execTime));
+                    listPlotable.Add(new PlotableProcess(escalonable, execTime));
                     execTime++;
                 }
             }
-
             return listPlotable;
         }
     }
