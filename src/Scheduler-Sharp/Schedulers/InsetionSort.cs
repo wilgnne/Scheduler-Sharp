@@ -5,13 +5,18 @@ namespace SchedulerSharp.Schedulers
 {
     public static class InsertionSort
     {
-        public static List<Process> InsertionSort_Processes(List<Process> list)
+        /// <summary>
+        /// LEGACY
+        /// </summary>
+        /// <returns>The sort processes.</returns>
+        /// <param name="list">List.</param>
+        public static List<Models.Process> InsertionSort_Processes(List<Models.Process> list)
         {
             int i, n, flag, j;
             n = list.Count;
             for (i = 1; i < n; i++)
             {
-                Process value = list[i];
+                Models.Process value = list[i];
                 flag = 0;
                 for (j = i - 1; j >= 0 && flag != 1;)
                 {

@@ -1,5 +1,6 @@
 ﻿using Gtk;
 using System;
+using System.Linq;
 using System.IO;
 using OxyPlot;
 using OxyPlot.Series;
@@ -8,6 +9,7 @@ using System.Threading;
 using System.Collections.Generic;
 
 using SchedulerSharp.Models;
+using SchedulerSharp.Schedulers;
 
 namespace SchedulerSharp.GUI.PlotInterface
 {
@@ -15,27 +17,28 @@ namespace SchedulerSharp.GUI.PlotInterface
     {
         PlotView view;
         PlotModel model;
-        IntervalBarSeries barSeries;
         Container container;
 
         //PlotAnim Global
         List<PlotableProcess> toPlot;
-        int toPlotRealLen;
+        List<String> xLabel;
+        List<String> yLabel;
         bool isPlotable;
         bool paused = false;
+
 
         public PlotInterface(Container container)
         {
             this.container = container;
             InitializeABarSeries();
-            InitializeAModel(0);
+            //InitializeAModel();
 
             view = new PlotView();
             container.Add(view);
             view.ShowAll();
             view.Model = model;
 
-            model.Series.Add(barSeries);
+            //model.Series.Add(barSeries);
         }
 
         /// <summary>
@@ -68,20 +71,6 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
         }
 
-        private void ThredCall()
-        {
-            for (int i = 0; i < toPlot.Count; i++)
-            {
-                List<PlotableProcess> listToPlot = toPlot.GetRange(0, i);
-                UpdateData(listToPlot);
-                while (paused)
-                {
-                    Thread.Sleep(1);
-                }
-                Thread.Sleep(250);
-            }
-        }
-
         /// <summary>
         /// Pausar animação
         /// </summary>
@@ -102,30 +91,29 @@ namespace SchedulerSharp.GUI.PlotInterface
             toPlot = processes;
             if (plotable)
             {
-                toPlotRealLen = processes.Count;
+                yLabel = toPlot.ConvertAll(x => x.Name);
+                yLabel = yLabel.Distinct().ToList();
+                xLabel = SchedulerUtils.Range(processes.Count);
             }
             else
             {
-                //Tamanho total
-                int len = 0;
-                for (int i = 0; i < processes.Count; i++)
-                {
-                    len += processes[i].Runtime;
-                }
-                toPlotRealLen = len;
+                List<int> ranges = toPlot.ConvertAll(x => (x.Runtime + x.ArrivalTime));
+                ranges.Sort();
+                xLabel = SchedulerUtils.Range(ranges[ranges.Count - 1] + 1);
+                yLabel = toPlot.ConvertAll(x => x.Name);
             }
-            PlotAnim anim = new PlotAnim(ThredCall);
-            anim.StartAnim();
+
+            UpdateData(toPlot, xLabel, yLabel);
         }
 
         /// <summary>
         /// Atualizar Modelo de plotagem
         /// </summary>
         /// <param name="processes">Processos a serem plotados.</param>
-        public void UpdateData(List<PlotableProcess> processes)
+        public void UpdateData(List<PlotableProcess> processes, List<string> xLabel, List<string> yLabel)
         {
             view.Model = null;
-            InitializeAModel(toPlotRealLen);
+            InitializeAModel(xLabel, yLabel);
 
             if (isPlotable)
             {
@@ -133,7 +121,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
             else
             {
-                SetUtilizationData(processes.ConvertAll(x => (Process)x));
+                //SetUtilizationData(processes.ConvertAll(x => (Process)x));
             }
 
             model.Series.Add(barSeries);

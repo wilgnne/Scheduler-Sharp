@@ -4,6 +4,7 @@
     <images-root-path>..</images-root-path>
   </configuration>
   <import>
+    <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../packages/OxyPlot.GtkSharp.1.0.0/lib/net45/OxyPlot.GtkSharp.dll" />
     <widget-library name="../bin/Debug/Scheduler-Sharp.exe" internal="true" />
   </import>
@@ -83,6 +84,7 @@
     <property name="Icon">resource:SchedulerSharp.004-01-512.png</property>
     <property name="WindowPosition">Center</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
+    <signal name="FrameEvent" handler="Frame" />
     <child>
       <widget class="Gtk.VBox" id="vbox1">
         <property name="MemberName" />
@@ -90,7 +92,7 @@
         <child>
           <widget class="Gtk.MenuBar" id="menubar3">
             <property name="MemberName" />
-            <node name="__gtksharp_128_Stetic_Editor_ActionMenuBar" type="Menubar">
+            <node name="menubar3" type="Menubar">
               <node type="Menu" action="ArquivoAction">
                 <node type="Menuitem" action="newAction" />
                 <node type="Menuitem" action="openAction" />
@@ -137,6 +139,7 @@ SJF
 RR
 Compare</property>
                         <property name="Active">0</property>
+                        <signal name="Changed" handler="OnSelectScheduler" />
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -166,11 +169,10 @@ Compare</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.VBox" id="plotBox">
+                  <widget class="Gtk.HPaned" id="plotBox">
                     <property name="MemberName" />
-                    <child>
-                      <placeholder />
-                    </child>
+                    <property name="CanFocus">True</property>
+                    <property name="Position">328</property>
                     <child>
                       <placeholder />
                     </child>
@@ -180,7 +182,7 @@ Compare</property>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
+                    <property name="AutoSize">False</property>
                   </packing>
                 </child>
                 <child>
@@ -248,6 +250,49 @@ Compare</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.HBox" id="hbox1">
+                    <property name="MemberName" />
+                    <property name="Spacing">6</property>
+                    <child>
+                      <widget class="Gtk.ProgressBar" id="progressFCFS">
+                        <property name="MemberName" />
+                        <property name="Text" translatable="yes">FCFS</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.ProgressBar" id="progressSJF">
+                        <property name="MemberName" />
+                        <property name="Text" translatable="yes">SJF</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.ProgressBar" id="progressRR">
+                        <property name="MemberName" />
+                        <property name="Text" translatable="yes">RR</property>
+                      </widget>
+                      <packing>
+                        <property name="Position">2</property>
+                        <property name="AutoSize">True</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="PackType">End</property>
+                    <property name="Position">3</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>

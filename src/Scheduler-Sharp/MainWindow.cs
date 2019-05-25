@@ -5,13 +5,19 @@ using System.Collections.Generic;
 
 using SchedulerSharp.GUI;
 using SchedulerSharp.GUI.PlotInterface;
+using SchedulerSharp.GUI.CreationInterface;
 using SchedulerSharp.Models;
+using SchedulerSharp.Schedulers;
 
 public partial class MainWindow : Gtk.Window
 {
     public CreationController creationController;
     public PlotInterface plot;
     public PlotInterface escalonadPlot;
+
+    public List<PlotableProcess> fcfs;
+    public List<PlotableProcess> rr;
+    public List<PlotableProcess> toPlot;
 
     public MainWindow() : base(WindowType.Toplevel)
     {
@@ -23,6 +29,8 @@ public partial class MainWindow : Gtk.Window
                 scrolledWindow);
         plot = new PlotInterface(plotBox);
         escalonadPlot = new PlotInterface(plotBox);
+
+        progressRR.Fraction = 0.5;
     }
 
     protected List<PlotableProcess> Gerar()
@@ -30,7 +38,26 @@ public partial class MainWindow : Gtk.Window
         List<PlotableProcess> plotables = new List<PlotableProcess>();
         List<EscalonableProcess> escalonables = new List<EscalonableProcess>();
 
-        foreach (Process process in creationController.GetItens())
+        foreach (Process process in InsertionSort.InsertionSort_Processes(creationController.GetItens()))
+        {
+            EscalonableProcess eProcess = new EscalonableProcess(process);
+            plotables.Add(new PlotableProcess(eProcess, 0));
+        }
+
+        return plotables;
+    }
+
+    protected List<PlotableProcess> GerarCompare()
+    {
+        List<PlotableProcess> plotables = new List<PlotableProcess>();
+        List<EscalonableProcess> escalonables = new List<EscalonableProcess>();
+
+        ProcessCompare compare = new ProcessCompare();
+
+        List<Process> li = new List<Process>(creationController.GetItens().ToArray());
+        li.Sort(compare);
+
+        foreach (Process process in li)
         {
             EscalonableProcess eProcess = new EscalonableProcess(process);
             plotables.Add(new PlotableProcess(eProcess, 0));
@@ -65,9 +92,19 @@ public partial class MainWindow : Gtk.Window
 
     protected void NewEvent(object sender, EventArgs e) => creationController.NewEvent();
 
-    protected void OnChangeDirEntry(object sender, EventArgs e) => creationController.OnChangeDirEntry((ComboBox)sender);
+    protected void OnChangeDirEntry(object sender, EventArgs e)
+    {
+        if (creationController.OnChangeDirEntry((ComboBox)sender))
+        {
+            toPlot = GerarCompare();
+            PlotAnim fcfsAnim = new PlotAnim(ThreFCFS, "FCFS");
+            fcfsAnim.StartAnim();
+        }
+    }
 
-    protected void PlayEvent(object sender, EventArgs e) => plot.AnimateData(Gerar(), false);
+    protected void PlayEvent(object sender, EventArgs e)
+    {
+    }
 
     protected void CloseEvent(object sender, EventArgs e) => Application.Quit();
 
@@ -76,4 +113,48 @@ public partial class MainWindow : Gtk.Window
     protected void ExportSVG(object sender, EventArgs e) => plot.ExportSVG();
 
     protected void ExportPNG(object sender, EventArgs e) => plot.ExportPNG();
+
+    protected void Frame(object o, FrameEventArgs args)
+    {
+        Console.WriteLine("Frame");
+    }
+
+    protected override bool OnConfigureEvent(Gdk.EventConfigure args)
+    {
+        base.OnConfigureEvent(args);
+        GetSize(out int w, out int h);
+        plotBox.Position = w / 2;
+        return true;
+    }
+
+    void ThreRR()
+    {
+        ProcessCompare compare = new ProcessCompare();
+        List<Process> li = new List<Process>(creationController.GetItens().ToArray());
+        li.Sort(compare);
+        rr = RR.Schedulering(li, 5);
+
+        Application.Invoke((sender, e) =>  escalonadPlot.AnimateData(rr, true));
+    }
+
+    void ThreFCFS()
+    {
+        ProcessCompare compare = new ProcessCompare();
+        List<Process> li = new List<Process>(creationController.GetItens().ToArray());
+        li.Sort(compare);
+        fcfs = FCFS.Schedulering(li, progressFCFS);
+
+        Application.Invoke((sender, e) => plot.AnimateData(fcfs, true));
+    }
+
+    protected void OnSelectScheduler(object sender, EventArgs e)
+    {
+        switch (((ComboBox)sender).ActiveText)
+        {
+            case "FCFS":
+                break;
+            default:
+                break;
+        }
+    }
 }

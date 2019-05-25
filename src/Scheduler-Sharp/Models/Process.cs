@@ -1,6 +1,5 @@
 ﻿using System;
 using OxyPlot;
-using System.Timers;
 
 namespace SchedulerSharp.Models
 {
@@ -44,8 +43,6 @@ namespace SchedulerSharp.Models
     {
         // Tempo em que o processo foi executado
         public int ExecTime { get; private set; }
-        // Cor no momento de execução
-        public OxyColor Color { get; private set; }
 
         /// <summary>
         /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.PlotableProcess"/> .
@@ -55,7 +52,6 @@ namespace SchedulerSharp.Models
         public PlotableProcess(EscalonableProcess process, int execTime)
         : base(process.Name, process.ArrivalTime, process.Runtime)
         {
-            Color = process.RunColor;
             ExecTime = execTime;
         }
     }
@@ -69,6 +65,8 @@ namespace SchedulerSharp.Models
         public OxyColor RunColor { get; private set; }
         // Cor em espera
         public OxyColor WaitingColor { get; private set; }
+
+        public Process Source { get; private set; }
 
         /// <summary>
         /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.EscalonableProcess"/> .
@@ -89,6 +87,7 @@ namespace SchedulerSharp.Models
         public EscalonableProcess(Process process)
         : base(process.Name, process.ArrivalTime, process.Runtime)
         {
+            Source = process;
             Colorize();
         }
 

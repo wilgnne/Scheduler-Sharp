@@ -10,6 +10,8 @@ namespace SchedulerSharp.GUI.PlotInterface
 {
     public partial class PlotInterface
     {
+        IntervalBarSeries barSeries;
+
         private void SetUtilizationData(List<PlotableProcess> processes)
         {
             InitializeABarSeries();
@@ -20,15 +22,15 @@ namespace SchedulerSharp.GUI.PlotInterface
                 {
                     Start = process.ExecTime - 0.5f,
                     End = process.ExecTime + 0.5f,
-                    CategoryIndex = index,
-                    Title = process.Name,
+                    CategoryIndex = yLabel.IndexOf(process.Name),
+                    //Title = process.Name,
                     Color = process.RunColor,
                 };
                 barSeries.Items.Add(item);
             }
         }
 
-        private void SetUtilizationData (List<Process> processes)
+        private void SetUtilizationData(List<Process> processes)
         {
             InitializeABarSeries();
             for (int index = 0; index < processes.Count; index++)
@@ -36,59 +38,79 @@ namespace SchedulerSharp.GUI.PlotInterface
                 Process process = processes[index];
                 IntervalBarItem item = new IntervalBarItem
                 {
-                    Start = process.ArrivalTime - 0.5f,
-                    End = process.ArrivalTime + process.Runtime + 0.5f,
+                    Start = process.ArrivalTime,
+                    End = process.ArrivalTime + process.Runtime,
                     CategoryIndex = index,
-                    Title = process.Name,
+                    //Title = process.Name,
                     Color = ((PlotableProcess)process).RunColor,
                 };
                 barSeries.Items.Add(item);
             }
         }
 
-        public void InitializeAModel(int LenX)
+            public void InitializeAModel(List<string> xLabels, List<string> yLabels)
         {
             model = new PlotModel
             {
-                LegendOrientation = LegendOrientation.Vertical,
+                LegendOrientation = LegendOrientation.Horizontal,
+                LegendPosition = LegendPosition.BottomCenter,
                 LegendPlacement = LegendPlacement.Outside,
-                LegendPosition = LegendPosition.RightTop
+                LegendBorderThickness = 0,
+                Title = "Titulo"
             };
 
-
+            /*
             // Define o eixo X
             CategoryAxis xAxis = new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
                 Title = "Clock's"
             };
-            for (int i = 0; i < LenX; i++)
+            for (int i = 0; i < xLabels.Count; i++)
             {
-                xAxis.Labels.Add(i.ToString());
+                xAxis.Labels.Add(xLabels[i]);
             }
+            */
+
+            LinearAxis xAxis = new LinearAxis()
+            {
+                Title = "Clock's",
+                Minimum = 0,
+                Position = AxisPosition.Bottom,
+            };
 
             // Adiciona ao eixo do plotModel
             model.Axes.Add(xAxis);
 
-
+            /*
+            LinearAxis yAxis = new LinearAxis()
+            {
+                Title = "Clock's",
+                Minimum = 0,
+                Position = AxisPosition.Left,
+            };
+            */
             // Define o eixo Y
             CategoryAxis yAxis = new CategoryAxis
             {
+                Title = "Processos",
+                Minimum = 0,
                 Position = AxisPosition.Left,
-                Title = "Processos"
             };
+            yAxis.Labels.AddRange(yLabel);
 
             // Adiciona ao eixo do plotModel
             model.Axes.Add(yAxis);
-
         }
 
         public void InitializeABarSeries()
         {
             barSeries = new IntervalBarSeries
             {
-                LabelMargin = 0
+                LabelMargin = 0,
             };
+            if (isPlotable)
+                barSeries.Title = "Tempo medio de espera: 30clk's";
         }
     }
 }

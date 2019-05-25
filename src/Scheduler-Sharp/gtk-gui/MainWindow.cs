@@ -41,7 +41,7 @@ public partial class MainWindow
 
 	private global::Gtk.ComboBox directoryEntry;
 
-	private global::Gtk.VBox plotBox;
+	private global::Gtk.HPaned plotBox;
 
 	private global::Gtk.HBox mediaBox;
 
@@ -52,6 +52,14 @@ public partial class MainWindow
 	private global::Gtk.Button playButton;
 
 	private global::Gtk.Button nextButton;
+
+	private global::Gtk.HBox hbox1;
+
+	private global::Gtk.ProgressBar progressFCFS;
+
+	private global::Gtk.ProgressBar progressSJF;
+
+	private global::Gtk.ProgressBar progressRR;
 
 	private global::Gtk.Label simuPageText;
 
@@ -168,8 +176,10 @@ public partial class MainWindow
 		w5.Expand = false;
 		w5.Fill = false;
 		// Container child simulatorBox.Gtk.Box+BoxChild
-		this.plotBox = new global::Gtk.VBox();
+		this.plotBox = new global::Gtk.HPaned();
+		this.plotBox.CanFocus = true;
 		this.plotBox.Name = "plotBox";
+		this.plotBox.Position = 328;
 		this.simulatorBox.Add(this.plotBox);
 		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.simulatorBox[this.plotBox]));
 		w6.Position = 1;
@@ -230,6 +240,37 @@ public partial class MainWindow
 		w15.Position = 2;
 		w15.Expand = false;
 		w15.Fill = false;
+		// Container child simulatorBox.Gtk.Box+BoxChild
+		this.hbox1 = new global::Gtk.HBox();
+		this.hbox1.Name = "hbox1";
+		this.hbox1.Spacing = 6;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.progressFCFS = new global::Gtk.ProgressBar();
+		this.progressFCFS.Name = "progressFCFS";
+		this.progressFCFS.Text = global::Mono.Unix.Catalog.GetString("FCFS");
+		this.hbox1.Add(this.progressFCFS);
+		global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.progressFCFS]));
+		w16.Position = 0;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.progressSJF = new global::Gtk.ProgressBar();
+		this.progressSJF.Name = "progressSJF";
+		this.progressSJF.Text = global::Mono.Unix.Catalog.GetString("SJF");
+		this.hbox1.Add(this.progressSJF);
+		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.progressSJF]));
+		w17.Position = 1;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.progressRR = new global::Gtk.ProgressBar();
+		this.progressRR.Name = "progressRR";
+		this.progressRR.Text = global::Mono.Unix.Catalog.GetString("RR");
+		this.hbox1.Add(this.progressRR);
+		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox1[this.progressRR]));
+		w18.Position = 2;
+		this.simulatorBox.Add(this.hbox1);
+		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.simulatorBox[this.hbox1]));
+		w19.PackType = ((global::Gtk.PackType)(1));
+		w19.Position = 3;
+		w19.Expand = false;
+		w19.Fill = false;
 		this.notebook1.Add(this.simulatorBox);
 		// Notebook tab
 		this.simuPageText = new global::Gtk.Label();
@@ -249,21 +290,21 @@ public partial class MainWindow
 		this.dirCreatorEntry = global::Gtk.ComboBox.NewText();
 		this.dirCreatorEntry.Name = "dirCreatorEntry";
 		this.cMenuBox.Add(this.dirCreatorEntry);
-		global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.dirCreatorEntry]));
-		w17.Position = 0;
+		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.cMenuBox[this.dirCreatorEntry]));
+		w21.Position = 0;
 		this.creatorBox.Add(this.cMenuBox);
-		global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.cMenuBox]));
-		w18.Position = 0;
-		w18.Expand = false;
-		w18.Fill = false;
+		global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.cMenuBox]));
+		w22.Position = 0;
+		w22.Expand = false;
+		w22.Fill = false;
 		// Container child creatorBox.Gtk.Box+BoxChild
 		this.scrolledWindow = new global::Gtk.ScrolledWindow();
 		this.scrolledWindow.CanFocus = true;
 		this.scrolledWindow.Name = "scrolledWindow";
 		this.scrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
 		this.creatorBox.Add(this.scrolledWindow);
-		global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.scrolledWindow]));
-		w19.Position = 1;
+		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.scrolledWindow]));
+		w23.Position = 1;
 		// Container child creatorBox.Gtk.Box+BoxChild
 		this.settingsBox = new global::Gtk.HBox();
 		this.settingsBox.Name = "settingsBox";
@@ -274,32 +315,32 @@ public partial class MainWindow
 		this.addCreatorButton.Name = "addCreatorButton";
 		this.addCreatorButton.UseUnderline = true;
 		this.addCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Adicionar");
-		global::Gtk.Image w20 = new global::Gtk.Image();
-		w20.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
-		this.addCreatorButton.Image = w20;
+		global::Gtk.Image w24 = new global::Gtk.Image();
+		w24.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-add", global::Gtk.IconSize.Button);
+		this.addCreatorButton.Image = w24;
 		this.settingsBox.Add(this.addCreatorButton);
-		global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.addCreatorButton]));
-		w21.Position = 0;
+		global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.addCreatorButton]));
+		w25.Position = 0;
 		// Container child settingsBox.Gtk.Box+BoxChild
 		this.removeCreatorButton = new global::Gtk.Button();
 		this.removeCreatorButton.CanFocus = true;
 		this.removeCreatorButton.Name = "removeCreatorButton";
 		this.removeCreatorButton.UseUnderline = true;
 		this.removeCreatorButton.Label = global::Mono.Unix.Catalog.GetString("Remover");
-		global::Gtk.Image w22 = new global::Gtk.Image();
-		w22.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
-		this.removeCreatorButton.Image = w22;
+		global::Gtk.Image w26 = new global::Gtk.Image();
+		w26.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "stock_delete", global::Gtk.IconSize.Button);
+		this.removeCreatorButton.Image = w26;
 		this.settingsBox.Add(this.removeCreatorButton);
-		global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.removeCreatorButton]));
-		w23.Position = 1;
+		global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.settingsBox[this.removeCreatorButton]));
+		w27.Position = 1;
 		this.creatorBox.Add(this.settingsBox);
-		global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.settingsBox]));
-		w24.Position = 2;
-		w24.Expand = false;
-		w24.Fill = false;
+		global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.creatorBox[this.settingsBox]));
+		w28.Position = 2;
+		w28.Expand = false;
+		w28.Fill = false;
 		this.notebook1.Add(this.creatorBox);
-		global::Gtk.Notebook.NotebookChild w25 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.creatorBox]));
-		w25.Position = 1;
+		global::Gtk.Notebook.NotebookChild w29 = ((global::Gtk.Notebook.NotebookChild)(this.notebook1[this.creatorBox]));
+		w29.Position = 1;
 		// Notebook tab
 		this.creationPageText = new global::Gtk.Label();
 		this.creationPageText.Name = "creationPageText";
@@ -307,8 +348,8 @@ public partial class MainWindow
 		this.notebook1.SetTabLabel(this.creatorBox, this.creationPageText);
 		this.creationPageText.ShowAll();
 		this.vbox1.Add(this.notebook1);
-		global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
-		w26.Position = 1;
+		global::Gtk.Box.BoxChild w30 = ((global::Gtk.Box.BoxChild)(this.vbox1[this.notebook1]));
+		w30.Position = 1;
 		this.Add(this.vbox1);
 		if ((this.Child != null))
 		{
@@ -318,6 +359,7 @@ public partial class MainWindow
 		this.DefaultHeight = 488;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
+		this.FrameEvent += new global::Gtk.FrameEventHandler(this.Frame);
 		this.newAction.Activated += new global::System.EventHandler(this.NewEvent);
 		this.openAction.Activated += new global::System.EventHandler(this.EditButtonEvent);
 		this.saveAction.Activated += new global::System.EventHandler(this.SaveEvent);
@@ -325,6 +367,7 @@ public partial class MainWindow
 		this.PNGAction.Activated += new global::System.EventHandler(this.ExportPNG);
 		this.SVGAction.Activated += new global::System.EventHandler(this.ExportSVG);
 		this.quitAction.Activated += new global::System.EventHandler(this.CloseEvent);
+		this.SchedulerCombobox.Changed += new global::System.EventHandler(this.OnSelectScheduler);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.pauseButton.Clicked += new global::System.EventHandler(this.PauseEvent);
 		this.playButton.Clicked += new global::System.EventHandler(this.PlayEvent);
