@@ -85,6 +85,7 @@
     <Compile Include="GUI\CreationController.cs" />
     <Compile Include="Schedulers\SJF.cs" />
     <Compile Include="Schedulers\InsetionSort.cs" />
+    <Compile Include="Schedulers\AverageWaitTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
