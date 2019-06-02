@@ -11,6 +11,7 @@ namespace SchedulerSharp.Schedulers
     /// </summary>
     public static class FCFS
     {
+        public static List<PlotableProcess> Scheduling(List<Process> list)
         /// <summary>
         /// Escalonar uma lista especifica
         /// </summary>
@@ -18,9 +19,11 @@ namespace SchedulerSharp.Schedulers
         /// <param name="list">Lista a ser escalonada.</param>
         public static List<PlotableProcess> Schedulering(List<Process> list, ProgressBar bar = null)
         {
+            int execTime = list[0].ArrivalTime;
             Application.Invoke((sender, e) => bar.Fraction = 0);
             int execTime = 0;
             List<PlotableProcess> listPlotable = new List<PlotableProcess>();
+            Queue<EscalonableProcess> escalonableProcesses = new Queue<EscalonableProcess>();
 
             double iteracoes = 0;
             list.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
@@ -28,12 +31,14 @@ namespace SchedulerSharp.Schedulers
 
             for (int i = 0; i < list.Count; i++)
             {
-                if (list[i].ArrivalTime > execTime)
-                    execTime = list[i].ArrivalTime;
-
-                EscalonableProcess escalonador = new EscalonableProcess(list[i]);
-                while (escalonador.Run())
+                escalonableProcesses.Enqueue(new EscalonableProcess(list[i]));
+            }
+            while (escalonableProcesses.Count > 0)
+            {
+                EscalonableProcess escalonable = escalonableProcesses.Dequeue();
+                while (escalonable.Run())
                 {
+                    listPlotable.Add(new PlotableProcess(escalonable, execTime));
                     Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                     cont += 1;
 
