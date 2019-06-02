@@ -65,7 +65,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             {
                 using (var stream = File.Create(path))
                 {
-                    var exporter = new PdfExporter { Width = 800, Height = 600 ,Background = OxyColors.White };
+                    var exporter = new PngExporter { Width = 800, Height = 600, Background = OxyColors.White, Resolution = 25 };
                     exporter.Export(model, stream);
                 }
             }
@@ -84,7 +84,7 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// </summary>
         /// <param name="processes">Processos a ser plotados.</param>
         /// <param name="plotable">Se for <c>true</c> sera considerado um objeto plotavel.</param>
-        public void AnimateData (List<PlotableProcess> processes, bool plotable)
+        public void AnimateData (List<PlotableProcess> processes, bool plotable, string Title = "Title")
         {
             paused = false;
             isPlotable = plotable;
@@ -103,17 +103,17 @@ namespace SchedulerSharp.GUI.PlotInterface
                 yLabel = toPlot.ConvertAll(x => x.Name);
             }
 
-            UpdateData(toPlot, xLabel, yLabel);
+            UpdateData(toPlot, xLabel, yLabel, Title);
         }
 
         /// <summary>
         /// Atualizar Modelo de plotagem
         /// </summary>
         /// <param name="processes">Processos a serem plotados.</param>
-        public void UpdateData(List<PlotableProcess> processes, List<string> xLabel, List<string> yLabel)
+        public void UpdateData(List<PlotableProcess> processes, List<string> xLabel, List<string> yLabel, string Title)
         {
             view.Model = null;
-            InitializeAModel(xLabel, yLabel);
+            InitializeAModel(xLabel, yLabel, Title);
 
             if (isPlotable)
             {
@@ -121,7 +121,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
             else
             {
-                //SetUtilizationData(processes.ConvertAll(x => (Process)x));
+                SetUtilizationData(processes.ConvertAll(x => (Process)x));
             }
 
             model.Series.Add(barSeries);

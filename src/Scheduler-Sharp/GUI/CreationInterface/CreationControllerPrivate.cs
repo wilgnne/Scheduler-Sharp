@@ -17,10 +17,24 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// </summary>
         private void HistoricInitialize()
         {
+            JsonController.SaveJson("[]", historicPath);
             string json = null;
             if (JsonController.OpenJson(historicPath, ref json))
             {
                 historicStrings = JsonController.JsonToList<string>(json);
+
+                foreach(ComboBox box in historicBoxs)
+                {
+                    for (int i = historicStrings.Count - 1; i >= 0; i--)
+                    {
+                        box.RemoveText(i);
+                    }
+                    foreach (string dir in historicStrings)
+                    {
+                        box.AppendText(dir);
+                    }
+                }
+
                 foreach (string dir in historicStrings)
                 {
                     foreach (ComboBox box in historicBoxs)
@@ -44,8 +58,10 @@ namespace SchedulerSharp.GUI.CreationInterface
         private void UpdateHistoric(ComboBox box, string newPath)
         {
             historicBuffer = newPath;
+            box.Active = -1;
             for (int i = historicStrings.Count - 1; i >= 0; i--)
             {
+                Console.WriteLine("Removendo");
                 box.RemoveText(i);
             }
 

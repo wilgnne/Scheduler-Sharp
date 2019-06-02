@@ -70,26 +70,35 @@ namespace SchedulerSharp.GUI.CreationInterface
             string json = null;
             if (JsonController.OpenJson(path, ref json))
             {
+                Console.WriteLine("{0} existe", path);
                 creationView.LoadItens(JsonController.JsonToList<Process>(json));
                 UpdateAllHistoric(path);
                 return true;
             }
             else
             {
+                Console.WriteLine("{0} nao existe", path);
                 historicStrings.Remove(path);
-                UpdateAllHistoric(String.Empty);
+                json = JsonController.ListToJson(historicStrings);
+                JsonController.SaveJson(json, historicPath);
+                ClearComboBox();
             }
             return false;
+        }
+
+        private void ClearComboBox()
+        {
+            foreach (ComboBox box in historicBoxs)
+            {
+                box.Active = -1;
+            }
+            historicBuffer = null;
         }
 
         public void NewEvent()
         {
             creationView.LoadItens(new List<Process>());
-            foreach(ComboBox box in historicBoxs)
-            {
-                box.Active = -1;
-            }
-            historicBuffer = null;
+            ClearComboBox();
         }
 
         /// <summary>
@@ -113,6 +122,7 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// </summary>
         public bool OnChangeDirEntry(ComboBox sender)
         {
+            Console.WriteLine("Chamada OnChangeDir: {0}", sender.ActiveText);
             if (historicBuffer != sender.ActiveText &&
                 string.IsNullOrEmpty(sender.ActiveText) == false)
             {

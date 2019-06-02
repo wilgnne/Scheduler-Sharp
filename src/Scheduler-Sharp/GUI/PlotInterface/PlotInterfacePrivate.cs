@@ -48,7 +48,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
         }
 
-            public void InitializeAModel(List<string> xLabels, List<string> yLabels)
+            public void InitializeAModel(List<string> xLabels, List<string> yLabels, string Title)
         {
             model = new PlotModel
             {
@@ -56,7 +56,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                 LegendPosition = LegendPosition.BottomCenter,
                 LegendPlacement = LegendPlacement.Outside,
                 LegendBorderThickness = 0,
-                Title = "Titulo"
+                Title = Title
             };
 
             /*
@@ -75,7 +75,6 @@ namespace SchedulerSharp.GUI.PlotInterface
             LinearAxis xAxis = new LinearAxis()
             {
                 Title = "Clock's",
-                Minimum = 0,
                 Position = AxisPosition.Bottom,
             };
 
@@ -94,7 +93,6 @@ namespace SchedulerSharp.GUI.PlotInterface
             CategoryAxis yAxis = new CategoryAxis
             {
                 Title = "Processos",
-                Minimum = 0,
                 Position = AxisPosition.Left,
             };
             yAxis.Labels.AddRange(yLabel);

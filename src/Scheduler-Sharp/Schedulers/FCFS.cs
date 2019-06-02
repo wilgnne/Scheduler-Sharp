@@ -18,7 +18,7 @@ namespace SchedulerSharp.Schedulers
         /// <param name="list">Lista a ser escalonada.</param>
         public static List<PlotableProcess> Schedulering(List<Process> list, ProgressBar bar = null)
         {
-            bar.Fraction = 0;
+            Application.Invoke((sender, e) => bar.Fraction = 0);
             int execTime = 0;
             List<PlotableProcess> listPlotable = new List<PlotableProcess>();
 
@@ -34,16 +34,14 @@ namespace SchedulerSharp.Schedulers
                 EscalonableProcess escalonador = new EscalonableProcess(list[i]);
                 while (escalonador.Run())
                 {
-                    bar.Fraction = cont / iteracoes;
+                    Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                     cont += 1;
 
                     listPlotable.Add( new PlotableProcess(escalonador, execTime));
                     execTime++;
                 }
             }
-
-            bool arg2 = (cont == iteracoes);
-            Console.WriteLine("{0} == {1} > {2}", cont, iteracoes, arg2);
+            Application.Invoke((sender, e) => bar.Fraction = 0);
 
             return listPlotable;
         }

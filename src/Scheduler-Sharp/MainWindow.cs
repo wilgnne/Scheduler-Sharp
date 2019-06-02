@@ -1,11 +1,9 @@
 ﻿using System;
-using Gtk;
-using OxyPlot.GtkSharp;
 using System.Collections.Generic;
-
+using Gtk;
 using SchedulerSharp.GUI;
-using SchedulerSharp.GUI.PlotInterface;
 using SchedulerSharp.GUI.CreationInterface;
+using SchedulerSharp.GUI.PlotInterface;
 using SchedulerSharp.Models;
 using SchedulerSharp.Schedulers;
 
@@ -29,25 +27,9 @@ public partial class MainWindow : Gtk.Window
                 scrolledWindow);
         plot = new PlotInterface(plotBox);
         escalonadPlot = new PlotInterface(plotBox);
-
-        progressRR.Fraction = 0.5;
     }
 
-    protected List<PlotableProcess> Gerar()
-    {
-        List<PlotableProcess> plotables = new List<PlotableProcess>();
-        List<EscalonableProcess> escalonables = new List<EscalonableProcess>();
-
-        foreach (Process process in InsertionSort.InsertionSort_Processes(creationController.GetItens()))
-        {
-            EscalonableProcess eProcess = new EscalonableProcess(process);
-            plotables.Add(new PlotableProcess(eProcess, 0));
-        }
-
-        return plotables;
-    }
-
-    protected List<PlotableProcess> GerarCompare()
+    protected List<PlotableProcess> GetProcessFromCreation()
     {
         List<PlotableProcess> plotables = new List<PlotableProcess>();
         List<EscalonableProcess> escalonables = new List<EscalonableProcess>();
@@ -92,32 +74,13 @@ public partial class MainWindow : Gtk.Window
 
     protected void NewEvent(object sender, EventArgs e) => creationController.NewEvent();
 
-    protected void OnChangeDirEntry(object sender, EventArgs e)
-    {
-        if (creationController.OnChangeDirEntry((ComboBox)sender))
-        {
-            toPlot = GerarCompare();
-            PlotAnim fcfsAnim = new PlotAnim(ThreFCFS, "FCFS");
-            fcfsAnim.StartAnim();
-        }
-    }
-
-    protected void PlayEvent(object sender, EventArgs e)
-    {
-    }
-
     protected void CloseEvent(object sender, EventArgs e) => Application.Quit();
 
     protected void PauseEvent(object sender, EventArgs e) => plot.Pause();
 
-    protected void ExportSVG(object sender, EventArgs e) => plot.ExportSVG();
+    protected void ExportSVG(object sender, EventArgs e) => escalonadPlot.ExportSVG();
 
-    protected void ExportPNG(object sender, EventArgs e) => plot.ExportPNG();
-
-    protected void Frame(object o, FrameEventArgs args)
-    {
-        Console.WriteLine("Frame");
-    }
+    protected void ExportPNG(object sender, EventArgs e) => escalonadPlot.ExportPNG();
 
     protected override bool OnConfigureEvent(Gdk.EventConfigure args)
     {
@@ -132,9 +95,9 @@ public partial class MainWindow : Gtk.Window
         ProcessCompare compare = new ProcessCompare();
         List<Process> li = new List<Process>(creationController.GetItens().ToArray());
         li.Sort(compare);
-        rr = RR.Schedulering(li, 5);
+        rr = RR.Schedulering(li, (int)quantumScale.Value, progressRR);
 
-        Application.Invoke((sender, e) =>  escalonadPlot.AnimateData(rr, true));
+        Application.Invoke((sender, e) => OnSelectScheduler(SchedulerCombobox, e));
     }
 
     void ThreFCFS()
@@ -144,17 +107,49 @@ public partial class MainWindow : Gtk.Window
         li.Sort(compare);
         fcfs = FCFS.Schedulering(li, progressFCFS);
 
-        Application.Invoke((sender, e) => plot.AnimateData(fcfs, true));
+        Application.Invoke((sender, e) => OnSelectScheduler(SchedulerCombobox, e));
     }
 
     protected void OnSelectScheduler(object sender, EventArgs e)
     {
         switch (((ComboBox)sender).ActiveText)
         {
+            case "RR":
+                if (rr != null)
+                    escalonadPlot.AnimateData(rr, true, "Round Robin");
+                break;
             case "FCFS":
+                if (fcfs != null)
+                    escalonadPlot.AnimateData(fcfs, true, "FCFS");
                 break;
             default:
                 break;
         }
+    }
+
+    protected void OnQuantumChange(object sender, EventArgs e)
+    {
+        PlotAnim rrAnim = new PlotAnim(ThreRR, "RR");
+        rrAnim.StartAnim();
+    }
+
+    protected void OnChangeDirEntry(object sender, EventArgs e)
+    {
+        if (creationController.OnChangeDirEntry((ComboBox)sender))
+        {
+            Console.WriteLine("Atualizado com susses");
+            toPlot = GetProcessFromCreation();
+            plot.AnimateData(toPlot, false, "Entrada");
+
+            PlotAnim fcfsAnim = new PlotAnim(ThreFCFS, "FCFS");
+            fcfsAnim.StartAnim();
+
+            PlotAnim rrAnim = new PlotAnim(ThreRR, "RR");
+            rrAnim.StartAnim();
+        }
+    }
+
+    protected void PlayEvent(object sender, EventArgs e)
+    {
     }
 }

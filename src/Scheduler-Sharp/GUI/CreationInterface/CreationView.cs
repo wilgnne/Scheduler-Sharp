@@ -57,7 +57,7 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// </summary>
         public void AddNewRamdomItem ()
         {
-            Process newItem = new Process("PID: " + Items.Count.ToString(), random.Next(0, 100), random.Next(1, 1000));
+            Process newItem = new Process("PID: " + Items.Count.ToString(), random.Next(0, 100), random.Next(1, 50));
             Items.Add(newItem);
             AddNewItem(newItem);
         }
