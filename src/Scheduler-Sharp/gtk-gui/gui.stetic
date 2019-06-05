@@ -11,10 +11,11 @@
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="672 488">
     <action-group name="Default">
-      <action id="ArquivoAction">
+      <action id="dndAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Arquivo</property>
         <property name="ShortLabel" translatable="yes">Arquivo</property>
+        <property name="StockId">gtk-dnd</property>
       </action>
       <action id="newAction">
         <property name="Type">Action</property>
@@ -23,11 +24,11 @@
         <property name="StockId">gtk-new</property>
         <signal name="Activated" handler="NewEvent" />
       </action>
-      <action id="openAction">
+      <action id="editAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Abrir...</property>
         <property name="ShortLabel" translatable="yes">Open</property>
-        <property name="StockId">gtk-open</property>
+        <property name="StockId">gtk-edit</property>
         <signal name="Activated" handler="EditButtonEvent" />
       </action>
       <action id="saveAction">
@@ -44,16 +45,17 @@
         <property name="StockId">gtk-save-as</property>
         <signal name="Activated" handler="SaveAsEvent" />
       </action>
-      <action id="SimulaoAction">
+      <action id="mediaPlayAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Simulação</property>
         <property name="ShortLabel" translatable="yes">Simulação</property>
+        <property name="StockId">gtk-media-play</property>
       </action>
-      <action id="floppyAction">
+      <action id="directoryAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Exportar</property>
         <property name="ShortLabel" translatable="yes">Exportar</property>
-        <property name="StockId">gtk-floppy</property>
+        <property name="StockId">gtk-directory</property>
       </action>
       <action id="PNGAction">
         <property name="Type">Action</property>
@@ -67,17 +69,148 @@
         <property name="ShortLabel" translatable="yes">.SVG</property>
         <signal name="Activated" handler="ExportSVG" />
       </action>
-      <action id="LogAction">
+      <action id="LogJsonAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Log</property>
-        <property name="ShortLabel" translatable="yes">Log</property>
+        <property name="Label" translatable="yes">Log .json</property>
+        <property name="ShortLabel" translatable="yes">.json</property>
+        <signal name="Activated" handler="LogJsonEvent" />
       </action>
-      <action id="quitAction">
+      <action id="closeAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Fechar</property>
         <property name="ShortLabel" translatable="yes">Fechar</property>
-        <property name="StockId">gtk-quit</property>
+        <property name="StockId">gtk-close</property>
         <signal name="Activated" handler="CloseEvent" />
+      </action>
+      <action id="LogTxtAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Log .txt</property>
+        <property name="ShortLabel" translatable="yes">Log .txt</property>
+        <signal name="Activated" handler="LogTxtEvent" />
+      </action>
+      <action id="orientationPortraitAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Importar</property>
+        <property name="ShortLabel" translatable="yes">Importar</property>
+        <property name="StockId">gtk-orientation-portrait</property>
+      </action>
+      <action id="LogJsonAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Log .json</property>
+        <property name="ShortLabel" translatable="yes">Log .json</property>
+        <signal name="Activated" handler="OnOpenLogJson" />
+      </action>
+      <action id="CompatibilidadeAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Compatibilidade</property>
+        <property name="ShortLabel" translatable="yes">Compatibilidade</property>
+      </action>
+      <action id="TxtParaJsonAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.txt para .json</property>
+        <property name="ShortLabel" translatable="yes">.txt para .json</property>
+      </action>
+      <action id="findAndReplaceAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Compatibilidade</property>
+        <property name="ShortLabel" translatable="yes">Compatibilidade</property>
+        <property name="StockId">gtk-find-and-replace</property>
+      </action>
+      <action id="convertAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">TXT para JSON</property>
+        <property name="ShortLabel" translatable="yes">TXT para JSON</property>
+        <property name="StockId">gtk-convert</property>
+      </action>
+      <action id="FCFSAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">FCFS</property>
+        <property name="ShortLabel" translatable="yes">FCFS</property>
+      </action>
+      <action id="PNGAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="FCFSAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">FCFS</property>
+        <property name="ShortLabel" translatable="yes">FCFS</property>
+      </action>
+      <action id="SJFAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">SJF</property>
+        <property name="ShortLabel" translatable="yes">SJF</property>
+      </action>
+      <action id="RRAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">RR</property>
+        <property name="ShortLabel" translatable="yes">RR</property>
+      </action>
+      <action id="PNGAction2">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction2">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="PNGAction3">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction3">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="PNGAction4">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction4">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="TodosAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Todos</property>
+        <property name="ShortLabel" translatable="yes">Todos</property>
+      </action>
+      <action id="PNGAction5">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction5">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
+      </action>
+      <action id="ComparaoAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Comparação</property>
+        <property name="ShortLabel" translatable="yes">Comparação</property>
+      </action>
+      <action id="PNGAction6">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.PNG</property>
+        <property name="ShortLabel" translatable="yes">.PNG</property>
+      </action>
+      <action id="SVGAction6">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">.SVG</property>
+        <property name="ShortLabel" translatable="yes">.SVG</property>
       </action>
     </action-group>
     <property name="MemberName" />
@@ -93,19 +226,46 @@
           <widget class="Gtk.MenuBar" id="menubar3">
             <property name="MemberName" />
             <node name="menubar3" type="Menubar">
-              <node type="Menu" action="ArquivoAction">
+              <node type="Menu" action="dndAction">
                 <node type="Menuitem" action="newAction" />
-                <node type="Menuitem" action="openAction" />
+                <node type="Menuitem" action="editAction" />
                 <node type="Menuitem" action="saveAction" />
                 <node type="Menuitem" action="saveAsAction" />
-                <node type="Menuitem" action="quitAction" />
+                <node type="Menuitem" action="closeAction" />
               </node>
-              <node type="Menu" action="SimulaoAction">
-                <node type="Menu" action="floppyAction">
+              <node type="Menu" action="mediaPlayAction">
+                <node type="Menu" action="directoryAction">
+                  <node type="Menu" action="FCFSAction1">
+                    <node type="Menuitem" action="PNGAction2" />
+                    <node type="Menuitem" action="SVGAction2" />
+                  </node>
+                  <node type="Menu" action="SJFAction">
+                    <node type="Menuitem" action="PNGAction3" />
+                    <node type="Menuitem" action="SVGAction3" />
+                  </node>
+                  <node type="Menu" action="RRAction">
+                    <node type="Menuitem" action="PNGAction4" />
+                    <node type="Menuitem" action="SVGAction4" />
+                  </node>
+                  <node type="Menu" action="ComparaoAction">
+                    <node type="Menuitem" action="PNGAction6" />
+                    <node type="Menuitem" action="SVGAction6" />
+                  </node>
+                  <node type="Menu" action="TodosAction">
+                    <node type="Menuitem" action="PNGAction5" />
+                    <node type="Menuitem" action="SVGAction5" />
+                  </node>
                   <node type="Menuitem" action="PNGAction" />
                   <node type="Menuitem" action="SVGAction" />
-                  <node type="Menuitem" action="LogAction" />
+                  <node type="Menuitem" action="LogJsonAction" />
+                  <node type="Menuitem" action="LogTxtAction" />
                 </node>
+                <node type="Menu" action="orientationPortraitAction">
+                  <node type="Menuitem" action="LogJsonAction1" />
+                </node>
+              </node>
+              <node type="Menu" action="findAndReplaceAction">
+                <node type="Menuitem" action="convertAction" />
               </node>
             </node>
           </widget>
@@ -462,6 +622,37 @@ Compare</property>
             <property name="Position">1</property>
             <property name="AutoSize">True</property>
           </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="SchedulerSharp.ImportView" design-size="400 300">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">ImportView</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <child>
+      <widget class="Gtk.VBox" id="vbox1">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.ComboBox" id="combobox1">
+            <property name="MemberName" />
+            <property name="IsTextCombo">True</property>
+            <property name="Items" translatable="yes">FCFS
+SJF
+RR</property>
+            <property name="Active">0</property>
+            <signal name="Changed" handler="OnSelectScheduler" />
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder />
         </child>
       </widget>
     </child>

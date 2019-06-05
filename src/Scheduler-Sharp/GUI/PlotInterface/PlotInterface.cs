@@ -3,13 +3,10 @@ using System;
 using System.Linq;
 using System.IO;
 using OxyPlot;
-using OxyPlot.Series;
 using OxyPlot.GtkSharp;
-using System.Threading;
 using System.Collections.Generic;
 
 using SchedulerSharp.Models;
-using SchedulerSharp.Schedulers;
 
 namespace SchedulerSharp.GUI.PlotInterface
 {
@@ -21,22 +18,23 @@ namespace SchedulerSharp.GUI.PlotInterface
 
         //PlotAnim Global
         List<PlotableProcess> toPlot;
-        List<String> xLabel;
-        List<String> yLabel;
+        List<string> yLabel;
         bool isPlotable;
-        bool paused = false;
+        bool paused;
 
 
         public PlotInterface(Container container)
         {
             this.container = container;
-            InitializeABarSeries();
+            InitializeAIntervalBarSeries();
             //InitializeAModel();
 
             view = new PlotView();
             container.Add(view);
             view.ShowAll();
             view.Model = model;
+
+           
 
             //model.Series.Add(barSeries);
         }
@@ -79,12 +77,29 @@ namespace SchedulerSharp.GUI.PlotInterface
             paused = !paused;
         }
 
+
+        public void AnimateData (List<double> waitTime, List<double> turnaroundTime, List<double> responseTime, List<string> text, string Title = "Title")
+        {
+            UpdateData(waitTime, turnaroundTime, responseTime, text, Title);
+        }
+
+        public void UpdateData(List<double> waitTime, List<double> turnaroundTime, List<double> responseTime, List<string> text, string Title = "Title")
+        {
+            view.Model = null;
+            InitializeAModel(text, Title, invert:true);
+
+            SetUtilizationData(waitTime, turnaroundTime, responseTime, text);
+            view.Model = model;
+            view.ShowAll();
+        }
+
+
         /// <summary>
         /// Animar a entrada
         /// </summary>
         /// <param name="processes">Processos a ser plotados.</param>
         /// <param name="plotable">Se for <c>true</c> sera considerado um objeto plotavel.</param>
-        public void AnimateData (List<PlotableProcess> processes, bool plotable, string Title = "Title")
+        public void AnimateData(List<PlotableProcess> processes, bool plotable, string Title = "Title")
         {
             paused = false;
             isPlotable = plotable;
@@ -93,27 +108,25 @@ namespace SchedulerSharp.GUI.PlotInterface
             {
                 yLabel = toPlot.ConvertAll(x => x.Name);
                 yLabel = yLabel.Distinct().ToList();
-                xLabel = SchedulerUtils.Range(processes.Count);
             }
             else
             {
                 List<int> ranges = toPlot.ConvertAll(x => (x.Runtime + x.ArrivalTime));
                 ranges.Sort();
-                xLabel = SchedulerUtils.Range(ranges[ranges.Count - 1] + 1);
                 yLabel = toPlot.ConvertAll(x => x.Name);
             }
 
-            UpdateData(toPlot, xLabel, yLabel, Title);
+            UpdateData(toPlot, yLabel, Title);
         }
 
         /// <summary>
         /// Atualizar Modelo de plotagem
         /// </summary>
         /// <param name="processes">Processos a serem plotados.</param>
-        public void UpdateData(List<PlotableProcess> processes, List<string> xLabel, List<string> yLabel, string Title)
+        private void UpdateData(List<PlotableProcess> processes, List<string> yLabels, string Title)
         {
             view.Model = null;
-            InitializeAModel(xLabel, yLabel, Title);
+            InitializeAModel(yLabels, Title);
 
             if (isPlotable)
             {
@@ -124,7 +137,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                 SetUtilizationData(processes.ConvertAll(x => (Process)x));
             }
 
-            model.Series.Add(barSeries);
+            model.Series.Add(intervalBarSeries);
             view.Model = model;
             view.ShowAll();
         }

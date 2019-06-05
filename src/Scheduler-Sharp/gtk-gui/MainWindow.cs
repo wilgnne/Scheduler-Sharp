@@ -5,27 +5,77 @@ public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
 
-	private global::Gtk.Action ArquivoAction;
+	private global::Gtk.Action dndAction;
 
 	private global::Gtk.Action newAction;
 
-	private global::Gtk.Action openAction;
+	private global::Gtk.Action editAction;
 
 	private global::Gtk.Action saveAction;
 
 	private global::Gtk.Action saveAsAction;
 
-	private global::Gtk.Action SimulaoAction;
+	private global::Gtk.Action mediaPlayAction;
 
-	private global::Gtk.Action floppyAction;
+	private global::Gtk.Action directoryAction;
 
 	private global::Gtk.Action PNGAction;
 
 	private global::Gtk.Action SVGAction;
 
-	private global::Gtk.Action LogAction;
+	private global::Gtk.Action LogJsonAction;
 
-	private global::Gtk.Action quitAction;
+	private global::Gtk.Action closeAction;
+
+	private global::Gtk.Action LogTxtAction;
+
+	private global::Gtk.Action orientationPortraitAction;
+
+	private global::Gtk.Action LogJsonAction1;
+
+	private global::Gtk.Action CompatibilidadeAction;
+
+	private global::Gtk.Action TxtParaJsonAction;
+
+	private global::Gtk.Action findAndReplaceAction;
+
+	private global::Gtk.Action convertAction;
+
+	private global::Gtk.Action FCFSAction;
+
+	private global::Gtk.Action PNGAction1;
+
+	private global::Gtk.Action SVGAction1;
+
+	private global::Gtk.Action FCFSAction1;
+
+	private global::Gtk.Action SJFAction;
+
+	private global::Gtk.Action RRAction;
+
+	private global::Gtk.Action PNGAction2;
+
+	private global::Gtk.Action SVGAction2;
+
+	private global::Gtk.Action PNGAction3;
+
+	private global::Gtk.Action SVGAction3;
+
+	private global::Gtk.Action PNGAction4;
+
+	private global::Gtk.Action SVGAction4;
+
+	private global::Gtk.Action TodosAction;
+
+	private global::Gtk.Action PNGAction5;
+
+	private global::Gtk.Action SVGAction5;
+
+	private global::Gtk.Action ComparaoAction;
+
+	private global::Gtk.Action PNGAction6;
+
+	private global::Gtk.Action SVGAction6;
 
 	private global::Gtk.VBox vbox1;
 
@@ -91,39 +141,114 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.UIManager = new global::Gtk.UIManager();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup("Default");
-		this.ArquivoAction = new global::Gtk.Action("ArquivoAction", global::Mono.Unix.Catalog.GetString("Arquivo"), null, null);
-		this.ArquivoAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Arquivo");
-		w1.Add(this.ArquivoAction, null);
+		this.dndAction = new global::Gtk.Action("dndAction", global::Mono.Unix.Catalog.GetString("Arquivo"), null, "gtk-dnd");
+		this.dndAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Arquivo");
+		w1.Add(this.dndAction, null);
 		this.newAction = new global::Gtk.Action("newAction", global::Mono.Unix.Catalog.GetString("Novo Arquivo"), null, "gtk-new");
 		this.newAction.ShortLabel = global::Mono.Unix.Catalog.GetString("New");
 		w1.Add(this.newAction, null);
-		this.openAction = new global::Gtk.Action("openAction", global::Mono.Unix.Catalog.GetString("Abrir..."), null, "gtk-open");
-		this.openAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Open");
-		w1.Add(this.openAction, null);
+		this.editAction = new global::Gtk.Action("editAction", global::Mono.Unix.Catalog.GetString("Abrir..."), null, "gtk-edit");
+		this.editAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Open");
+		w1.Add(this.editAction, null);
 		this.saveAction = new global::Gtk.Action("saveAction", global::Mono.Unix.Catalog.GetString("Salvar"), null, "gtk-save");
 		this.saveAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Save");
 		w1.Add(this.saveAction, null);
 		this.saveAsAction = new global::Gtk.Action("saveAsAction", global::Mono.Unix.Catalog.GetString("Salvar Como..."), null, "gtk-save-as");
 		this.saveAsAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Save as");
 		w1.Add(this.saveAsAction, null);
-		this.SimulaoAction = new global::Gtk.Action("SimulaoAction", global::Mono.Unix.Catalog.GetString("Simulação"), null, null);
-		this.SimulaoAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Simulação");
-		w1.Add(this.SimulaoAction, null);
-		this.floppyAction = new global::Gtk.Action("floppyAction", global::Mono.Unix.Catalog.GetString("Exportar"), null, "gtk-floppy");
-		this.floppyAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Exportar");
-		w1.Add(this.floppyAction, null);
+		this.mediaPlayAction = new global::Gtk.Action("mediaPlayAction", global::Mono.Unix.Catalog.GetString("Simulação"), null, "gtk-media-play");
+		this.mediaPlayAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Simulação");
+		w1.Add(this.mediaPlayAction, null);
+		this.directoryAction = new global::Gtk.Action("directoryAction", global::Mono.Unix.Catalog.GetString("Exportar"), null, "gtk-directory");
+		this.directoryAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Exportar");
+		w1.Add(this.directoryAction, null);
 		this.PNGAction = new global::Gtk.Action("PNGAction", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
 		this.PNGAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
 		w1.Add(this.PNGAction, null);
 		this.SVGAction = new global::Gtk.Action("SVGAction", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
 		this.SVGAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
 		w1.Add(this.SVGAction, null);
-		this.LogAction = new global::Gtk.Action("LogAction", global::Mono.Unix.Catalog.GetString("Log"), null, null);
-		this.LogAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Log");
-		w1.Add(this.LogAction, null);
-		this.quitAction = new global::Gtk.Action("quitAction", global::Mono.Unix.Catalog.GetString("Fechar"), null, "gtk-quit");
-		this.quitAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Fechar");
-		w1.Add(this.quitAction, null);
+		this.LogJsonAction = new global::Gtk.Action("LogJsonAction", global::Mono.Unix.Catalog.GetString("Log .json"), null, null);
+		this.LogJsonAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".json");
+		w1.Add(this.LogJsonAction, null);
+		this.closeAction = new global::Gtk.Action("closeAction", global::Mono.Unix.Catalog.GetString("Fechar"), null, "gtk-close");
+		this.closeAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Fechar");
+		w1.Add(this.closeAction, null);
+		this.LogTxtAction = new global::Gtk.Action("LogTxtAction", global::Mono.Unix.Catalog.GetString("Log .txt"), null, null);
+		this.LogTxtAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .txt");
+		w1.Add(this.LogTxtAction, null);
+		this.orientationPortraitAction = new global::Gtk.Action("orientationPortraitAction", global::Mono.Unix.Catalog.GetString("Importar"), null, "gtk-orientation-portrait");
+		this.orientationPortraitAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Importar");
+		w1.Add(this.orientationPortraitAction, null);
+		this.LogJsonAction1 = new global::Gtk.Action("LogJsonAction1", global::Mono.Unix.Catalog.GetString("Log .json"), null, null);
+		this.LogJsonAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .json");
+		w1.Add(this.LogJsonAction1, null);
+		this.CompatibilidadeAction = new global::Gtk.Action("CompatibilidadeAction", global::Mono.Unix.Catalog.GetString("Compatibilidade"), null, null);
+		this.CompatibilidadeAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Compatibilidade");
+		w1.Add(this.CompatibilidadeAction, null);
+		this.TxtParaJsonAction = new global::Gtk.Action("TxtParaJsonAction", global::Mono.Unix.Catalog.GetString(".txt para .json"), null, null);
+		this.TxtParaJsonAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".txt para .json");
+		w1.Add(this.TxtParaJsonAction, null);
+		this.findAndReplaceAction = new global::Gtk.Action("findAndReplaceAction", global::Mono.Unix.Catalog.GetString("Compatibilidade"), null, "gtk-find-and-replace");
+		this.findAndReplaceAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Compatibilidade");
+		w1.Add(this.findAndReplaceAction, null);
+		this.convertAction = new global::Gtk.Action("convertAction", global::Mono.Unix.Catalog.GetString("TXT para JSON"), null, "gtk-convert");
+		this.convertAction.ShortLabel = global::Mono.Unix.Catalog.GetString("TXT para JSON");
+		w1.Add(this.convertAction, null);
+		this.FCFSAction = new global::Gtk.Action("FCFSAction", global::Mono.Unix.Catalog.GetString("FCFS"), null, null);
+		this.FCFSAction.ShortLabel = global::Mono.Unix.Catalog.GetString("FCFS");
+		w1.Add(this.FCFSAction, null);
+		this.PNGAction1 = new global::Gtk.Action("PNGAction1", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction1.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction1, null);
+		this.SVGAction1 = new global::Gtk.Action("SVGAction1", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction1.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction1, null);
+		this.FCFSAction1 = new global::Gtk.Action("FCFSAction1", global::Mono.Unix.Catalog.GetString("FCFS"), null, null);
+		this.FCFSAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("FCFS");
+		w1.Add(this.FCFSAction1, null);
+		this.SJFAction = new global::Gtk.Action("SJFAction", global::Mono.Unix.Catalog.GetString("SJF"), null, null);
+		this.SJFAction.ShortLabel = global::Mono.Unix.Catalog.GetString("SJF");
+		w1.Add(this.SJFAction, null);
+		this.RRAction = new global::Gtk.Action("RRAction", global::Mono.Unix.Catalog.GetString("RR"), null, null);
+		this.RRAction.ShortLabel = global::Mono.Unix.Catalog.GetString("RR");
+		w1.Add(this.RRAction, null);
+		this.PNGAction2 = new global::Gtk.Action("PNGAction2", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction2.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction2, null);
+		this.SVGAction2 = new global::Gtk.Action("SVGAction2", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction2.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction2, null);
+		this.PNGAction3 = new global::Gtk.Action("PNGAction3", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction3.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction3, null);
+		this.SVGAction3 = new global::Gtk.Action("SVGAction3", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction3.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction3, null);
+		this.PNGAction4 = new global::Gtk.Action("PNGAction4", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction4.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction4, null);
+		this.SVGAction4 = new global::Gtk.Action("SVGAction4", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction4.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction4, null);
+		this.TodosAction = new global::Gtk.Action("TodosAction", global::Mono.Unix.Catalog.GetString("Todos"), null, null);
+		this.TodosAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Todos");
+		w1.Add(this.TodosAction, null);
+		this.PNGAction5 = new global::Gtk.Action("PNGAction5", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction5.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction5, null);
+		this.SVGAction5 = new global::Gtk.Action("SVGAction5", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction5.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction5, null);
+		this.ComparaoAction = new global::Gtk.Action("ComparaoAction", global::Mono.Unix.Catalog.GetString("Comparação"), null, null);
+		this.ComparaoAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Comparação");
+		w1.Add(this.ComparaoAction, null);
+		this.PNGAction6 = new global::Gtk.Action("PNGAction6", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
+		this.PNGAction6.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
+		w1.Add(this.PNGAction6, null);
+		this.SVGAction6 = new global::Gtk.Action("SVGAction6", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
+		this.SVGAction6.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
+		w1.Add(this.SVGAction6, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -135,7 +260,28 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString(@"<ui><menubar name='menubar3'><menu name='ArquivoAction' action='ArquivoAction'><menuitem name='newAction' action='newAction'/><menuitem name='openAction' action='openAction'/><menuitem name='saveAction' action='saveAction'/><menuitem name='saveAsAction' action='saveAsAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='SimulaoAction' action='SimulaoAction'><menu name='floppyAction' action='floppyAction'><menuitem name='PNGAction' action='PNGAction'/><menuitem name='SVGAction' action='SVGAction'/><menuitem name='LogAction' action='LogAction'/></menu></menu></menubar></ui>");
+		this.UIManager.AddUiFromString("<ui><menubar name=\'menubar3\'><menu name=\'dndAction\' action=\'dndAction\'><menuitem " +
+				"name=\'newAction\' action=\'newAction\'/><menuitem name=\'editAction\' action=\'editAct" +
+				"ion\'/><menuitem name=\'saveAction\' action=\'saveAction\'/><menuitem name=\'saveAsAct" +
+				"ion\' action=\'saveAsAction\'/><menuitem name=\'closeAction\' action=\'closeAction\'/><" +
+				"/menu><menu name=\'mediaPlayAction\' action=\'mediaPlayAction\'><menu name=\'director" +
+				"yAction\' action=\'directoryAction\'><menu name=\'FCFSAction1\' action=\'FCFSAction1\'>" +
+				"<menuitem name=\'PNGAction2\' action=\'PNGAction2\'/><menuitem name=\'SVGAction2\' act" +
+				"ion=\'SVGAction2\'/></menu><menu name=\'SJFAction\' action=\'SJFAction\'><menuitem nam" +
+				"e=\'PNGAction3\' action=\'PNGAction3\'/><menuitem name=\'SVGAction3\' action=\'SVGActio" +
+				"n3\'/></menu><menu name=\'RRAction\' action=\'RRAction\'><menuitem name=\'PNGAction4\' " +
+				"action=\'PNGAction4\'/><menuitem name=\'SVGAction4\' action=\'SVGAction4\'/></menu><me" +
+				"nu name=\'ComparaoAction\' action=\'ComparaoAction\'><menuitem name=\'PNGAction6\' act" +
+				"ion=\'PNGAction6\'/><menuitem name=\'SVGAction6\' action=\'SVGAction6\'/></menu><menu " +
+				"name=\'TodosAction\' action=\'TodosAction\'><menuitem name=\'PNGAction5\' action=\'PNGA" +
+				"ction5\'/><menuitem name=\'SVGAction5\' action=\'SVGAction5\'/></menu><menuitem name=" +
+				"\'PNGAction\' action=\'PNGAction\'/><menuitem name=\'SVGAction\' action=\'SVGAction\'/><" +
+				"menuitem name=\'LogJsonAction\' action=\'LogJsonAction\'/><menuitem name=\'LogTxtActi" +
+				"on\' action=\'LogTxtAction\'/></menu><menu name=\'orientationPortraitAction\' action=" +
+				"\'orientationPortraitAction\'><menuitem name=\'LogJsonAction1\' action=\'LogJsonActio" +
+				"n1\'/></menu></menu><menu name=\'findAndReplaceAction\' action=\'findAndReplaceActio" +
+				"n\'><menuitem name=\'convertAction\' action=\'convertAction\'/></menu></menubar></ui>" +
+				"");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add(this.menubar3);
@@ -400,12 +546,15 @@ public partial class MainWindow
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 		this.newAction.Activated += new global::System.EventHandler(this.NewEvent);
-		this.openAction.Activated += new global::System.EventHandler(this.EditButtonEvent);
+		this.editAction.Activated += new global::System.EventHandler(this.EditButtonEvent);
 		this.saveAction.Activated += new global::System.EventHandler(this.SaveEvent);
 		this.saveAsAction.Activated += new global::System.EventHandler(this.SaveAsEvent);
 		this.PNGAction.Activated += new global::System.EventHandler(this.ExportPNG);
 		this.SVGAction.Activated += new global::System.EventHandler(this.ExportSVG);
-		this.quitAction.Activated += new global::System.EventHandler(this.CloseEvent);
+		this.LogJsonAction.Activated += new global::System.EventHandler(this.LogJsonEvent);
+		this.closeAction.Activated += new global::System.EventHandler(this.CloseEvent);
+		this.LogTxtAction.Activated += new global::System.EventHandler(this.LogTxtEvent);
+		this.LogJsonAction1.Activated += new global::System.EventHandler(this.OnOpenLogJson);
 		this.SchedulerCombobox.Changed += new global::System.EventHandler(this.OnSelectScheduler);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.quantumScale.ValueChanged += new global::System.EventHandler(this.OnQuantumChange);

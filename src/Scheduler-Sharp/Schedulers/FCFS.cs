@@ -11,7 +11,6 @@ namespace SchedulerSharp.Schedulers
     /// </summary>
     public static class FCFS
     {
-        public static List<PlotableProcess> Scheduling(List<Process> list)
         /// <summary>
         /// Escalonar uma lista especifica
         /// </summary>
@@ -19,30 +18,37 @@ namespace SchedulerSharp.Schedulers
         /// <param name="list">Lista a ser escalonada.</param>
         public static List<PlotableProcess> Schedulering(List<Process> list, ProgressBar bar = null)
         {
-            int execTime = list[0].ArrivalTime;
+            //ProgressBar em 0%
             Application.Invoke((sender, e) => bar.Fraction = 0);
             int execTime = 0;
             List<PlotableProcess> listPlotable = new List<PlotableProcess>();
-            Queue<EscalonableProcess> escalonableProcesses = new Queue<EscalonableProcess>();
+            Queue<EscalonableProcess> escalonableProcesses;
 
+            //Calculo de procentagem para a progessBar
             double iteracoes = 0;
             list.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
             double cont = 0;
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                escalonableProcesses.Enqueue(new EscalonableProcess(list[i]));
-            }
+            //Empilihando Processos
+            escalonableProcesses = new Queue<EscalonableProcess>(list.ConvertAll(
+                (input) => { return new EscalonableProcess(input); }));
+
+            //Enquanto houver processos
             while (escalonableProcesses.Count > 0)
             {
+                //Desenpilhamos o processo
                 EscalonableProcess escalonable = escalonableProcesses.Dequeue();
+                //Viajamos para o futuro caso o processo esteja em um execTime a frente
+                if (escalonable.ArrivalTime > execTime)
+                    execTime = escalonable.ArrivalTime;
+                //E o executamos
                 while (escalonable.Run())
                 {
                     listPlotable.Add(new PlotableProcess(escalonable, execTime));
                     Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                     cont += 1;
 
-                    listPlotable.Add( new PlotableProcess(escalonador, execTime));
+                    listPlotable.Add( new PlotableProcess(escalonable, execTime));
                     execTime++;
                 }
             }

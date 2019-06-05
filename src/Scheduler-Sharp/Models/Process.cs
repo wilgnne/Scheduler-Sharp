@@ -3,6 +3,18 @@ using OxyPlot;
 
 namespace SchedulerSharp.Models
 {
+    public struct LogProcess
+    {
+        public string Name;
+        public int execTime;
+
+        public LogProcess (PlotableProcess process)
+        {
+            Name = process.Name;
+            execTime = process.ExecTime;
+        }
+    }
+
     /// <summary>
     /// Classe base para os processos
     /// </summary>
@@ -53,6 +65,13 @@ namespace SchedulerSharp.Models
         : base(process.Name, process.ArrivalTime, process.Runtime)
         {
             ExecTime = execTime;
+        }
+
+        public PlotableProcess(string Name, int ExecTime)
+            : base(Name, 0, 0)
+        {
+            this.ExecTime = ExecTime;
+            Colorize();
         }
     }
 
@@ -119,7 +138,7 @@ namespace SchedulerSharp.Models
             RunColor = OxyColor.FromArgb(0xff, r, g, b);
         }
 
-        public int StringToInt(string str)
+        public static int StringToInt(string str)
         {
             char[] vs = str.ToCharArray();
             int acc = 0;

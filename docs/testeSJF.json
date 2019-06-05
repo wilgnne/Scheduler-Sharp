@@ -1,0 +1,22 @@
+﻿[
+  {
+    "Name": "PID: 0",
+    "ArrivalTime": 0,
+    "Runtime": 50
+  },
+  {
+    "Name": "PID: 1",
+    "ArrivalTime": 1,
+    "Runtime": 10
+  },
+  {
+    "Name": "PID: 2",
+    "ArrivalTime": 1,
+    "Runtime": 6
+  },
+  {
+    "Name": "PID: 3",
+    "ArrivalTime": 3,
+    "Runtime": 25
+  }
+]

@@ -28,7 +28,7 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// <summary>
         /// Evento do botão Salvar
         /// </summary>
-        public void SaveEvent ()
+        public void SaveEvent (VoidDelegade callback)
         {
             if (string.IsNullOrEmpty(historicBuffer) == false)
             {
@@ -36,13 +36,13 @@ namespace SchedulerSharp.GUI.CreationInterface
                 if (JsonController.SaveJson(json, historicBuffer))
                 {
                     Console.WriteLine(historicBuffer);
-                    UpdateAllHistoric(historicBuffer);
+                    EditButtonEvent(historicBuffer, callback);
                 }
             }
             else
             {
                 if(GTKUtils.ShowFileChooser(out string path, ".json", "Salvar como..", "Selecionar"))
-                    SaveAsEvent(path);
+                    SaveAsEvent(path, callback);
             }
 
         }
@@ -51,13 +51,13 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// Evento Salvar Como...
         /// </summary>
         /// <param name="path">Diretorio do arquivo.</param>
-        public void SaveAsEvent (string path)
+        public void SaveAsEvent (string path, VoidDelegade callback)
         {
             string json = JsonController.ListToJson(GetItens());
             if (JsonController.SaveJson(json, path))
             {
                 Console.WriteLine(path);
-                UpdateAllHistoric(path);
+                EditButtonEvent(path, callback);
             }
         }
 
@@ -65,7 +65,7 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// Evento do botão Editar.
         /// </summary>
         /// <param name="path">Endereçõ do novo arquivo a ser editado</param>
-        public bool EditButtonEvent(string path)
+        public bool EditButtonEvent(string path, VoidDelegade callback)
         {
             string json = null;
             if (JsonController.OpenJson(path, ref json))
@@ -73,6 +73,7 @@ namespace SchedulerSharp.GUI.CreationInterface
                 Console.WriteLine("{0} existe", path);
                 creationView.LoadItens(JsonController.JsonToList<Process>(json));
                 UpdateAllHistoric(path);
+                callback();
                 return true;
             }
             else
@@ -120,13 +121,13 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// <summary>
         /// Ao Alterar o diretorio
         /// </summary>
-        public bool OnChangeDirEntry(ComboBox sender)
+        public bool OnChangeDirEntry(ComboBox sender, VoidDelegade callback)
         {
             Console.WriteLine("Chamada OnChangeDir: {0}", sender.ActiveText);
             if (historicBuffer != sender.ActiveText &&
                 string.IsNullOrEmpty(sender.ActiveText) == false)
             {
-                return EditButtonEvent(sender.ActiveText);
+                return EditButtonEvent(sender.ActiveText, callback);
             }
             return false;
         }

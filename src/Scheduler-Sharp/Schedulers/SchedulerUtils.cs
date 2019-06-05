@@ -4,6 +4,12 @@ using SchedulerSharp.Models;
 
 namespace SchedulerSharp.Schedulers
 {
+    public struct SchedulersResult
+    {
+        public List<LogProcess> FCFS, SJF;
+        public double Quantum;
+        public List<LogProcess> RR;
+    }
     /// <summary>
     /// Scheduler utils.
     /// </summary>

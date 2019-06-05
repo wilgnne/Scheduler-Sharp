@@ -10,11 +10,79 @@ namespace SchedulerSharp.GUI.PlotInterface
 {
     public partial class PlotInterface
     {
-        IntervalBarSeries barSeries;
+        IntervalBarSeries intervalBarSeries;
 
+        /// <summary>
+        /// Inicializar dados de comparação.
+        /// </summary>
+        /// <param name="fcfsTimes">Fcfs times.</param>
+        /// <param name="sjfTimes">Sjf times.</param>
+        /// <param name="rrTimes">Rr times.</param>
+        /// <param name="text">Text.</param>
+        private void SetUtilizationData (List<double> fcfsTimes, List<double> sjfTimes, List<double> rrTimes, List<string> text)
+        {
+            ColumnSeries FCFSTime = new ColumnSeries
+            {
+                Title = "FCFS",
+                FillColor = OxyColors.DarkTurquoise,
+            };
+            ColumnSeries SJFTime = new ColumnSeries
+            {
+                Title = "SJF",
+                FillColor = OxyColors.Tomato,
+            };
+            ColumnSeries RRTime = new ColumnSeries
+            {
+                Title = "RR",
+                FillColor = OxyColors.Orange,
+            };
+
+            for (int index = 0; index < fcfsTimes.Count; index++)
+            {
+                FCFSTime.Items.Add(CreateColumnItem(fcfsTimes[index]));
+                SJFTime.Items.Add(CreateColumnItem(sjfTimes[index]));
+                RRTime.Items.Add(CreateColumnItem(rrTimes[index]));
+            }
+
+            model.Series.Add(FCFSTime);
+            model.Series.Add(SJFTime);
+            model.Series.Add(RRTime);
+        }
+
+        /// <summary>
+        /// Criar itens de coluna.
+        /// </summary>
+        /// <returns>The column item.</returns>
+        /// <param name="value">Value.</param>
+        public ColumnItem CreateColumnItem(double value)
+        {
+            return new ColumnItem
+            {
+                Value = value,
+                //Title = string.Format("{0:C3} Clock's", value]),
+                //CategoryIndex = index,
+                //Color = color
+            };
+        }
+
+        public static int StringToInt(string str)
+        {
+            char[] vs = str.ToCharArray();
+            int acc = 0;
+            for (int i = 0; i < vs.Length; i++)
+            {
+                acc += Convert.ToInt32(Convert.ToByte(vs[i]));
+            }
+            return acc;
+        }
+
+        /// <summary>
+        /// Inicializar dados escalonados.
+        /// </summary>
+        /// <param name="processes">Processes.</param>
         private void SetUtilizationData(List<PlotableProcess> processes)
         {
-            InitializeABarSeries();
+            InitializeAIntervalBarSeries();
             for (int index = 0; index < processes.Count; index++)
             {
                 PlotableProcess process = processes[index];
@@ -26,13 +94,17 @@ namespace SchedulerSharp.GUI.PlotInterface
                     //Title = process.Name,
                     Color = process.RunColor,
                 };
-                barSeries.Items.Add(item);
+                intervalBarSeries.Items.Add(item);
             }
         }
 
+        /// <summary>
+        /// Inicializar dados ha escalonar.
+        /// </summary>
+        /// <param name="processes">Processes.</param>
         private void SetUtilizationData(List<Process> processes)
         {
-            InitializeABarSeries();
+            InitializeAIntervalBarSeries();
             for (int index = 0; index < processes.Count; index++)
             {
                 Process process = processes[index];
@@ -44,11 +116,19 @@ namespace SchedulerSharp.GUI.PlotInterface
                     //Title = process.Name,
                     Color = ((PlotableProcess)process).RunColor,
                 };
-                barSeries.Items.Add(item);
+                intervalBarSeries.Items.Add(item);
             }
         }
 
-            public void InitializeAModel(List<string> xLabels, List<string> yLabels, string Title)
+        /// <summary>
+        /// Inicializar modelo.
+        /// </summary>
+        /// <param name="yLabels">Y labels.</param>
+        /// <param name="Title">Title.</param>
+        /// <param name="xTitle">X title.</param>
+        /// <param name="yTitle">Y title.</param>
+        /// <param name="invert">If set to <c>true</c> invert.</param>
+        public void InitializeAModel(List<string> yLabels, string Title, string xTitle = "Clock's", string yTitle = "Processos", bool invert = false)
         {
             model = new PlotModel
             {
@@ -59,56 +139,47 @@ namespace SchedulerSharp.GUI.PlotInterface
                 Title = Title
             };
 
-            /*
-            // Define o eixo X
-            CategoryAxis xAxis = new CategoryAxis
-            {
-                Position = AxisPosition.Bottom,
-                Title = "Clock's"
-            };
-            for (int i = 0; i < xLabels.Count; i++)
-            {
-                xAxis.Labels.Add(xLabels[i]);
-            }
-            */
-
             LinearAxis xAxis = new LinearAxis()
             {
-                Title = "Clock's",
+                Title = xTitle,
                 Position = AxisPosition.Bottom,
             };
 
-            // Adiciona ao eixo do plotModel
-            model.Axes.Add(xAxis);
-
-            /*
-            LinearAxis yAxis = new LinearAxis()
-            {
-                Title = "Clock's",
-                Minimum = 0,
-                Position = AxisPosition.Left,
-            };
-            */
             // Define o eixo Y
             CategoryAxis yAxis = new CategoryAxis
             {
-                Title = "Processos",
+                Title = yTitle,
                 Position = AxisPosition.Left,
             };
-            yAxis.Labels.AddRange(yLabel);
+            yAxis.Labels.AddRange(yLabels);
 
+            if (invert)
+            {
+                xAxis.Position = AxisPosition.Left;
+                yAxis.Position = AxisPosition.Bottom;
+            }
+
+            // Adiciona ao eixo do plotModel
+            model.Axes.Add(xAxis);
             // Adiciona ao eixo do plotModel
             model.Axes.Add(yAxis);
         }
 
-        public void InitializeABarSeries()
+        public void InitializeAIntervalBarSeries()
         {
-            barSeries = new IntervalBarSeries
+            intervalBarSeries = new IntervalBarSeries
+            {
+                LabelMargin = 0,
+            };     
+        }
+
+        public BarSeries InitializeABarSeries(BarSeries bar)
+        {
+            bar = new BarSeries
             {
                 LabelMargin = 0,
             };
-            if (isPlotable)
-                barSeries.Title = "Tempo medio de espera: 30clk's";
+            return bar;
         }
     }
 }
