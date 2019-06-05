@@ -97,6 +97,7 @@
     <Compile Include="ImportView.cs" />
     <Compile Include="gtk-gui\SchedulerSharp.ImportView.cs" />
     <Compile Include="MainWindowFunctions.cs" />
+    <Compile Include="Models\DataConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
