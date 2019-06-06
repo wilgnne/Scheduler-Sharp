@@ -61,13 +61,11 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
-        <signal name="Activated" handler="ExportPNG" />
       </action>
       <action id="SVGAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
-        <signal name="Activated" handler="ExportSVG" />
       </action>
       <action id="LogJsonAction">
         <property name="Type">Action</property>
@@ -156,31 +154,37 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportFCFSPNG" />
       </action>
       <action id="SVGAction2">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportFCFSSVG" />
       </action>
       <action id="PNGAction3">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportSJFPNG" />
       </action>
       <action id="SVGAction3">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportSJFSVG" />
       </action>
       <action id="PNGAction4">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportRRPNG" />
       </action>
       <action id="SVGAction4">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportRRSVG" />
       </action>
       <action id="TodosAction">
         <property name="Type">Action</property>
@@ -191,11 +195,13 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportALLPNG" />
       </action>
       <action id="SVGAction5">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportALLSVG" />
       </action>
       <action id="ComparaoAction">
         <property name="Type">Action</property>
@@ -206,11 +212,13 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.PNG</property>
         <property name="ShortLabel" translatable="yes">.PNG</property>
+        <signal name="Activated" handler="ExportComparePNG" />
       </action>
       <action id="SVGAction6">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">.SVG</property>
         <property name="ShortLabel" translatable="yes">.SVG</property>
+        <signal name="Activated" handler="ExportCompareSVG" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -255,8 +263,6 @@
                     <node type="Menuitem" action="PNGAction5" />
                     <node type="Menuitem" action="SVGAction5" />
                   </node>
-                  <node type="Menuitem" action="PNGAction" />
-                  <node type="Menuitem" action="SVGAction" />
                   <node type="Menuitem" action="LogJsonAction" />
                   <node type="Menuitem" action="LogTxtAction" />
                 </node>
@@ -401,6 +407,7 @@ Compare</property>
                         <property name="Icon">stock:gtk-media-previous Button</property>
                         <property name="Label" translatable="yes">Retroceder</property>
                         <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="PreviewEvent" />
                       </widget>
                       <packing>
                         <property name="Position">0</property>
@@ -445,6 +452,7 @@ Compare</property>
                         <property name="Icon">stock:gtk-media-next Button</property>
                         <property name="Label" translatable="yes">Avançar</property>
                         <property name="UseUnderline">True</property>
+                        <signal name="Clicked" handler="NextEvent" />
                       </widget>
                       <packing>
                         <property name="Position">3</property>

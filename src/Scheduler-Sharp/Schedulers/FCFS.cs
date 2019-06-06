@@ -44,7 +44,6 @@ namespace SchedulerSharp.Schedulers
                 //E o executamos
                 while (escalonable.Run())
                 {
-                    listPlotable.Add(new PlotableProcess(escalonable, execTime));
                     Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                     cont += 1;
 

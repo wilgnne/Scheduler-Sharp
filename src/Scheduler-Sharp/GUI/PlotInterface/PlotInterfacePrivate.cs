@@ -82,7 +82,6 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// <param name="processes">Processes.</param>
         private void SetUtilizationData(List<PlotableProcess> processes)
         {
-            InitializeAIntervalBarSeries();
             for (int index = 0; index < processes.Count; index++)
             {
                 PlotableProcess process = processes[index];
@@ -90,9 +89,9 @@ namespace SchedulerSharp.GUI.PlotInterface
                 {
                     Start = process.ExecTime - 0.5f,
                     End = process.ExecTime + 0.5f,
-                    CategoryIndex = yLabel.IndexOf(process.Name),
+                    CategoryIndex = YLabel.IndexOf(process.Name),
                     //Title = process.Name,
-                    Color = process.RunColor,
+                    Color = process.attColor,
                 };
                 intervalBarSeries.Items.Add(item);
             }
@@ -104,7 +103,6 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// <param name="processes">Processes.</param>
         private void SetUtilizationData(List<Process> processes)
         {
-            InitializeAIntervalBarSeries();
             for (int index = 0; index < processes.Count; index++)
             {
                 Process process = processes[index];
@@ -114,7 +112,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                     End = process.ArrivalTime + process.Runtime,
                     CategoryIndex = index,
                     //Title = process.Name,
-                    Color = ((PlotableProcess)process).RunColor,
+                    Color = ((PlotableProcess)process).attColor,
                 };
                 intervalBarSeries.Items.Add(item);
             }
@@ -128,7 +126,7 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// <param name="xTitle">X title.</param>
         /// <param name="yTitle">Y title.</param>
         /// <param name="invert">If set to <c>true</c> invert.</param>
-        public void InitializeAModel(List<string> yLabels, string Title, string xTitle = "Clock's", string yTitle = "Processos", bool invert = false)
+        public void InitializeAModel(List<string> yLabels, string Title, string xTitle = "Clock's", string yTitle = "Processos", bool invert = false, bool isAnim = false)
         {
             model = new PlotModel
             {
@@ -159,18 +157,30 @@ namespace SchedulerSharp.GUI.PlotInterface
                 yAxis.Position = AxisPosition.Bottom;
             }
 
+            if(isAnim)
+            {
+                xAxis.IsZoomEnabled = false;
+                xAxis.IsPanEnabled = false;
+
+                yAxis.IsZoomEnabled = false;
+                yAxis.IsPanEnabled = false;
+            }
+
             // Adiciona ao eixo do plotModel
             model.Axes.Add(xAxis);
             // Adiciona ao eixo do plotModel
             model.Axes.Add(yAxis);
         }
 
-        public void InitializeAIntervalBarSeries()
+        public void InitializeAIntervalBarSeries(bool isAnim = false)
         {
             intervalBarSeries = new IntervalBarSeries
             {
                 LabelMargin = 0,
-            };     
+                BarWidth = 0.75,
+                StrokeColor = OxyColors.Transparent,
+            };
+            intervalBarSeries.Selectable = !isAnim;     
         }
 
         public BarSeries InitializeABarSeries(BarSeries bar)

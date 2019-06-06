@@ -56,7 +56,6 @@ namespace SchedulerSharp.Schedulers
             {
                 PlotableProcess aux = plotableProcesses.FindLast((obj) => obj.Name.Equals(processes[i].Name));
                 soma = soma + (aux.ExecTime - aux.ArrivalTime);
-                Console.WriteLine("Exectime {0} --- ArrivalTime {1}", aux.ExecTime, aux.ArrivalTime);
             }
             return Convert.ToDouble(soma) / processes.Count;
         }
@@ -68,7 +67,6 @@ namespace SchedulerSharp.Schedulers
             {
                 PlotableProcess aux = plotableProcesses.Find((obj) => obj.Name.Equals(processes[i].Name));
                 soma = soma + (aux.ExecTime - aux.ArrivalTime);
-                Console.WriteLine("Exectime {0} --- ArrivalTime {1} ---- Name {2}", aux.ExecTime, aux.ArrivalTime, aux.Name);
             }
             return Convert.ToDouble(soma) / processes.Count;
         }

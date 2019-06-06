@@ -34,6 +34,39 @@ namespace SchedulerSharp.GUI
             }
         }
 
+        public static bool ShowFolderChooser(out string path)
+        {
+            path = null;
+            var dialog = new Gtk.FileChooserDialog(
+                "Selecione a Pasta de Exportação",
+                null,
+                FileChooserAction.CreateFolder,
+                "Cancel",
+                ResponseType.Cancel,
+                "Ok",
+                ResponseType.Ok)
+            {
+                WindowPosition = Gtk.WindowPosition.Center,
+                SelectMultiple = false,
+            };
+
+
+            if (dialog.Run() == (int)Gtk.ResponseType.Ok)
+            {
+                path = dialog.Filename;
+                Console.WriteLine(path[path.Length - 1]);
+                if (path[path.Length - 1] != '/')
+                    path = path.Insert(path.Length, "/");
+
+                dialog.Destroy();
+                return true;
+            }
+
+            dialog.Destroy();
+
+            return false;
+        }
+
         /// <summary>
         /// Exibir um selecionador de arquivo
         /// </summary>

@@ -53,6 +53,7 @@ namespace SchedulerSharp.Models
     /// </summary>
     public class PlotableProcess : EscalonableProcess
     {
+        public OxyColor attColor;
         // Tempo em que o processo foi executado
         public int ExecTime { get; private set; }
 
@@ -65,6 +66,7 @@ namespace SchedulerSharp.Models
         : base(process.Name, process.ArrivalTime, process.Runtime)
         {
             ExecTime = execTime;
+            attColor = WaitingColor;
         }
 
         public PlotableProcess(string Name, int ExecTime)
@@ -72,6 +74,7 @@ namespace SchedulerSharp.Models
         {
             this.ExecTime = ExecTime;
             Colorize();
+            attColor = WaitingColor;
         }
     }
 
@@ -130,12 +133,12 @@ namespace SchedulerSharp.Models
         public void Colorize()
         {
             Random random = new Random(StringToInt(Name));
-            byte r = (byte)random.Next(100, 255);
-            byte g = (byte)random.Next(100, 255);
-            byte b = (byte)random.Next(100, 255);
+            byte r = (byte)random.Next(50, 255);
+            byte g = (byte)random.Next(50, 255);
+            byte b = (byte)random.Next(50, 255);
 
-            WaitingColor = OxyColor.FromArgb(0x7f, r, g, b);
-            RunColor = OxyColor.FromArgb(0xff, r, g, b);
+            WaitingColor = OxyColor.FromArgb(255, r, g, b);
+            RunColor = OxyColor.FromArgb(255, (byte)(r - 50), (byte)(g - 50), (byte)(b - 50));
         }
 
         public static int StringToInt(string str)

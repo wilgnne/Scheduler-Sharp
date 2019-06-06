@@ -10,6 +10,8 @@ using SchedulerSharp.Models;
 
 namespace SchedulerSharp.GUI.PlotInterface
 {
+    public delegate void AnimCallBack(PlotableProcess inExec);
+
     public partial class PlotInterface
     {
         PlotView view;
@@ -18,12 +20,17 @@ namespace SchedulerSharp.GUI.PlotInterface
 
         //PlotAnim Global
         List<PlotableProcess> toPlot;
-        List<string> yLabel;
+        int rangePlot;
+
+        public List<string> YLabel { get; private set; }
         bool isPlotable;
-        bool paused;
+        bool paused, autoIncr = true;
+        string title;
+
+        AnimCallBack callBack;
 
 
-        public PlotInterface(Container container)
+        public PlotInterface(Container container, AnimCallBack callBack = null)
         {
             this.container = container;
             InitializeAIntervalBarSeries();
@@ -34,7 +41,10 @@ namespace SchedulerSharp.GUI.PlotInterface
             view.ShowAll();
             view.Model = model;
 
-           
+            this.callBack = callBack;
+
+            GLib.Timeout.Add(60, AnimationThr);
+            
 
             //model.Series.Add(barSeries);
         }
@@ -42,31 +52,71 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// <summary>
         /// Exportar o modelo atual para SVG
         /// </summary>
-        public void ExportSVG()
+        public void ExportSVG(string path)
         {
-            if (GTKUtils.ShowFileChooser(out string path, ".svg", "Salvar Como...", "Salvar"))
+            using (var stream = File.Create(path))
             {
-                using (var stream = File.Create(path))
-                {
-                    var exporter = new SvgExporter { Width = 800, Height = 600 };
-                    exporter.Export(model, stream);
-                }
+                var exporter = new SvgExporter { Width = 1920, Height = 1080 };
+                exporter.Export(model, stream);
             }
         }
 
         /// <summary>
         /// Exportar o modelo atual para PNG
         /// </summary>
-        public void ExportPNG()
+        public void ExportPNG(string path)
         {
-            if (GTKUtils.ShowFileChooser(out string path, ".png", "Salvar Como...", "Salvar"))
+            using (var stream = File.Create(path))
             {
-                using (var stream = File.Create(path))
+                var exporter = new PngExporter { Width = 1920, Height = 1080, Background = OxyColors.White, Resolution = 125 };
+                exporter.Export(model, stream);
+            }
+        }
+
+        public void ChangeColor ()
+        {
+
+        }
+
+        public void CutListEndPlot (bool isAnim)
+        {
+            List<PlotableProcess> processes = toPlot.GetRange(0, rangePlot);
+            if (processes.Count > 0)
+            {
+                processes[processes.Count - 1].attColor = processes[processes.Count - 1].RunColor;
+
+                callBack?.Invoke(processes[processes.Count - 1]);
+
+                UpdateData(processes, YLabel, title, isAnim);
+                processes[processes.Count - 1].attColor = processes[processes.Count - 1].WaitingColor;
+            }
+        }
+
+        public bool AnimationThr ()
+        {
+            if (toPlot != null)
+            {
+                if (rangePlot < toPlot.Count && rangePlot >= 0)
                 {
-                    var exporter = new PngExporter { Width = 800, Height = 600, Background = OxyColors.White, Resolution = 25 };
-                    exporter.Export(model, stream);
+                    if (paused)
+                    {
+                        return true;
+                    }
+                    if (autoIncr)
+                    {
+                        rangePlot += 1;
+                        CutListEndPlot(true);
+                    }
                 }
             }
+            return true;
+        }
+
+        public void Play()
+        {
+            rangePlot = 0;
+            paused = false;
+            autoIncr = true;
         }
 
         /// <summary>
@@ -74,9 +124,38 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// </summary>
         public void Pause ()
         {
-            paused = !paused;
+            if (toPlot != null)
+            {
+                if (rangePlot < toPlot.Count)
+                    paused = !paused;
+                else
+                    paused = true;
+            }
         }
 
+        public void Next()
+        {
+            autoIncr = false;
+            paused = false;
+            if (rangePlot < toPlot.Count)
+                rangePlot = rangePlot + 1;
+            else
+                rangePlot = 0;
+
+            CutListEndPlot(false);
+        }
+
+        public void Preview()
+        {
+            autoIncr = false;
+            paused = false;
+            if (rangePlot > 0)
+                rangePlot = rangePlot - 1;
+            else
+                rangePlot = toPlot.Count - 1;
+
+            CutListEndPlot(false);
+        }
 
         public void AnimateData (List<double> waitTime, List<double> turnaroundTime, List<double> responseTime, List<string> text, string Title = "Title")
         {
@@ -99,34 +178,44 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// </summary>
         /// <param name="processes">Processos a ser plotados.</param>
         /// <param name="plotable">Se for <c>true</c> sera considerado um objeto plotavel.</param>
-        public void AnimateData(List<PlotableProcess> processes, bool plotable, string Title = "Title")
+        public void AnimateData(List<PlotableProcess> processes, bool plotable, string Title = "Title", List<string> yLabel = null, bool isAnim = false)
         {
             paused = false;
             isPlotable = plotable;
             toPlot = processes;
+            title = Title;
+            rangePlot = toPlot.Count;
             if (plotable)
             {
-                yLabel = toPlot.ConvertAll(x => x.Name);
-                yLabel = yLabel.Distinct().ToList();
+                if (yLabel == null)
+                {
+                    YLabel = toPlot.ConvertAll(x => x.Name);
+                    YLabel = YLabel.Distinct().ToList();
+                }
+                else
+                {
+                    YLabel = yLabel;
+                }
             }
             else
             {
                 List<int> ranges = toPlot.ConvertAll(x => (x.Runtime + x.ArrivalTime));
                 ranges.Sort();
-                yLabel = toPlot.ConvertAll(x => x.Name);
+                YLabel = toPlot.ConvertAll(x => x.Name);
             }
 
-            UpdateData(toPlot, yLabel, Title);
+            UpdateData(toPlot, YLabel, Title, isAnim);
         }
 
         /// <summary>
         /// Atualizar Modelo de plotagem
         /// </summary>
         /// <param name="processes">Processos a serem plotados.</param>
-        private void UpdateData(List<PlotableProcess> processes, List<string> yLabels, string Title)
+        private void UpdateData(List<PlotableProcess> processes, List<string> yLabels, string Title, bool isAnim = false)
         {
             view.Model = null;
-            InitializeAModel(yLabels, Title);
+            InitializeAModel(yLabels, Title, isAnim: isAnim);
+            InitializeAIntervalBarSeries(isAnim);
 
             if (isPlotable)
             {

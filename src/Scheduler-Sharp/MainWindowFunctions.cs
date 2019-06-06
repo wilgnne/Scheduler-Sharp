@@ -95,4 +95,12 @@ public partial class MainWindow : Gtk.Window
         sjfAnim.StartAnim();
     }
 
+    protected void AtualizeAnimCallBack(PlotableProcess process)
+    {
+        List<PlotableProcess> list = GetProcessFromCreation();
+        list.Find((obj) => obj.Name == process.Name).attColor = list.Find((obj) => obj.Name == process.Name).RunColor;
+        plot.AnimateData(list, false, "Entrada", isAnim:true);
+        list.Find((obj) => obj.Name == process.Name).attColor = list.Find((obj) => obj.Name == process.Name).WaitingColor;
+    }
+
 }
