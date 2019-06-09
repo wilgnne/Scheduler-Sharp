@@ -30,9 +30,35 @@ namespace SchedulerSharp.Models
         /// <param name="json">String json a ser desserializada.</param>
         public static List<T> JsonToList<T> (string json)
         {
-            List<T> l = JsonConvert.DeserializeObject<List<T>>(json);
+            List<T> l = null;
+            try
+            {
+                l = JsonConvert.DeserializeObject<List<T>>(json);
+            }
+            catch (Exception exception)
+            {
+                GTKUtils.ShowDilog("Erro ao decodificar arquivo!", Gtk.MessageType.Error, exception.Message);
+            }
 
             return l;
+        }
+
+        public static string ObjectToJson<T>(T obj)
+        {
+            return JsonConvert.SerializeObject(obj, Formatting.Indented);
+        }
+
+        public static bool JsonToObject<T> (string json, ref T obj)
+        {
+            try
+            {
+                obj = JsonConvert.DeserializeObject<T>(json);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
         }
 
         /// <summary>

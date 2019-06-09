@@ -79,20 +79,23 @@ public partial class MainWindow : Gtk.Window
 
     protected void ChangeDirCallback()
     {
-        SchedulerCombobox.Sensitive = true;
-        quantumScale.Sensitive = true;
-        Console.WriteLine("Atualizado com susses");
         toPlot = GetProcessFromCreation();
-        plot.AnimateData(toPlot, false, "Entrada");
+        if (toPlot.Count > 0)
+        {
+            SchedulerCombobox.Sensitive = true;
+            quantumScale.Sensitive = true;
 
-        PlotAnim fcfsAnim = new PlotAnim(ThreFCFS, "FCFS");
-        fcfsAnim.StartAnim();
+            plot.AnimateData(toPlot, false, "Entrada");
 
-        PlotAnim rrAnim = new PlotAnim(ThreRR, "RR");
-        rrAnim.StartAnim();
+            PlotAnim fcfsAnim = new PlotAnim(ThreFCFS, "FCFS");
+            fcfsAnim.StartAnim();
 
-        PlotAnim sjfAnim = new PlotAnim(ThreSJF, "SJF");
-        sjfAnim.StartAnim();
+            PlotAnim rrAnim = new PlotAnim(ThreRR, "RR");
+            rrAnim.StartAnim();
+
+            PlotAnim sjfAnim = new PlotAnim(ThreSJF, "SJF");
+            sjfAnim.StartAnim();
+        }
     }
 
     protected void AtualizeAnimCallBack(PlotableProcess process)

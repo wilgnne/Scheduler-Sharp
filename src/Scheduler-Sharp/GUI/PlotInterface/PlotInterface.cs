@@ -73,11 +73,6 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
         }
 
-        public void ChangeColor ()
-        {
-
-        }
-
         public void CutListEndPlot (bool isAnim)
         {
             List<PlotableProcess> processes = toPlot.GetRange(0, rangePlot);
@@ -127,9 +122,14 @@ namespace SchedulerSharp.GUI.PlotInterface
             if (toPlot != null)
             {
                 if (rangePlot < toPlot.Count)
-                    paused = !paused;
+                {
+                    paused = false;
+                    autoIncr = !autoIncr;
+                }
                 else
+                {
                     paused = true;
+                }
             }
         }
 

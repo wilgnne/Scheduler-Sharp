@@ -12,6 +12,7 @@ namespace SchedulerSharp
     {
         public PlotInterface escalonadPlot;
         public List<PlotableProcess> rr, sjf, fcfs;
+        public double quantum;
 
         public ImportView(SchedulersResult result) :
                 base(WindowType.Toplevel)
@@ -20,6 +21,7 @@ namespace SchedulerSharp
             fcfs = result.FCFS.ConvertAll((input) => { return new PlotableProcess(input.Name, input.execTime); });
             sjf = result.SJF.ConvertAll((input) => { return new PlotableProcess(input.Name, input.execTime); });
             rr = result.RR.ConvertAll((input) => { return new PlotableProcess(input.Name, input.execTime); });
+            quantum = result.Quantum;
 
             escalonadPlot = new PlotInterface(vbox1);
             escalonadPlot.AnimateData(fcfs, true, "FCFS");
@@ -35,13 +37,11 @@ namespace SchedulerSharp
                     break;
                 case "RR":
                     if (rr != null)
-                        escalonadPlot.AnimateData(rr, true, "Round Robin");
+                        escalonadPlot.AnimateData(rr, true, "Round Robin / Quantum: " + ((int)quantum).ToString());
                     break;
                 case "FCFS":
                     if (fcfs != null)
                         escalonadPlot.AnimateData(fcfs, true, "FCFS");
-                    break;
-                default:
                     break;
             }
         }

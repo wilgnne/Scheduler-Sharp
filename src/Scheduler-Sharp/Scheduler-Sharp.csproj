@@ -48,7 +48,9 @@
     <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>glib-sharp-2.0</Package>
     </Reference>
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glade-sharp-2.0</Package>
+    </Reference>
     <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <Package>gtk-sharp-2.0</Package>
     </Reference>
@@ -66,8 +68,10 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="icons8-boia-salva-vidas-64.png" />
-    <EmbeddedResource Include="icons8-bóia-de-segurança-64.png" />
+    <EmbeddedResource Include="icon512.png" />
+    <EmbeddedResource Include="Icons\icon127.png" />
+    <EmbeddedResource Include="Icons\icon64.png" />
+    <EmbeddedResource Include="Icons\icon255.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -79,14 +83,12 @@
     <Compile Include="Models\Process.cs" />
     <Compile Include="Models\JsonController.cs" />
     <Compile Include="Schedulers\SJF.cs" />
-    <Compile Include="Schedulers\InsetionSort.cs" />
     <Compile Include="Schedulers\Benchmark.cs" />
     <Compile Include="GUI\GTKUtils.cs" />
     <Compile Include="GUI\PlotInterface\PlotInterface.cs" />
     <Compile Include="GUI\PlotInterface\PlotAnim.cs" />
     <Compile Include="GUI\PlotInterface\PlotInterfacePrivate.cs" />
     <Compile Include="Schedulers\ProcessCompare.cs" />
-    <Compile Include="Schedulers\SchedulerUtils.cs" />
     <Compile Include="GUI\CreationInterface\CreationController.cs" />
     <Compile Include="GUI\CreationInterface\CreationView.cs" />
     <Compile Include="GUI\CreationInterface\CreationViewPrivate.cs" />
@@ -98,6 +100,9 @@
     <Compile Include="gtk-gui\SchedulerSharp.ImportView.cs" />
     <Compile Include="MainWindowFunctions.cs" />
     <Compile Include="Models\DataConverter.cs" />
+    <Compile Include="Windows\AboutDilog.cs" />
+    <Compile Include="gtk-gui\SchedulerSharp.Windows.AboutDilog.cs" />
+    <Compile Include="Models\ExportController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -108,6 +113,8 @@
     <Folder Include="Models\" />
     <Folder Include="GUI\PlotInterface\" />
     <Folder Include="GUI\CreationInterface\" />
+    <Folder Include="Windows\" />
+    <Folder Include="Icons\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

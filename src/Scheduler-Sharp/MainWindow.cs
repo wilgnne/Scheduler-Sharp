@@ -49,19 +49,14 @@ public partial class MainWindow : Gtk.Window
 
     #region "Eventos de manipulação de dados"
     //Evento de manipulação de dados
-    protected void SaveAsEvent(object sender, EventArgs e)
-    {
-        if (GTKUtils.ShowFileChooser(out string path, ".json", "Salvar Como...", "Salvar"))
-            creationController.SaveAsEvent(path, ChangeDirCallback);
-
-    }
-
     protected void EditButtonEvent(object sender, EventArgs e)
     {
-        if (GTKUtils.ShowFileChooser(out string path, ".json", "Abrir...", "Selecionar"))
+        if (GTKUtils.ShowFileChooser(out string path, ".prb", "Abrir...", "Selecionar"))
             creationController.EditButtonEvent(path, ChangeDirCallback);
 
     }
+
+    protected void SaveAsEvent(object sender, EventArgs e) => creationController.SaveAsEvent(ChangeDirCallback);
 
     protected void SaveEvent(object sender, EventArgs e) => creationController.SaveEvent(ChangeDirCallback);
 
@@ -79,15 +74,9 @@ public partial class MainWindow : Gtk.Window
 
     protected void PauseEvent(object sender, EventArgs e) => escalonadPlot.Pause();
 
-    protected void NextEvent(object sender, EventArgs e)
-    {
-        escalonadPlot.Next();
-    }
+    protected void NextEvent(object sender, EventArgs e) => escalonadPlot.Next();
 
-    protected void PreviewEvent(object sender, EventArgs e)
-    {
-        escalonadPlot.Preview();
-    }
+    protected void PreviewEvent(object sender, EventArgs e) => escalonadPlot.Preview();
 
     #endregion
 
@@ -103,6 +92,11 @@ public partial class MainWindow : Gtk.Window
         return true;
     }
 
+    protected void GenereteList<T>(T responseTime, T turnarondTime, T waitTime, out List<T> output) => output = new List<T>
+        {
+            responseTime,  turnarondTime, waitTime,
+        };
+
     protected void OnSelectScheduler(object sender, EventArgs e)
     {
         escalonadPlot.Pause();
@@ -111,22 +105,14 @@ public partial class MainWindow : Gtk.Window
             case "Compare":
                 MediaButtonSensitibe(false);
 
-                List<double> fcfsTime = new List<double>
-                {
-                    responseTimeFCFS,  turnarondTimeFCFS, waitTimeFCFS,
-                };
-                List<double> sjfTime = new List<double>
-                {
-                    responseTimeSJF, turnarondTimeSJF, waitTimeSJF
-                };
-                List<double> rrTime = new List<double>
-                {
-                    responseTimeRR, turnarondTimeRR, waitTimeRR
-                };
-                List<string> text = new List<string>
-                {
-                    "Tempo de Resposta", "Tempo de Vida", "Tempo de Espera"
-                };
+                GenereteList(responseTimeFCFS, turnarondTimeFCFS, waitTimeFCFS, out List<double> fcfsTime);
+
+                GenereteList(responseTimeSJF, turnarondTimeSJF, waitTimeSJF, out List<double> sjfTime);
+
+                GenereteList(responseTimeRR, turnarondTimeRR, waitTimeRR, out List<double> rrTime);
+
+                GenereteList("Tempo de Resposta", "Tempo de Vida", "Tempo de Espera", out List<string> text);
+
                 escalonadPlot.AnimateData(fcfsTime, sjfTime, rrTime, text, "Comparação");
                 break;
             case "SJF":
@@ -149,6 +135,7 @@ public partial class MainWindow : Gtk.Window
 
     protected void OnQuantumChange(object sender, EventArgs e)
     {
+
         PlotAnim rrAnim = new PlotAnim(ThreRR, "RR");
         rrAnim.StartAnim();
     }
@@ -156,309 +143,44 @@ public partial class MainWindow : Gtk.Window
     #endregion
 
     #region "Eventos de Exportagem"
-    protected void LogJsonEvent(object sender, EventArgs e)
-    {
-        if (fcfs != null && sjf != null && rr != null)
-        {
-            SchedulersResult result = new SchedulersResult
-            {
-                FCFS = fcfs.ConvertAll((input) => { return new LogProcess(input); }),
-                SJF = sjf.ConvertAll((input) => { return new LogProcess(input); }),
-                Quantum = quantumScale.Value,
-                RR = rr.ConvertAll((input) => { return new LogProcess(input); }),
-            };
-            if (GTKUtils.ShowFileChooser(out string path, ".json", "Salvar Log .json", "Salvar"))
-            {
-                string json = JsonController.ListToJson(new List<SchedulersResult> { result });
-                JsonController.SaveJson(json, path);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void LogJsonEvent(object sender, EventArgs e) => ExportController.LogJsonExport(fcfs, sjf, rr, quantumScale.Value);
 
-    protected void LogTxtEvent(object sender, EventArgs e)
-    {
-        if (fcfs != null && sjf != null && rr != null)
-        {
-            string txt = "FCFS\n";
-            foreach (PlotableProcess process in fcfs)
-            {
-                txt += process.Name + " " + process.ExecTime + "\n";
-            }
-            txt += "\nSJF\n";
-            foreach (PlotableProcess process in sjf)
-            {
-                txt += process.Name + " " + process.ExecTime + "\n";
-            }
-            txt += "\nRR: Quantum = +" + quantumScale.Value + "\n";
-            foreach (PlotableProcess process in rr)
-            {
-                txt += process.Name + " " + process.ExecTime + "\n";
-            }
-            if (GTKUtils.ShowFileChooser(out string path, ".txt", "Salvar Log .txt", "Salvar"))
-            {
-                JsonController.SaveJson(txt, path);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void LogTxtEvent(object sender, EventArgs e) => ExportController.LogTXTExport(fcfs, sjf, rr, quantumScale.Value);
 
-    protected void OnOpenLogJson(object sender, EventArgs e)
-    {
-        if (GTKUtils.ShowFileChooser(out string path, ".json", "Abrir Log Json", "Abrir"))
-        {
-            string json = "";
-            if (JsonController.OpenJson(path, ref json))
-            {
-                try
-                {
-                    SchedulersResult result = JsonController.JsonToList<SchedulersResult>(json)[0];
-                    SchedulerSharp.ImportView view = new SchedulerSharp.ImportView(result);
-                    view.Show();
-                }
-                catch (Exception exception)
-                {
-                    GTKUtils.ShowDilog("Erro ao decodificar arquivo!", MessageType.Error,
-                    exception.Message);
-                }
-
-            }
-            else
-            {
-                GTKUtils.ShowDilog("Erro ao abrir o arquivo!", MessageType.Warning,
-                    "Arquivo inexistente ou corrompido!");
-            }
-        }
-    }
+    protected void OnOpenLogJson(object sender, EventArgs e) => ExportController.LogJsonImport();
 
     protected void ExportALLSVG(object sender, EventArgs e)
     {
-        if (fcfs != null && sjf != null && rr != null)
-        {
-            if (GTKUtils.ShowFolderChooser(out string path))
-            {
-                string[] names =
-                {
-                    "FCFS","SJF", "RR", "Compare",
-                };
-
-                for (int i = 0; i < names.Length; i++)
-                {
-                    ExportTo(i, path, names[i], false);
-                }
-                plot.ExportSVG(path + "Entrada.svg");
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
-
-    protected void ExportTo(int index, string path, string name, bool png)
-    {
-        if (png)
-        {
-            SchedulerCombobox.Active = index;
-            OnSelectScheduler(SchedulerCombobox, EventArgs.Empty);
-            escalonadPlot.ExportPNG(path + name + ".png");
-        }
-        else
-        {
-            SchedulerCombobox.Active = index;
-            OnSelectScheduler(SchedulerCombobox, EventArgs.Empty);
-            escalonadPlot.ExportPNG(path + name + ".svg");
-        }
+        string path = ExportController.ExportALL(fcfs, sjf, rr, ".svg", SchedulerCombobox, escalonadPlot);
+        plot.ExportSVG(path + "Entrada.svg");
     }
 
     protected void ExportALLPNG(object sender, EventArgs e)
     {
-        /*
-        if (GTKUtils.ShowFileChooser(out string qw, ".png", "Salvar Como...", "Salvar"))
-        { }
-        */
-
-        if (fcfs != null && sjf != null && rr != null)
-        {
-            if (GTKUtils.ShowFolderChooser(out string path))
-            {
-                string[] names =
-                {
-                "FCFS","SJF", "RR", "Compare",
-                };
-
-                for (int i = 0; i < names.Length; i++)
-                {
-                    ExportTo(i, path, names[i], true);
-                }
-                plot.ExportPNG(path + "Entrada.png");
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
+        string path = ExportController.ExportALL(fcfs, sjf, rr, ".png", SchedulerCombobox, escalonadPlot);
+        plot.ExportPNG(path + "Entrada.png");
     }
 
-    protected void ExportFCFSPNG(object sender, EventArgs e)
-    {
-        if (fcfs != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".png", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(0, path, "", true);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportFCFSPNG(object sender, EventArgs e) => ExportController.Export(fcfs, 0, ".png", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportFCFSSVG(object sender, EventArgs e)
-    {
-        if (fcfs != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".svg", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(0, path, "", false);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportFCFSSVG(object sender, EventArgs e) => ExportController.Export(fcfs, 0, ".svg", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportSJFPNG(object sender, EventArgs e)
-    {
-        if (sjf != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".png", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(1, path, "", true);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportSJFPNG(object sender, EventArgs e) => ExportController.Export(sjf, 1, ".png", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportSJFSVG(object sender, EventArgs e)
-    {
-        if (sjf != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".svg", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(1, path, "", false);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportSJFSVG(object sender, EventArgs e) => ExportController.Export(sjf, 1, ".svg", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportRRPNG(object sender, EventArgs e)
-    {
-        if (rr != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".png", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(2, path, "", true);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportRRPNG(object sender, EventArgs e) => ExportController.Export(rr, 2, ".png", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportRRSVG(object sender, EventArgs e)
-    {
-        if (rr != null)
-        {
-            if (GTKUtils.ShowFileChooser(out string path, ".svg", "Salvar Como...", "Salvar"))
-            {
-                ExportTo(2, path, "", false);
-            }
-        }
-        else
-        {
-            GTKUtils.ShowDilog("Não ha processos escalonados!", MessageType.Info,
-                "Não existem dados a serem exportados!");
-        }
-    }
+    protected void ExportRRSVG(object sender, EventArgs e) => ExportController.Export(rr, 2, ".svg", SchedulerCombobox, escalonadPlot);
 
-    protected void ExportComparePNG(object sender, EventArgs e)
-    {
-        List<double> fcfsTime = new List<double>
-                {
-                    responseTimeFCFS,  turnarondTimeFCFS, waitTimeFCFS,
-                };
-        List<double> sjfTime = new List<double>
-                {
-                    responseTimeSJF, turnarondTimeSJF, waitTimeSJF
-                };
-        List<double> rrTime = new List<double>
-                {
-                    responseTimeRR, turnarondTimeRR, waitTimeRR
-                };
-        List<string> text = new List<string>
-                {
-                    "Tempo de Resposta", "Tempo de Vida", "Tempo de Espera"
-                };
-        escalonadPlot.AnimateData(fcfsTime, sjfTime, rrTime, text, "Comparação");
+    protected void ExportComparePNG(object sender, EventArgs e) => ExportController.Export(fcfs, 3, ".png", SchedulerCombobox, escalonadPlot);
 
-        if (GTKUtils.ShowFileChooser(out string path, ".png", "Salvar Como...", "Salvar"))
-        {
-            escalonadPlot.ExportPNG(path  + "Comparação.png");
-        }
-
-    }
-
-    protected void ExportCompareSVG(object sender, EventArgs e)
-    {
-        List<double> fcfsTime = new List<double>
-                {
-                    responseTimeFCFS,  turnarondTimeFCFS, waitTimeFCFS,
-                };
-        List<double> sjfTime = new List<double>
-                {
-                    responseTimeSJF, turnarondTimeSJF, waitTimeSJF
-                };
-        List<double> rrTime = new List<double>
-                {
-                    responseTimeRR, turnarondTimeRR, waitTimeRR
-                };
-        List<string> text = new List<string>
-                {
-                    "Tempo de Resposta", "Tempo de Vida", "Tempo de Espera"
-                };
-
-        escalonadPlot.AnimateData(fcfsTime, sjfTime, rrTime, text, "Comparação");
-
-        if (GTKUtils.ShowFileChooser(out string path, ".svg", "Salvar Como...", "Salvar"))
-        {
-            escalonadPlot.ExportSVG(path + "Comparação.svg");
-        }
-
-    }
+    protected void ExportCompareSVG(object sender, EventArgs e) => ExportController.Export(fcfs, 3, ".svg", SchedulerCombobox, escalonadPlot);
     #endregion
+
+    protected void AboutWindowOpen(object sender, EventArgs e)
+    {
+        SchedulerSharp.Windows.AboutDilog about = new SchedulerSharp.Windows.AboutDilog(this);
+        about.ShowAll();
+    }
 }

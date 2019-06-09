@@ -4,6 +4,13 @@ using SchedulerSharp.Models;
 
 namespace SchedulerSharp.Schedulers
 {
+    public struct SchedulersResult
+    {
+        public List<LogProcess> FCFS, SJF;
+        public double Quantum;
+        public List<LogProcess> RR;
+    }
+
     /// <summary>
     /// Classe de Benchmark de Escalonadores de Processos
     /// </summary>
@@ -18,28 +25,32 @@ namespace SchedulerSharp.Schedulers
         public static double WaitTime(List<PlotableProcess> plotableProcesses, int totalProcess)
         {
             double waitTime = 0;
-            PlotableProcess anterior = plotableProcesses[0];
-            for (int i = 0; i < plotableProcesses.Count; i++)
+            if (totalProcess > 0)
             {
-                PlotableProcess atual = plotableProcesses[i];
-                if (anterior.Name != atual.Name)
+                PlotableProcess anterior = plotableProcesses[0];
+                for (int i = 0; i < plotableProcesses.Count; i++)
                 {
-                    List<PlotableProcess> aux = plotableProcesses.GetRange(0, i);
-                    PlotableProcess ultimaExec =  aux.FindLast((obj) => obj.Name == atual.Name);
-                    double wait = 0;
-                    if (ultimaExec != null)
+                    PlotableProcess atual = plotableProcesses[i];
+                    if (anterior.Name != atual.Name)
                     {
-                        wait = (atual.ExecTime - ultimaExec.ExecTime) - 1;
-                    }
-                    else
-                    {
-                        wait = (atual.ExecTime - atual.ArrivalTime);
-                    }
+                        List<PlotableProcess> aux = plotableProcesses.GetRange(0, i);
+                        PlotableProcess ultimaExec = aux.FindLast((obj) => obj.Name == atual.Name);
+                        double wait = 0;
+                        if (ultimaExec != null)
+                        {
+                            wait = (atual.ExecTime - ultimaExec.ExecTime) - 1;
+                        }
+                        else
+                        {
+                            wait = (atual.ExecTime - atual.ArrivalTime);
+                        }
 
-                    waitTime += wait;
+                        waitTime += wait;
+                    }
+                    anterior = atual;
                 }
-                anterior = atual;
             }
+
             return waitTime / Convert.ToDouble(totalProcess);
         }
 

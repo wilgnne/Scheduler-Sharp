@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 
 using SchedulerSharp.Models;
+using SchedulerSharp.GUI;
 
 namespace SchedulerSharp.GUI.CreationInterface
 {
@@ -30,34 +31,39 @@ namespace SchedulerSharp.GUI.CreationInterface
         /// </summary>
         public void SaveEvent (VoidDelegade callback)
         {
+            string json = JsonController.ListToJson(GetItens());
             if (string.IsNullOrEmpty(historicBuffer) == false)
             {
-                string json = JsonController.ListToJson(GetItens());
-                if (JsonController.SaveJson(json, historicBuffer))
+                if (GetItens().Count > 0 && JsonController.SaveJson(json, historicBuffer))
                 {
-                    Console.WriteLine(historicBuffer);
                     EditButtonEvent(historicBuffer, callback);
+                    return;
                 }
             }
-            else
-            {
-                if(GTKUtils.ShowFileChooser(out string path, ".json", "Salvar como..", "Selecionar"))
-                    SaveAsEvent(path, callback);
-            }
-
+            SaveAsEvent(callback);
         }
 
         /// <summary>
         /// Evento Salvar Como...
         /// </summary>
         /// <param name="path">Diretorio do arquivo.</param>
-        public void SaveAsEvent (string path, VoidDelegade callback)
+        public void SaveAsEvent (VoidDelegade callback)
         {
-            string json = JsonController.ListToJson(GetItens());
-            if (JsonController.SaveJson(json, path))
+            if (GetItens().Count > 0)
             {
-                Console.WriteLine(path);
-                EditButtonEvent(path, callback);
+                if (GTKUtils.ShowFileChooser(out string path, ".prb", "Salvar como..", "Selecionar"))
+                {
+                    string json = JsonController.ListToJson(GetItens());
+                    if (JsonController.SaveJson(json, path))
+                    {
+                        Console.WriteLine(path);
+                        EditButtonEvent(path, callback);
+                    }
+                }
+            }
+            else
+            {
+                GTKUtils.ShowDilog("Não há dados a serem salvos!", MessageType.Warning, "Use a aba de Criação para gerar e editar processos!");
             }
         }
 

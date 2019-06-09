@@ -23,7 +23,7 @@ public partial class MainWindow
 
 	private global::Gtk.Action SVGAction;
 
-	private global::Gtk.Action LogJsonAction;
+	private global::Gtk.Action LogLogAction;
 
 	private global::Gtk.Action closeAction;
 
@@ -31,7 +31,7 @@ public partial class MainWindow
 
 	private global::Gtk.Action orientationPortraitAction;
 
-	private global::Gtk.Action LogJsonAction1;
+	private global::Gtk.Action LogLogAction1;
 
 	private global::Gtk.Action CompatibilidadeAction;
 
@@ -76,6 +76,10 @@ public partial class MainWindow
 	private global::Gtk.Action PNGAction6;
 
 	private global::Gtk.Action SVGAction6;
+
+	private global::Gtk.Action AjudaAction;
+
+	private global::Gtk.Action SobreAction;
 
 	private global::Gtk.VBox vbox1;
 
@@ -168,21 +172,21 @@ public partial class MainWindow
 		this.SVGAction = new global::Gtk.Action("SVGAction", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
 		this.SVGAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
 		w1.Add(this.SVGAction, null);
-		this.LogJsonAction = new global::Gtk.Action("LogJsonAction", global::Mono.Unix.Catalog.GetString("Log .json"), null, null);
-		this.LogJsonAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".json");
-		w1.Add(this.LogJsonAction, null);
+		this.LogLogAction = new global::Gtk.Action("LogLogAction", global::Mono.Unix.Catalog.GetString("Log: .log"), null, null);
+		this.LogLogAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".json");
+		w1.Add(this.LogLogAction, null);
 		this.closeAction = new global::Gtk.Action("closeAction", global::Mono.Unix.Catalog.GetString("Fechar"), null, "gtk-close");
 		this.closeAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Fechar");
 		w1.Add(this.closeAction, null);
-		this.LogTxtAction = new global::Gtk.Action("LogTxtAction", global::Mono.Unix.Catalog.GetString("Log .txt"), null, null);
+		this.LogTxtAction = new global::Gtk.Action("LogTxtAction", global::Mono.Unix.Catalog.GetString("Log: .txt"), null, null);
 		this.LogTxtAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .txt");
 		w1.Add(this.LogTxtAction, null);
 		this.orientationPortraitAction = new global::Gtk.Action("orientationPortraitAction", global::Mono.Unix.Catalog.GetString("Importar"), null, "gtk-orientation-portrait");
 		this.orientationPortraitAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Importar");
 		w1.Add(this.orientationPortraitAction, null);
-		this.LogJsonAction1 = new global::Gtk.Action("LogJsonAction1", global::Mono.Unix.Catalog.GetString("Log .json"), null, null);
-		this.LogJsonAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .json");
-		w1.Add(this.LogJsonAction1, null);
+		this.LogLogAction1 = new global::Gtk.Action("LogLogAction1", global::Mono.Unix.Catalog.GetString("Log: .log"), null, null);
+		this.LogLogAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .json");
+		w1.Add(this.LogLogAction1, null);
 		this.CompatibilidadeAction = new global::Gtk.Action("CompatibilidadeAction", global::Mono.Unix.Catalog.GetString("Compatibilidade"), null, null);
 		this.CompatibilidadeAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Compatibilidade");
 		w1.Add(this.CompatibilidadeAction, null);
@@ -192,8 +196,8 @@ public partial class MainWindow
 		this.findAndReplaceAction = new global::Gtk.Action("findAndReplaceAction", global::Mono.Unix.Catalog.GetString("Compatibilidade"), null, "gtk-find-and-replace");
 		this.findAndReplaceAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Compatibilidade");
 		w1.Add(this.findAndReplaceAction, null);
-		this.convertAction = new global::Gtk.Action("convertAction", global::Mono.Unix.Catalog.GetString("TXT para JSON"), null, "gtk-convert");
-		this.convertAction.ShortLabel = global::Mono.Unix.Catalog.GetString("TXT para JSON");
+		this.convertAction = new global::Gtk.Action("convertAction", global::Mono.Unix.Catalog.GetString("TXT para PRB"), null, "gtk-convert");
+		this.convertAction.ShortLabel = global::Mono.Unix.Catalog.GetString("TXT para PRB");
 		w1.Add(this.convertAction, null);
 		this.FCFSAction = new global::Gtk.Action("FCFSAction", global::Mono.Unix.Catalog.GetString("FCFS"), null, null);
 		this.FCFSAction.ShortLabel = global::Mono.Unix.Catalog.GetString("FCFS");
@@ -249,12 +253,20 @@ public partial class MainWindow
 		this.SVGAction6 = new global::Gtk.Action("SVGAction6", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
 		this.SVGAction6.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
 		w1.Add(this.SVGAction6, null);
+		this.AjudaAction = new global::Gtk.Action("AjudaAction", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
+		this.AjudaAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
+		w1.Add(this.AjudaAction, null);
+		this.SobreAction = new global::Gtk.Action("SobreAction", global::Mono.Unix.Catalog.GetString("Sobre"), null, null);
+		this.SobreAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Sobre");
+		w1.Add(this.SobreAction, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString("Scherduler-Sharp");
-		this.Icon = global::Gdk.Pixbuf.LoadFromResource("SchedulerSharp.icons8-boia-salva-vidas-64.png");
+		this.Title = global::Mono.Unix.Catalog.GetString("Scherduler#");
+		this.Icon = global::Gdk.Pixbuf.LoadFromResource("SchedulerSharp.icon512.png");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+		this.DefaultWidth = 800;
+		this.DefaultHeight = 600;
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox();
 		this.vbox1.Name = "vbox1";
@@ -275,11 +287,13 @@ public partial class MainWindow
 				"ion=\'PNGAction6\'/><menuitem name=\'SVGAction6\' action=\'SVGAction6\'/></menu><menu " +
 				"name=\'TodosAction\' action=\'TodosAction\'><menuitem name=\'PNGAction5\' action=\'PNGA" +
 				"ction5\'/><menuitem name=\'SVGAction5\' action=\'SVGAction5\'/></menu><menuitem name=" +
-				"\'LogJsonAction\' action=\'LogJsonAction\'/><menuitem name=\'LogTxtAction\' action=\'Lo" +
-				"gTxtAction\'/></menu><menu name=\'orientationPortraitAction\' action=\'orientationPo" +
-				"rtraitAction\'><menuitem name=\'LogJsonAction1\' action=\'LogJsonAction1\'/></menu></" +
-				"menu><menu name=\'findAndReplaceAction\' action=\'findAndReplaceAction\'><menuitem n" +
-				"ame=\'convertAction\' action=\'convertAction\'/></menu></menubar></ui>");
+				"\'LogLogAction\' action=\'LogLogAction\'/><menuitem name=\'LogTxtAction\' action=\'LogT" +
+				"xtAction\'/></menu><menu name=\'orientationPortraitAction\' action=\'orientationPort" +
+				"raitAction\'><menuitem name=\'LogLogAction1\' action=\'LogLogAction1\'/></menu></menu" +
+				"><menu name=\'findAndReplaceAction\' action=\'findAndReplaceAction\'><menuitem name=" +
+				"\'convertAction\' action=\'convertAction\'/></menu><menu name=\'AjudaAction\' action=\'" +
+				"AjudaAction\'><menuitem name=\'SobreAction\' action=\'SobreAction\'/></menu></menubar" +
+				"></ui>");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add(this.menubar3);
@@ -539,18 +553,16 @@ public partial class MainWindow
 		{
 			this.Child.ShowAll();
 		}
-		this.DefaultWidth = 672;
-		this.DefaultHeight = 488;
 		this.Show();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler(this.OnDeleteEvent);
 		this.newAction.Activated += new global::System.EventHandler(this.NewEvent);
 		this.editAction.Activated += new global::System.EventHandler(this.EditButtonEvent);
 		this.saveAction.Activated += new global::System.EventHandler(this.SaveEvent);
 		this.saveAsAction.Activated += new global::System.EventHandler(this.SaveAsEvent);
-		this.LogJsonAction.Activated += new global::System.EventHandler(this.LogJsonEvent);
+		this.LogLogAction.Activated += new global::System.EventHandler(this.LogJsonEvent);
 		this.closeAction.Activated += new global::System.EventHandler(this.CloseEvent);
 		this.LogTxtAction.Activated += new global::System.EventHandler(this.LogTxtEvent);
-		this.LogJsonAction1.Activated += new global::System.EventHandler(this.OnOpenLogJson);
+		this.LogLogAction1.Activated += new global::System.EventHandler(this.OnOpenLogJson);
 		this.PNGAction2.Activated += new global::System.EventHandler(this.ExportFCFSPNG);
 		this.SVGAction2.Activated += new global::System.EventHandler(this.ExportFCFSSVG);
 		this.PNGAction3.Activated += new global::System.EventHandler(this.ExportSJFPNG);
@@ -561,6 +573,7 @@ public partial class MainWindow
 		this.SVGAction5.Activated += new global::System.EventHandler(this.ExportALLSVG);
 		this.PNGAction6.Activated += new global::System.EventHandler(this.ExportComparePNG);
 		this.SVGAction6.Activated += new global::System.EventHandler(this.ExportCompareSVG);
+		this.SobreAction.Activated += new global::System.EventHandler(this.AboutWindowOpen);
 		this.SchedulerCombobox.Changed += new global::System.EventHandler(this.OnSelectScheduler);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.quantumScale.ValueChanged += new global::System.EventHandler(this.OnQuantumChange);

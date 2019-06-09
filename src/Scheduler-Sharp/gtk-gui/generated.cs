@@ -11,6 +11,10 @@ namespace Stetic
 			if ((Stetic.Gui.initialized == false))
 			{
 				Stetic.Gui.initialized = true;
+				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory();
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet(global::Gdk.Pixbuf.LoadFromResource("SchedulerSharp.icon512.png"));
+				w1.Add("icon", w2);
+				w1.AddDefault();
 			}
 		}
 	}
