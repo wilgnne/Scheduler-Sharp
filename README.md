@@ -102,6 +102,7 @@ Você pode exportar o arquivo atual clicando em `Simulação` seguido de `Export
 A instalação pode ser realizada apartir do codigo-fonte ou atravez do pacote [.deb](http://handlebarsjs.com/).
 #### Por código-fonte
 - Mono e MonoDevelop
+
 Ao instalar o MonoDevelop as dependências do GTK-Sharp já são resolvidas
 <p align="center">
   <img width="1024" height="336" src="https://raw.githubusercontent.com/Wilgnne/Scheduler-Sharp/master/docs/Pictures/carbonMonoDevelop.png">
