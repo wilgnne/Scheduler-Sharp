@@ -5,6 +5,12 @@
 # Scheduler#
 Simulador de escalonamento de processos, escrito em C# com interface gráfica em GTK2, com implementação dos escalonadores: FCFS, SJF com preempção e Round Robin.
 
+ - [Usando](https://github.com/Wilgnne/Scheduler-Sharp#usando)
+	 - [Arquivos](https://github.com/Wilgnne/Scheduler-Sharp#arquivos)
+	 - [Areá de Criação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
+	 - [Areá de Simulação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
+- [Instalação](https://github.com/Wilgnne/Scheduler-Sharp#c%C3%B3digo-fonte)
+
 # Usando
 
 ## Arquivos
