@@ -72,7 +72,6 @@
     <EmbeddedResource Include="Icons\icon127.png" />
     <EmbeddedResource Include="Icons\icon64.png" />
     <EmbeddedResource Include="Icons\icon255.png" />
-    <EmbeddedResource Include="..\..\..\..\..\..\..\..\..\home\ubuntu\Pictures\Scherduler-_001.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
