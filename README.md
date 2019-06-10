@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Scheduler#
 Simulador de escalonamento de processos, escrito em C# com interface gráfica em GTK2, com implementação dos escalonadores: FCFS, SJF com preempção e Round Robin.
 
@@ -68,3 +69,8 @@ Você pode exportar o arquivo atual clicando em `Simulação` seguido de `Export
 A instalação pode ser realizada apartir do codigo-fonte ou atravez do pacote [.deb](http://handlebarsjs.com/).
 #### Por código-fonte
 - Mono e MonoDevelop
+=======
+Scheduler-Sharp
+
+sudo apt install gtk-sharp2
+>>>>>>> GUI-Implementation

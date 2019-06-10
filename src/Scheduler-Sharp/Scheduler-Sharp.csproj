@@ -8,6 +8,7 @@
     <RootNamespace>SchedulerSharp</RootNamespace>
     <AssemblyName>Scheduler-Sharp</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ReleaseVersion>0.0.1</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -28,29 +29,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="gtk-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="gdk-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="glib-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>glib-sharp-2.0</Package>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="glade-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="pango-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="atk-sharp, Version=2.4.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
-      <Package>gtk-sharp-2.0</Package>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="Mono.Posix" />
     <Reference Include="OxyPlot">
       <HintPath>packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
@@ -58,11 +36,43 @@
     <Reference Include="OxyPlot.GtkSharp">
       <HintPath>packages\OxyPlot.GtkSharp.1.0.0\lib\net45\OxyPlot.GtkSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glib-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glade-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="icon512.png" />
+    <EmbeddedResource Include="Icons\icon127.png" />
+    <EmbeddedResource Include="Icons\icon64.png" />
+    <EmbeddedResource Include="Icons\icon255.png" />
+    <EmbeddedResource Include="..\..\..\..\..\..\..\..\..\home\ubuntu\Pictures\Scherduler-_001.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -70,9 +80,42 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedulers\FCFS.cs" />
+    <Compile Include="Models\Process.cs" />
+    <Compile Include="Models\JsonController.cs" />
+    <Compile Include="Schedulers\SJF.cs" />
+    <Compile Include="Schedulers\Benchmark.cs" />
+    <Compile Include="GUI\GTKUtils.cs" />
+    <Compile Include="GUI\PlotInterface\PlotInterface.cs" />
+    <Compile Include="GUI\PlotInterface\PlotAnim.cs" />
+    <Compile Include="GUI\PlotInterface\PlotInterfacePrivate.cs" />
+    <Compile Include="Schedulers\ProcessCompare.cs" />
+    <Compile Include="GUI\CreationInterface\CreationController.cs" />
+    <Compile Include="GUI\CreationInterface\CreationView.cs" />
+    <Compile Include="GUI\CreationInterface\CreationViewPrivate.cs" />
+    <Compile Include="GUI\CreationInterface\CreationControllerPrivate.cs" />
+    <Compile Include="Schedulers\RR.cs" />
+    <Compile Include="GUI\ComparePlotClass.cs" />
+    <Compile Include="Models\Delegade.cs" />
+    <Compile Include="ImportView.cs" />
+    <Compile Include="gtk-gui\SchedulerSharp.ImportView.cs" />
+    <Compile Include="MainWindowFunctions.cs" />
+    <Compile Include="Models\DataConverter.cs" />
+    <Compile Include="Windows\AboutDilog.cs" />
+    <Compile Include="gtk-gui\SchedulerSharp.Windows.AboutDilog.cs" />
+    <Compile Include="Models\ExportController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Schedulers\" />
+    <Folder Include="GUI\" />
+    <Folder Include="Models\" />
+    <Folder Include="GUI\PlotInterface\" />
+    <Folder Include="GUI\CreationInterface\" />
+    <Folder Include="Windows\" />
+    <Folder Include="Icons\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
