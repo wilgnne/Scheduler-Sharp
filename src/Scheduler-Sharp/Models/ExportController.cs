@@ -23,6 +23,34 @@ namespace SchedulerSharp.Models
         public static void InfoDilog(string title, string messege) =>
             GTKUtils.ShowDilog(title, MessageType.Info, messege);
 
+
+        public static void TxtToPRBConverter ()
+        {
+            if (GTKUtils.ShowFileChooser(out string path, ".txt", "Arquivo alvo", "Converter"))
+            {
+                string txt = "";
+                if (JsonController.OpenJson(path, ref txt))
+                {
+                    try
+                    {
+                        string prb = DataConverter.TxtToPRB(txt);
+                        if (GTKUtils.ShowFileChooser(out string newPath, ".prb", "Arquivo Convertido", "Salvar"))
+                        {
+                            JsonController.SaveJson(prb, newPath);
+                        }
+                    }
+                    catch
+                    {
+                        ErrorDilog("Erro ao converter arquivo!", "Não foi possivel extrair os dados do arquivo!");
+                    }
+                }
+                else
+                {
+                    WarningDilog("Erro ao abrir o arquivo!", "Arquivo inexistente ou corrompido!");
+                }
+            }
+        }
+
         public static void LogJsonExport(List<PlotableProcess> fcfs, List<PlotableProcess> sjf, List<PlotableProcess> rr, double quantum)
         {
             if (fcfs != null && sjf != null && rr != null)
@@ -53,17 +81,17 @@ namespace SchedulerSharp.Models
                 string txt = "FCFS\n";
                 foreach (PlotableProcess process in fcfs)
                 {
-                    txt += process.Name + " " + process.ExecTime + "\n";
+                    txt += process.name + " " + process.ExecTime + "\n";
                 }
                 txt += "\nSJF\n";
                 foreach (PlotableProcess process in sjf)
                 {
-                    txt += process.Name + " " + process.ExecTime + "\n";
+                    txt += process.name + " " + process.ExecTime + "\n";
                 }
                 txt += "\nRR: Quantum = +" + quantum.ToString() + "\n";
                 foreach (PlotableProcess process in rr)
                 {
-                    txt += process.Name + " " + process.ExecTime + "\n";
+                    txt += process.name + " " + process.ExecTime + "\n";
                 }
                 if (GTKUtils.ShowFileChooser(out string path, ".txt", "Exportar Log: .txt", "Salvar"))
                 {

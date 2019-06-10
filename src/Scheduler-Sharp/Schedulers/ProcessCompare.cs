@@ -33,15 +33,15 @@ namespace SchedulerSharp.Schedulers
             if (y == null) return Xy.X;
 
             //Se o tempo de chegada e o runtime sao iguais
-            if (x.ArrivalTime == y.ArrivalTime && x.Runtime == y.Runtime) return Xy.Both;
+            if (x.arrivalTime == y.arrivalTime && x.runtime == y.runtime) return Xy.Both;
 
             //Se o tempo de chegada e igual, mas o runtime de X e menor
-            if (x.ArrivalTime == y.ArrivalTime && x.Runtime < y.Runtime) return Xy.X;
+            if (x.arrivalTime == y.arrivalTime && x.runtime < y.runtime) return Xy.X;
             //Se o tempo de chegada e igual, mas o runtime de Y e menor
-            if (x.ArrivalTime == y.ArrivalTime && x.Runtime > y.Runtime) return Xy.Y;
+            if (x.arrivalTime == y.arrivalTime && x.runtime > y.runtime) return Xy.Y;
 
-            if (x.ArrivalTime < y.ArrivalTime) return Xy.X;
-            if (x.ArrivalTime > y.ArrivalTime) return Xy.Y;
+            if (x.arrivalTime < y.arrivalTime) return Xy.X;
+            if (x.arrivalTime > y.arrivalTime) return Xy.Y;
 
             Console.WriteLine("Nao entrou em nada");
             return Xy.Both;

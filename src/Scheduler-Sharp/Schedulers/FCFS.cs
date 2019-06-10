@@ -26,7 +26,7 @@ namespace SchedulerSharp.Schedulers
 
             //Calculo de procentagem para a progessBar
             double iteracoes = 0;
-            list.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
+            list.ForEach((obj) => { iteracoes = iteracoes + obj.runtime; });
             double cont = 0;
 
             //Empilihando Processos
@@ -39,8 +39,8 @@ namespace SchedulerSharp.Schedulers
                 //Desenpilhamos o processo
                 EscalonableProcess escalonable = escalonableProcesses.Dequeue();
                 //Viajamos para o futuro caso o processo esteja em um execTime a frente
-                if (escalonable.ArrivalTime > execTime)
-                    execTime = escalonable.ArrivalTime;
+                if (escalonable.arrivalTime > execTime)
+                    execTime = escalonable.arrivalTime;
                 //E o executamos
                 while (escalonable.Run())
                 {

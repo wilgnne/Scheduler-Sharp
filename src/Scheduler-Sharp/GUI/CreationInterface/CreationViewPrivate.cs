@@ -90,13 +90,13 @@ namespace SchedulerSharp.GUI.CreationInterface
             switch (column.Title)
             {
                 case "Nome":
-                    process.Name = args.NewText;
+                    process.name = args.NewText;
                     break;
                 case "Tempo de Chegada":
-                    int.TryParse(args.NewText, out process.ArrivalTime);
+                    int.TryParse(args.NewText, out process.arrivalTime);
                     break;
                 case "Tempo de Execução":
-                    int.TryParse(args.NewText, out process.Runtime);
+                    int.TryParse(args.NewText, out process.runtime);
                     break;
                 default:
                     (cell as CellRendererText).Text = "Coluna Indefinida";
@@ -114,13 +114,13 @@ namespace SchedulerSharp.GUI.CreationInterface
             switch (column.Title)
             {
                 case "Nome":
-                    (cell as CellRendererText).Text = process.Name;
+                    (cell as CellRendererText).Text = process.name;
                     break;
                 case "Tempo de Chegada":
-                    (cell as CellRendererText).Text = process.ArrivalTime.ToString();
+                    (cell as CellRendererText).Text = process.arrivalTime.ToString();
                     break;
                 case "Tempo de Execução":
-                    (cell as CellRendererText).Text = process.Runtime.ToString();
+                    (cell as CellRendererText).Text = process.runtime.ToString();
                     break;
                 default:
                     (cell as CellRendererText).Text = "Coluna Indefinida";

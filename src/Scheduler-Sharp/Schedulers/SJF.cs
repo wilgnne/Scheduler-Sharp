@@ -13,7 +13,7 @@ namespace SchedulerSharp.Schedulers
             Application.Invoke((sender, e) => bar.Fraction = 0);
 
             double iteracoes = 0;
-            processes.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
+            processes.ForEach((obj) => { iteracoes = iteracoes + obj.runtime; });
             double cont = 0;
 
             List<PlotableProcess> plotableProcesses = new List<PlotableProcess>();
@@ -23,11 +23,11 @@ namespace SchedulerSharp.Schedulers
             {
                 escalonableProcesses.Add(new EscalonableProcess(processes[i]));
             }
-            execTime = escalonableProcesses[0].ArrivalTime;
+            execTime = escalonableProcesses[0].arrivalTime;
             EscalonableProcess aux = escalonableProcesses[0];
             while (escalonableProcesses.Count > 0)
             {
-                List<EscalonableProcess> tempo = escalonableProcesses.FindAll((obj) => obj.ArrivalTime <= execTime);
+                List<EscalonableProcess> tempo = escalonableProcesses.FindAll((obj) => obj.arrivalTime <= execTime);
 
                 if (tempo.Count == 0)
                 {
@@ -44,9 +44,9 @@ namespace SchedulerSharp.Schedulers
                 Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                 cont += 1;
 
-                if (escalonableProcesses[indice].Runtime == 0)
+                if (escalonableProcesses[indice].runtime == 0)
                 {
-                    tempo.RemoveAt(tempo.FindIndex((obj) => obj.Name == escalonableProcesses[indice].Name));
+                    tempo.RemoveAt(tempo.FindIndex((obj) => obj.name == escalonableProcesses[indice].name));
                     escalonableProcesses.RemoveAt(indice);
                     if (escalonableProcesses.Count > 0)
                     {
@@ -64,7 +64,7 @@ namespace SchedulerSharp.Schedulers
         {
             for (int i = 0; i < tempo.Count; i++)
             {
-                if (aux.Runtime > tempo[i].Runtime)
+                if (aux.runtime > tempo[i].runtime)
                 {
                     aux = tempo[i];
                 }

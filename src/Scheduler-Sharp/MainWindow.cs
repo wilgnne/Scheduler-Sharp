@@ -183,4 +183,18 @@ public partial class MainWindow : Gtk.Window
         SchedulerSharp.Windows.AboutDilog about = new SchedulerSharp.Windows.AboutDilog(this);
         about.ShowAll();
     }
+
+    protected void TxtToPRBEvent(object sender, EventArgs e)
+    {
+        ExportController.TxtToPRBConverter();
+    }
+
+    public void HelpEvent(object sender, EventArgs e)
+    {
+        System.Threading.Thread thr = new System.Threading.Thread
+        (new System.Threading.ThreadStart(delegate {
+            System.Diagnostics.Process.Start("http://www.github.com/Wilgnne/Scheduler-Sharp");
+            }));
+        thr.Start();
+    }
 }

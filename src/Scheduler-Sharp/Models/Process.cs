@@ -10,7 +10,7 @@ namespace SchedulerSharp.Models
 
         public LogProcess (PlotableProcess process)
         {
-            Name = process.Name;
+            Name = process.name;
             execTime = process.ExecTime;
         }
     }
@@ -21,11 +21,11 @@ namespace SchedulerSharp.Models
     public class Process
     {
         // Nome do processo
-        public string Name;
+        public string name;
         // Tempo de chegada do processo
-        public int ArrivalTime;
+        public int arrivalTime;
         // Clocks de execução
-        public int Runtime;
+        public int runtime;
 
         /// <summary>
         /// Inicializa uma nova instancia de <see cref="T:SchedulerSharp.Models.Process"/> .
@@ -35,16 +35,16 @@ namespace SchedulerSharp.Models
         /// <param name="runtime">Tempo de execução.</param>
         public Process(string name, int arrivalTime, int runtime)
         {
-            Name = name;
-            ArrivalTime = arrivalTime;
-            Runtime = runtime;
+            this.name = name;
+            this.arrivalTime = arrivalTime;
+            this.runtime = runtime;
         }
 
         public override string ToString()
         {
-            string arrival = ArrivalTime.ToString();
-            string runtime = Runtime.ToString();
-            return "Nome: " + Name + ", ArrivalTime: " + arrival + ", Runtime: " + runtime;
+            return "Nome: " + name + 
+                ", ArrivalTime: " + arrivalTime.ToString() + 
+                ", Runtime: " + runtime.ToString();
         }
     }
 
@@ -63,7 +63,7 @@ namespace SchedulerSharp.Models
         /// <param name="process">Processo base.</param>
         /// <param name="execTime">Tempo em que foi executado.</param>
         public PlotableProcess(EscalonableProcess process, int execTime)
-        : base(process.Name, process.ArrivalTime, process.Runtime)
+        : base(process.name, process.arrivalTime, process.runtime)
         {
             ExecTime = execTime;
             attColor = WaitingColor;
@@ -107,7 +107,7 @@ namespace SchedulerSharp.Models
         /// </summary>
         /// <param name="process">Processo base.</param>
         public EscalonableProcess(Process process)
-        : base(process.Name, process.ArrivalTime, process.Runtime)
+        : base(process.name, process.arrivalTime, process.runtime)
         {
             Source = process;
             Colorize();
@@ -118,9 +118,9 @@ namespace SchedulerSharp.Models
         /// </summary>
         public bool Run()
         {
-            if (Runtime > 0)
+            if (runtime > 0)
             {
-                Runtime -= 1;
+                runtime -= 1;
                 return true;
             }
 
@@ -132,7 +132,7 @@ namespace SchedulerSharp.Models
         /// </summary>
         public void Colorize()
         {
-            Random random = new Random(StringToInt(Name));
+            Random random = new Random(StringToInt(name));
             byte r = (byte)random.Next(50, 255);
             byte g = (byte)random.Next(50, 255);
             byte b = (byte)random.Next(50, 255);

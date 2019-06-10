@@ -89,7 +89,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                 {
                     Start = process.ExecTime - 0.5f,
                     End = process.ExecTime + 0.5f,
-                    CategoryIndex = YLabel.IndexOf(process.Name),
+                    CategoryIndex = YLabel.IndexOf(process.name),
                     //Title = process.Name,
                     Color = process.attColor,
                 };
@@ -108,8 +108,8 @@ namespace SchedulerSharp.GUI.PlotInterface
                 Process process = processes[index];
                 IntervalBarItem item = new IntervalBarItem
                 {
-                    Start = process.ArrivalTime,
-                    End = process.ArrivalTime + process.Runtime,
+                    Start = process.arrivalTime,
+                    End = process.arrivalTime + process.runtime,
                     CategoryIndex = index,
                     //Title = process.Name,
                     Color = ((PlotableProcess)process).attColor,

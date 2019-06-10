@@ -16,14 +16,14 @@ namespace SchedulerSharp.Schedulers
 
             Application.Invoke((sender, e) => bar.Fraction = 0);
             double iteracoes = 0;
-            processes.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
+            processes.ForEach((obj) => { iteracoes = iteracoes + obj.runtime; });
             double cont = 0;
 
 
             int execTime = 0;
             while (escalonables.Count != 0)
             {
-                List<EscalonableProcess> attTime = escalonables.FindAll((obj) => obj.ArrivalTime <= execTime);
+                List<EscalonableProcess> attTime = escalonables.FindAll((obj) => obj.arrivalTime <= execTime);
                 execTime = attTime.Count == 0 ? execTime + 1 : execTime;
 
                 foreach (EscalonableProcess process in attTime)
@@ -61,14 +61,14 @@ namespace SchedulerSharp.Schedulers
 
             Application.Invoke((sender, e) => bar.Fraction = 0);
             double iteracoes = 0;
-            processes.ForEach((obj) => { iteracoes = iteracoes + obj.Runtime; });
+            processes.ForEach((obj) => { iteracoes = iteracoes + obj.runtime; });
             double cont = 0;
 
 
             int execTime = 0;
             while (escalonables.Count != 0)
             {
-                List<EscalonableProcess> attTime = escalonables.FindAll((obj) => obj.ArrivalTime <= execTime);
+                List<EscalonableProcess> attTime = escalonables.FindAll((obj) => obj.arrivalTime <= execTime);
                 execTime = attTime.Count == 0 ? execTime + 1 : execTime;
 
                 for(int i = 0; i < attTime.Count; i++)
@@ -83,7 +83,7 @@ namespace SchedulerSharp.Schedulers
                             attQuantun += 1;
                             execTime += 1;
 
-                            attTime = escalonables.FindAll((obj) => obj.ArrivalTime <= execTime);
+                            attTime = escalonables.FindAll((obj) => obj.arrivalTime <= execTime);
 
                             Application.Invoke((sender, e) => bar.Fraction = cont / iteracoes);
                             cont += 1;

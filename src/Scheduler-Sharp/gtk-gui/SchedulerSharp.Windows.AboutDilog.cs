@@ -116,7 +116,6 @@ namespace SchedulerSharp.Windows
 			this.label8.Name = "label8";
 			this.label8.LabelProp = global::Mono.Unix.Catalog.GetString("<span foreground=\"red\"><u>www.github.com/Wilgnne/Scheduler-Sharp</u></span>");
 			this.label8.UseMarkup = true;
-			this.label8.Selectable = true;
 			this.vbox4.Add(this.label8);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.label8]));
 			w9.Position = 7;

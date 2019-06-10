@@ -29,6 +29,8 @@ namespace SchedulerSharp.GUI.PlotInterface
 
         AnimCallBack callBack;
 
+        uint tagTrh;
+
 
         public PlotInterface(Container container, AnimCallBack callBack = null)
         {
@@ -43,7 +45,7 @@ namespace SchedulerSharp.GUI.PlotInterface
 
             this.callBack = callBack;
 
-            GLib.Timeout.Add(60, AnimationThr);
+            tagTrh = GLib.Timeout.Add(60, AnimationThr);
             
 
             //model.Series.Add(barSeries);
@@ -119,6 +121,7 @@ namespace SchedulerSharp.GUI.PlotInterface
         /// </summary>
         public void Pause ()
         {
+            //GLib.Source.Remove(tagTrh);
             if (toPlot != null)
             {
                 if (rangePlot < toPlot.Count)
@@ -189,7 +192,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             {
                 if (yLabel == null)
                 {
-                    YLabel = toPlot.ConvertAll(x => x.Name);
+                    YLabel = toPlot.ConvertAll(x => x.name);
                     YLabel = YLabel.Distinct().ToList();
                 }
                 else
@@ -199,9 +202,9 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
             else
             {
-                List<int> ranges = toPlot.ConvertAll(x => (x.Runtime + x.ArrivalTime));
+                List<int> ranges = toPlot.ConvertAll(x => (x.runtime + x.arrivalTime));
                 ranges.Sort();
-                YLabel = toPlot.ConvertAll(x => x.Name);
+                YLabel = toPlot.ConvertAll(x => x.name);
             }
 
             UpdateData(toPlot, YLabel, Title, isAnim);

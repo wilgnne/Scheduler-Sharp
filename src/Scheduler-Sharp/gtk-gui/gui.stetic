@@ -126,6 +126,7 @@
         <property name="Label" translatable="yes">TXT para PRB</property>
         <property name="ShortLabel" translatable="yes">TXT para PRB</property>
         <property name="StockId">gtk-convert</property>
+        <signal name="Activated" handler="TxtToPRBEvent" />
       </action>
       <action id="FCFSAction">
         <property name="Type">Action</property>
@@ -238,6 +239,17 @@
         <property name="ShortLabel" translatable="yes">Sobre</property>
         <signal name="Activated" handler="AboutWindowOpen" />
       </action>
+      <action id="AjudaAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Ajuda</property>
+        <property name="ShortLabel" translatable="yes">Ajuda</property>
+      </action>
+      <action id="AjudaAction2">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Ajuda</property>
+        <property name="ShortLabel" translatable="yes">Ajuda</property>
+        <signal name="Activated" handler="HelpEvent" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">Scherduler#</property>
@@ -294,6 +306,7 @@
                 <node type="Menuitem" action="convertAction" />
               </node>
               <node type="Menu" action="AjudaAction">
+                <node type="Menuitem" action="AjudaAction2" />
                 <node type="Menuitem" action="SobreAction" />
               </node>
             </node>
@@ -801,7 +814,6 @@ FCFS, SJF com Preempção e Round Robim</property>
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">&lt;span foreground="red"&gt;&lt;u&gt;www.github.com/Wilgnne/Scheduler-Sharp&lt;/u&gt;&lt;/span&gt;</property>
                 <property name="UseMarkup">True</property>
-                <property name="Selectable">True</property>
               </widget>
               <packing>
                 <property name="Position">7</property>

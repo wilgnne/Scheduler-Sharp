@@ -81,6 +81,10 @@ public partial class MainWindow
 
 	private global::Gtk.Action SobreAction;
 
+	private global::Gtk.Action AjudaAction1;
+
+	private global::Gtk.Action AjudaAction2;
+
 	private global::Gtk.VBox vbox1;
 
 	private global::Gtk.MenuBar menubar3;
@@ -259,6 +263,12 @@ public partial class MainWindow
 		this.SobreAction = new global::Gtk.Action("SobreAction", global::Mono.Unix.Catalog.GetString("Sobre"), null, null);
 		this.SobreAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Sobre");
 		w1.Add(this.SobreAction, null);
+		this.AjudaAction1 = new global::Gtk.Action("AjudaAction1", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
+		this.AjudaAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
+		w1.Add(this.AjudaAction1, null);
+		this.AjudaAction2 = new global::Gtk.Action("AjudaAction2", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
+		this.AjudaAction2.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
+		w1.Add(this.AjudaAction2, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -292,8 +302,8 @@ public partial class MainWindow
 				"raitAction\'><menuitem name=\'LogLogAction1\' action=\'LogLogAction1\'/></menu></menu" +
 				"><menu name=\'findAndReplaceAction\' action=\'findAndReplaceAction\'><menuitem name=" +
 				"\'convertAction\' action=\'convertAction\'/></menu><menu name=\'AjudaAction\' action=\'" +
-				"AjudaAction\'><menuitem name=\'SobreAction\' action=\'SobreAction\'/></menu></menubar" +
-				"></ui>");
+				"AjudaAction\'><menuitem name=\'AjudaAction2\' action=\'AjudaAction2\'/><menuitem name" +
+				"=\'SobreAction\' action=\'SobreAction\'/></menu></menubar></ui>");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add(this.menubar3);
@@ -563,6 +573,7 @@ public partial class MainWindow
 		this.closeAction.Activated += new global::System.EventHandler(this.CloseEvent);
 		this.LogTxtAction.Activated += new global::System.EventHandler(this.LogTxtEvent);
 		this.LogLogAction1.Activated += new global::System.EventHandler(this.OnOpenLogJson);
+		this.convertAction.Activated += new global::System.EventHandler(this.TxtToPRBEvent);
 		this.PNGAction2.Activated += new global::System.EventHandler(this.ExportFCFSPNG);
 		this.SVGAction2.Activated += new global::System.EventHandler(this.ExportFCFSSVG);
 		this.PNGAction3.Activated += new global::System.EventHandler(this.ExportSJFPNG);
@@ -574,6 +585,7 @@ public partial class MainWindow
 		this.PNGAction6.Activated += new global::System.EventHandler(this.ExportComparePNG);
 		this.SVGAction6.Activated += new global::System.EventHandler(this.ExportCompareSVG);
 		this.SobreAction.Activated += new global::System.EventHandler(this.AboutWindowOpen);
+		this.AjudaAction2.Activated += new global::System.EventHandler(this.HelpEvent);
 		this.SchedulerCombobox.Changed += new global::System.EventHandler(this.OnSelectScheduler);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.quantumScale.ValueChanged += new global::System.EventHandler(this.OnQuantumChange);

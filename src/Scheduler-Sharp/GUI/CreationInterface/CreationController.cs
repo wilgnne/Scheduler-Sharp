@@ -51,7 +51,7 @@ namespace SchedulerSharp.GUI.CreationInterface
         {
             if (GetItens().Count > 0)
             {
-                if (GTKUtils.ShowFileChooser(out string path, ".prb", "Salvar como..", "Selecionar"))
+                if (GTKUtils.ShowFileChooser(out string path, ".prb", "Salvar como..", "Salvar"))
                 {
                     string json = JsonController.ListToJson(GetItens());
                     if (JsonController.SaveJson(json, path))

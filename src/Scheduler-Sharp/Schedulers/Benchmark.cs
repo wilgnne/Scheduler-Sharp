@@ -31,10 +31,10 @@ namespace SchedulerSharp.Schedulers
                 for (int i = 0; i < plotableProcesses.Count; i++)
                 {
                     PlotableProcess atual = plotableProcesses[i];
-                    if (anterior.Name != atual.Name)
+                    if (anterior.name != atual.name)
                     {
                         List<PlotableProcess> aux = plotableProcesses.GetRange(0, i);
-                        PlotableProcess ultimaExec = aux.FindLast((obj) => obj.Name == atual.Name);
+                        PlotableProcess ultimaExec = aux.FindLast((obj) => obj.name == atual.name);
                         double wait = 0;
                         if (ultimaExec != null)
                         {
@@ -42,7 +42,7 @@ namespace SchedulerSharp.Schedulers
                         }
                         else
                         {
-                            wait = (atual.ExecTime - atual.ArrivalTime);
+                            wait = (atual.ExecTime - atual.arrivalTime);
                         }
 
                         waitTime += wait;
@@ -65,8 +65,8 @@ namespace SchedulerSharp.Schedulers
             int soma = 0;
             for (int i = 0; i < processes.Count; i++)
             {
-                PlotableProcess aux = plotableProcesses.FindLast((obj) => obj.Name.Equals(processes[i].Name));
-                soma = soma + (aux.ExecTime - aux.ArrivalTime);
+                PlotableProcess aux = plotableProcesses.FindLast((obj) => obj.name.Equals(processes[i].name));
+                soma = soma + (aux.ExecTime - aux.arrivalTime);
             }
             return Convert.ToDouble(soma) / processes.Count;
         }
@@ -76,8 +76,8 @@ namespace SchedulerSharp.Schedulers
             int soma = 0;
             for (int i = 0; i < processes.Count; i++)
             {
-                PlotableProcess aux = plotableProcesses.Find((obj) => obj.Name.Equals(processes[i].Name));
-                soma = soma + (aux.ExecTime - aux.ArrivalTime);
+                PlotableProcess aux = plotableProcesses.Find((obj) => obj.name.Equals(processes[i].name));
+                soma = soma + (aux.ExecTime - aux.arrivalTime);
             }
             return Convert.ToDouble(soma) / processes.Count;
         }
