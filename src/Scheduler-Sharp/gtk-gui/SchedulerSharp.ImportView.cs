@@ -13,8 +13,9 @@ namespace SchedulerSharp
 			global::Stetic.Gui.Initialize(this);
 			// Widget SchedulerSharp.ImportView
 			this.Name = "SchedulerSharp.ImportView";
-			this.Title = global::Mono.Unix.Catalog.GetString("ImportView");
-			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Title = global::Mono.Unix.Catalog.GetString("Visualização de LOG");
+			this.Icon = global::Gdk.Pixbuf.LoadFromResource("SchedulerSharp.icon512.png");
+			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 			// Container child SchedulerSharp.ImportView.Gtk.Container+ContainerChild
 			this.vbox1 = new global::Gtk.VBox();
 			this.vbox1.Name = "vbox1";

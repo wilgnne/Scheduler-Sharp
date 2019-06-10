@@ -107,14 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Content\Scherduler-_001.png" />
-    <None Include="Content\Scherduler-_003.png" />
-    <None Include="Content\Scherduler-_004.png" />
-    <None Include="Content\Scherduler-_005.png" />
-    <None Include="Content\Scherduler-_006.png" />
-    <None Include="Content\Scherduler-_007.png" />
-    <None Include="Content\Scherduler-_008.png" />
-    <None Include="Content\Scherduler-_009.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Schedulers\" />

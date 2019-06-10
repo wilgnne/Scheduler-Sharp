@@ -57,7 +57,7 @@ namespace SchedulerSharp.Windows
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.label4 = new global::Gtk.Label();
 			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("<span size=\"x-large\"><b>Sheduler-Sharp 0.8b</b></span>");
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("<span size=\"x-large\"><b>Sheduler-Sharp 1.0</b></span>");
 			this.label4.UseMarkup = true;
 			this.label4.Justify = ((global::Gtk.Justification)(2));
 			this.vbox4.Add(this.label4);
@@ -70,7 +70,7 @@ namespace SchedulerSharp.Windows
 			this.label5.Name = "label5";
 			this.label5.LabelProp = global::Mono.Unix.Catalog.GetString("Simulador de escalonamento de processos.\nEscrito em C# com interface grafica em G" +
 					"TK.\nImplementação dos algoritmos de escalonamento\nFCFS, SJF com Preempção e Roun" +
-					"d Robim");
+					"d Robin.");
 			this.label5.Justify = ((global::Gtk.Justification)(2));
 			this.vbox4.Add(this.label5);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.label5]));
@@ -116,6 +116,7 @@ namespace SchedulerSharp.Windows
 			this.label8.Name = "label8";
 			this.label8.LabelProp = global::Mono.Unix.Catalog.GetString("<span foreground=\"red\"><u>www.github.com/Wilgnne/Scheduler-Sharp</u></span>");
 			this.label8.UseMarkup = true;
+			this.label8.Selectable = true;
 			this.vbox4.Add(this.label8);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox4[this.label8]));
 			w9.Position = 7;

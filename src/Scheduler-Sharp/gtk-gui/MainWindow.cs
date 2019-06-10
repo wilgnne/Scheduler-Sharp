@@ -25,7 +25,7 @@ public partial class MainWindow
 
 	private global::Gtk.Action LogLogAction;
 
-	private global::Gtk.Action closeAction;
+	private global::Gtk.Action quitAction;
 
 	private global::Gtk.Action LogTxtAction;
 
@@ -71,19 +71,19 @@ public partial class MainWindow
 
 	private global::Gtk.Action SVGAction5;
 
-	private global::Gtk.Action ComparaoAction;
+	private global::Gtk.Action BenchmarkAction;
 
 	private global::Gtk.Action PNGAction6;
 
 	private global::Gtk.Action SVGAction6;
 
-	private global::Gtk.Action AjudaAction;
+	private global::Gtk.Action dialogQuestionAction;
 
-	private global::Gtk.Action SobreAction;
+	private global::Gtk.Action dialogInfoAction;
 
 	private global::Gtk.Action AjudaAction1;
 
-	private global::Gtk.Action AjudaAction2;
+	private global::Gtk.Action connectAction;
 
 	private global::Gtk.VBox vbox1;
 
@@ -179,9 +179,9 @@ public partial class MainWindow
 		this.LogLogAction = new global::Gtk.Action("LogLogAction", global::Mono.Unix.Catalog.GetString("Log: .log"), null, null);
 		this.LogLogAction.ShortLabel = global::Mono.Unix.Catalog.GetString(".json");
 		w1.Add(this.LogLogAction, null);
-		this.closeAction = new global::Gtk.Action("closeAction", global::Mono.Unix.Catalog.GetString("Fechar"), null, "gtk-close");
-		this.closeAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Fechar");
-		w1.Add(this.closeAction, null);
+		this.quitAction = new global::Gtk.Action("quitAction", global::Mono.Unix.Catalog.GetString("Fechar"), null, "gtk-quit");
+		this.quitAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Fechar");
+		w1.Add(this.quitAction, null);
 		this.LogTxtAction = new global::Gtk.Action("LogTxtAction", global::Mono.Unix.Catalog.GetString("Log: .txt"), null, null);
 		this.LogTxtAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Log .txt");
 		w1.Add(this.LogTxtAction, null);
@@ -248,27 +248,27 @@ public partial class MainWindow
 		this.SVGAction5 = new global::Gtk.Action("SVGAction5", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
 		this.SVGAction5.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
 		w1.Add(this.SVGAction5, null);
-		this.ComparaoAction = new global::Gtk.Action("ComparaoAction", global::Mono.Unix.Catalog.GetString("Comparação"), null, null);
-		this.ComparaoAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Comparação");
-		w1.Add(this.ComparaoAction, null);
+		this.BenchmarkAction = new global::Gtk.Action("BenchmarkAction", global::Mono.Unix.Catalog.GetString("Benchmark"), null, null);
+		this.BenchmarkAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Comparação");
+		w1.Add(this.BenchmarkAction, null);
 		this.PNGAction6 = new global::Gtk.Action("PNGAction6", global::Mono.Unix.Catalog.GetString(".PNG"), null, null);
 		this.PNGAction6.ShortLabel = global::Mono.Unix.Catalog.GetString(".PNG");
 		w1.Add(this.PNGAction6, null);
 		this.SVGAction6 = new global::Gtk.Action("SVGAction6", global::Mono.Unix.Catalog.GetString(".SVG"), null, null);
 		this.SVGAction6.ShortLabel = global::Mono.Unix.Catalog.GetString(".SVG");
 		w1.Add(this.SVGAction6, null);
-		this.AjudaAction = new global::Gtk.Action("AjudaAction", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
-		this.AjudaAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
-		w1.Add(this.AjudaAction, null);
-		this.SobreAction = new global::Gtk.Action("SobreAction", global::Mono.Unix.Catalog.GetString("Sobre"), null, null);
-		this.SobreAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Sobre");
-		w1.Add(this.SobreAction, null);
+		this.dialogQuestionAction = new global::Gtk.Action("dialogQuestionAction", global::Mono.Unix.Catalog.GetString("Ajuda"), null, "gtk-dialog-question");
+		this.dialogQuestionAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
+		w1.Add(this.dialogQuestionAction, null);
+		this.dialogInfoAction = new global::Gtk.Action("dialogInfoAction", global::Mono.Unix.Catalog.GetString("Sobre"), null, "gtk-dialog-info");
+		this.dialogInfoAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Sobre");
+		w1.Add(this.dialogInfoAction, null);
 		this.AjudaAction1 = new global::Gtk.Action("AjudaAction1", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
 		this.AjudaAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
 		w1.Add(this.AjudaAction1, null);
-		this.AjudaAction2 = new global::Gtk.Action("AjudaAction2", global::Mono.Unix.Catalog.GetString("Ajuda"), null, null);
-		this.AjudaAction2.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
-		w1.Add(this.AjudaAction2, null);
+		this.connectAction = new global::Gtk.Action("connectAction", global::Mono.Unix.Catalog.GetString("Documentação"), null, "gtk-connect");
+		this.connectAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Ajuda");
+		w1.Add(this.connectAction, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -285,15 +285,15 @@ public partial class MainWindow
 		this.UIManager.AddUiFromString("<ui><menubar name=\'menubar3\'><menu name=\'dndAction\' action=\'dndAction\'><menuitem " +
 				"name=\'newAction\' action=\'newAction\'/><menuitem name=\'editAction\' action=\'editAct" +
 				"ion\'/><menuitem name=\'saveAction\' action=\'saveAction\'/><menuitem name=\'saveAsAct" +
-				"ion\' action=\'saveAsAction\'/><menuitem name=\'closeAction\' action=\'closeAction\'/><" +
-				"/menu><menu name=\'mediaPlayAction\' action=\'mediaPlayAction\'><menu name=\'director" +
-				"yAction\' action=\'directoryAction\'><menu name=\'FCFSAction1\' action=\'FCFSAction1\'>" +
-				"<menuitem name=\'PNGAction2\' action=\'PNGAction2\'/><menuitem name=\'SVGAction2\' act" +
-				"ion=\'SVGAction2\'/></menu><menu name=\'SJFAction\' action=\'SJFAction\'><menuitem nam" +
-				"e=\'PNGAction3\' action=\'PNGAction3\'/><menuitem name=\'SVGAction3\' action=\'SVGActio" +
-				"n3\'/></menu><menu name=\'RRAction\' action=\'RRAction\'><menuitem name=\'PNGAction4\' " +
-				"action=\'PNGAction4\'/><menuitem name=\'SVGAction4\' action=\'SVGAction4\'/></menu><me" +
-				"nu name=\'ComparaoAction\' action=\'ComparaoAction\'><menuitem name=\'PNGAction6\' act" +
+				"ion\' action=\'saveAsAction\'/><menuitem name=\'quitAction\' action=\'quitAction\'/></m" +
+				"enu><menu name=\'mediaPlayAction\' action=\'mediaPlayAction\'><menu name=\'directoryA" +
+				"ction\' action=\'directoryAction\'><menu name=\'FCFSAction1\' action=\'FCFSAction1\'><m" +
+				"enuitem name=\'PNGAction2\' action=\'PNGAction2\'/><menuitem name=\'SVGAction2\' actio" +
+				"n=\'SVGAction2\'/></menu><menu name=\'SJFAction\' action=\'SJFAction\'><menuitem name=" +
+				"\'PNGAction3\' action=\'PNGAction3\'/><menuitem name=\'SVGAction3\' action=\'SVGAction3" +
+				"\'/></menu><menu name=\'RRAction\' action=\'RRAction\'><menuitem name=\'PNGAction4\' ac" +
+				"tion=\'PNGAction4\'/><menuitem name=\'SVGAction4\' action=\'SVGAction4\'/></menu><menu" +
+				" name=\'BenchmarkAction\' action=\'BenchmarkAction\'><menuitem name=\'PNGAction6\' act" +
 				"ion=\'PNGAction6\'/><menuitem name=\'SVGAction6\' action=\'SVGAction6\'/></menu><menu " +
 				"name=\'TodosAction\' action=\'TodosAction\'><menuitem name=\'PNGAction5\' action=\'PNGA" +
 				"ction5\'/><menuitem name=\'SVGAction5\' action=\'SVGAction5\'/></menu><menuitem name=" +
@@ -301,9 +301,10 @@ public partial class MainWindow
 				"xtAction\'/></menu><menu name=\'orientationPortraitAction\' action=\'orientationPort" +
 				"raitAction\'><menuitem name=\'LogLogAction1\' action=\'LogLogAction1\'/></menu></menu" +
 				"><menu name=\'findAndReplaceAction\' action=\'findAndReplaceAction\'><menuitem name=" +
-				"\'convertAction\' action=\'convertAction\'/></menu><menu name=\'AjudaAction\' action=\'" +
-				"AjudaAction\'><menuitem name=\'AjudaAction2\' action=\'AjudaAction2\'/><menuitem name" +
-				"=\'SobreAction\' action=\'SobreAction\'/></menu></menubar></ui>");
+				"\'convertAction\' action=\'convertAction\'/></menu><menu name=\'dialogQuestionAction\'" +
+				" action=\'dialogQuestionAction\'><menuitem name=\'connectAction\' action=\'connectAct" +
+				"ion\'/><menuitem name=\'dialogInfoAction\' action=\'dialogInfoAction\'/></menu></menu" +
+				"bar></ui>");
 		this.menubar3 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar3")));
 		this.menubar3.Name = "menubar3";
 		this.vbox1.Add(this.menubar3);
@@ -315,7 +316,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 0;
+		this.notebook1.CurrentPage = 1;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.simulatorBox = new global::Gtk.VBox();
 		this.simulatorBox.Name = "simulatorBox";
@@ -329,7 +330,7 @@ public partial class MainWindow
 		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("FCFS"));
 		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("SJF"));
 		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("RR"));
-		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Compare"));
+		this.SchedulerCombobox.AppendText(global::Mono.Unix.Catalog.GetString("Benchmark"));
 		this.SchedulerCombobox.WidthRequest = 160;
 		this.SchedulerCombobox.Name = "SchedulerCombobox";
 		this.SchedulerCombobox.Active = 0;
@@ -570,7 +571,7 @@ public partial class MainWindow
 		this.saveAction.Activated += new global::System.EventHandler(this.SaveEvent);
 		this.saveAsAction.Activated += new global::System.EventHandler(this.SaveAsEvent);
 		this.LogLogAction.Activated += new global::System.EventHandler(this.LogJsonEvent);
-		this.closeAction.Activated += new global::System.EventHandler(this.CloseEvent);
+		this.quitAction.Activated += new global::System.EventHandler(this.CloseEvent);
 		this.LogTxtAction.Activated += new global::System.EventHandler(this.LogTxtEvent);
 		this.LogLogAction1.Activated += new global::System.EventHandler(this.OnOpenLogJson);
 		this.convertAction.Activated += new global::System.EventHandler(this.TxtToPRBEvent);
@@ -584,8 +585,8 @@ public partial class MainWindow
 		this.SVGAction5.Activated += new global::System.EventHandler(this.ExportALLSVG);
 		this.PNGAction6.Activated += new global::System.EventHandler(this.ExportComparePNG);
 		this.SVGAction6.Activated += new global::System.EventHandler(this.ExportCompareSVG);
-		this.SobreAction.Activated += new global::System.EventHandler(this.AboutWindowOpen);
-		this.AjudaAction2.Activated += new global::System.EventHandler(this.HelpEvent);
+		this.dialogInfoAction.Activated += new global::System.EventHandler(this.AboutWindowOpen);
+		this.connectAction.Activated += new global::System.EventHandler(this.HelpEvent);
 		this.SchedulerCombobox.Changed += new global::System.EventHandler(this.OnSelectScheduler);
 		this.directoryEntry.Changed += new global::System.EventHandler(this.OnChangeDirEntry);
 		this.quantumScale.ValueChanged += new global::System.EventHandler(this.OnQuantumChange);

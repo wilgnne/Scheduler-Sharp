@@ -132,6 +132,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                 else
                 {
                     paused = true;
+                    CutListEndPlot(false);
                 }
             }
         }

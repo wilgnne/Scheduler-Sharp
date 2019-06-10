@@ -11,7 +11,7 @@ namespace SchedulerSharp.Models
     public static class ExportController
     {
         public static void NotProcess() => 
-            GTKUtils.ShowDilog("Não ha processos escalonados!", 
+            GTKUtils.ShowDilog("Não há processos escalonados!", 
                 MessageType.Info, "Não existem dados a serem exportados!");
 
         public static void ErrorDilog (string title, string messege) => 
@@ -144,7 +144,7 @@ namespace SchedulerSharp.Models
             }
             else
             {
-                InfoDilog("Não ha processos escalonados!", "Não existem dados a serem exportados!");
+                NotProcess();
             }
         }
 
@@ -162,7 +162,7 @@ namespace SchedulerSharp.Models
                 {
                     string[] names =
                     {
-                        "FCFS","SJF", "RR", "Compare",
+                        "FCFS","SJF", "RR", "Benchmark",
                     };
 
                     for (int i = 0; i < names.Length; i++)
@@ -175,7 +175,7 @@ namespace SchedulerSharp.Models
             }
             else
             {
-                InfoDilog("Não ha processos escalonados!", "Não existem dados a serem exportados!");
+                NotProcess();
             }
 
             return null;

@@ -31,7 +31,11 @@ public partial class MainWindow : Gtk.Window
 
         plot = new PlotInterface(plotBox);
         escalonadPlot = new PlotInterface(plotBox, AtualizeAnimCallBack);
+        DisableAll();
+    }
 
+    protected void DisableAll ()
+    {
         SchedulerCombobox.Sensitive = false;
         quantumScale.Sensitive = false;
         MediaButtonSensitibe(false);
@@ -60,7 +64,11 @@ public partial class MainWindow : Gtk.Window
 
     protected void SaveEvent(object sender, EventArgs e) => creationController.SaveEvent(ChangeDirCallback);
 
-    protected void NewEvent(object sender, EventArgs e) => creationController.NewEvent();
+    protected void NewEvent(object sender, EventArgs e)
+    {
+        creationController.NewEvent();
+        DisableAll();
+    }
     #endregion
 
     #region "Eventos de Criação"
@@ -102,7 +110,7 @@ public partial class MainWindow : Gtk.Window
         escalonadPlot.Pause();
         switch (((ComboBox)sender).ActiveText)
         {
-            case "Compare":
+            case "Benchmark":
                 MediaButtonSensitibe(false);
 
                 GenereteList(responseTimeFCFS, turnarondTimeFCFS, waitTimeFCFS, out List<double> fcfsTime);
@@ -113,7 +121,7 @@ public partial class MainWindow : Gtk.Window
 
                 GenereteList("Tempo de Resposta", "Tempo de Vida", "Tempo de Espera", out List<string> text);
 
-                escalonadPlot.AnimateData(fcfsTime, sjfTime, rrTime, text, "Comparação");
+                escalonadPlot.AnimateData(fcfsTime, sjfTime, rrTime, text, "Benchmark");
                 break;
             case "SJF":
                 MediaButtonSensitibe(true);

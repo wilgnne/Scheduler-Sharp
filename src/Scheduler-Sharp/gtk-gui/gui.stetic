@@ -80,11 +80,11 @@
         <property name="ShortLabel" translatable="yes">.json</property>
         <signal name="Activated" handler="LogJsonEvent" />
       </action>
-      <action id="closeAction">
+      <action id="quitAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Fechar</property>
         <property name="ShortLabel" translatable="yes">Fechar</property>
-        <property name="StockId">gtk-close</property>
+        <property name="StockId">gtk-quit</property>
         <signal name="Activated" handler="CloseEvent" />
       </action>
       <action id="LogTxtAction">
@@ -211,9 +211,9 @@
         <property name="ShortLabel" translatable="yes">.SVG</property>
         <signal name="Activated" handler="ExportALLSVG" />
       </action>
-      <action id="ComparaoAction">
+      <action id="BenchmarkAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Comparação</property>
+        <property name="Label" translatable="yes">Benchmark</property>
         <property name="ShortLabel" translatable="yes">Comparação</property>
       </action>
       <action id="PNGAction6">
@@ -228,15 +228,17 @@
         <property name="ShortLabel" translatable="yes">.SVG</property>
         <signal name="Activated" handler="ExportCompareSVG" />
       </action>
-      <action id="AjudaAction">
+      <action id="dialogQuestionAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Ajuda</property>
         <property name="ShortLabel" translatable="yes">Ajuda</property>
+        <property name="StockId">gtk-dialog-question</property>
       </action>
-      <action id="SobreAction">
+      <action id="dialogInfoAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Sobre</property>
         <property name="ShortLabel" translatable="yes">Sobre</property>
+        <property name="StockId">gtk-dialog-info</property>
         <signal name="Activated" handler="AboutWindowOpen" />
       </action>
       <action id="AjudaAction1">
@@ -244,10 +246,11 @@
         <property name="Label" translatable="yes">Ajuda</property>
         <property name="ShortLabel" translatable="yes">Ajuda</property>
       </action>
-      <action id="AjudaAction2">
+      <action id="connectAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Ajuda</property>
+        <property name="Label" translatable="yes">Documentação</property>
         <property name="ShortLabel" translatable="yes">Ajuda</property>
+        <property name="StockId">gtk-connect</property>
         <signal name="Activated" handler="HelpEvent" />
       </action>
     </action-group>
@@ -271,7 +274,7 @@
                 <node type="Menuitem" action="editAction" />
                 <node type="Menuitem" action="saveAction" />
                 <node type="Menuitem" action="saveAsAction" />
-                <node type="Menuitem" action="closeAction" />
+                <node type="Menuitem" action="quitAction" />
               </node>
               <node type="Menu" action="mediaPlayAction">
                 <node type="Menu" action="directoryAction">
@@ -287,7 +290,7 @@
                     <node type="Menuitem" action="PNGAction4" />
                     <node type="Menuitem" action="SVGAction4" />
                   </node>
-                  <node type="Menu" action="ComparaoAction">
+                  <node type="Menu" action="BenchmarkAction">
                     <node type="Menuitem" action="PNGAction6" />
                     <node type="Menuitem" action="SVGAction6" />
                   </node>
@@ -305,9 +308,9 @@
               <node type="Menu" action="findAndReplaceAction">
                 <node type="Menuitem" action="convertAction" />
               </node>
-              <node type="Menu" action="AjudaAction">
-                <node type="Menuitem" action="AjudaAction2" />
-                <node type="Menuitem" action="SobreAction" />
+              <node type="Menu" action="dialogQuestionAction">
+                <node type="Menuitem" action="connectAction" />
+                <node type="Menuitem" action="dialogInfoAction" />
               </node>
             </node>
           </widget>
@@ -339,7 +342,7 @@
                         <property name="Items" translatable="yes">FCFS
 SJF
 RR
-Compare</property>
+Benchmark</property>
                         <property name="Active">0</property>
                         <signal name="Changed" handler="OnSelectScheduler" />
                       </widget>
@@ -672,8 +675,9 @@ Compare</property>
   </widget>
   <widget class="Gtk.Window" id="SchedulerSharp.ImportView" design-size="400 300">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">ImportView</property>
-    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Title" translatable="yes">Visualização de LOG</property>
+    <property name="Icon">resource:SchedulerSharp.icon512.png</property>
+    <property name="WindowPosition">Center</property>
     <child>
       <widget class="Gtk.VBox" id="vbox1">
         <property name="MemberName" />
@@ -736,7 +740,7 @@ RR</property>
             <child>
               <widget class="Gtk.Label" id="label4">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;span size="x-large"&gt;&lt;b&gt;Sheduler-Sharp 0.8b&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;span size="x-large"&gt;&lt;b&gt;Sheduler-Sharp 1.0&lt;/b&gt;&lt;/span&gt;</property>
                 <property name="UseMarkup">True</property>
                 <property name="Justify">Center</property>
               </widget>
@@ -753,7 +757,7 @@ RR</property>
                 <property name="LabelProp" translatable="yes">Simulador de escalonamento de processos.
 Escrito em C# com interface grafica em GTK.
 Implementação dos algoritmos de escalonamento
-FCFS, SJF com Preempção e Round Robim</property>
+FCFS, SJF com Preempção e Round Robin.</property>
                 <property name="Justify">Center</property>
               </widget>
               <packing>
@@ -814,6 +818,7 @@ FCFS, SJF com Preempção e Round Robim</property>
                 <property name="MemberName" />
                 <property name="LabelProp" translatable="yes">&lt;span foreground="red"&gt;&lt;u&gt;www.github.com/Wilgnne/Scheduler-Sharp&lt;/u&gt;&lt;/span&gt;</property>
                 <property name="UseMarkup">True</property>
+                <property name="Selectable">True</property>
               </widget>
               <packing>
                 <property name="Position">7</property>
