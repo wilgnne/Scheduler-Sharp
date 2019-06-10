@@ -1,3 +1,9 @@
+<p align="center">
+  <img width="255" height="255" src="https://raw.githubusercontent.com/Wilgnne/Scheduler-Sharp/master/src/Scheduler-Sharp/Icons/icon255.png">
+  <br> <h1> Scheduler# </h1></br>
+</p>
+
+
 # Scheduler#
 Simulador de escalonamento de processos, escrito em C# com interface gráfica em GTK2, com implementação dos escalonadores: FCFS, SJF com preempção e Round Robin.
 
