@@ -41,7 +41,7 @@ Arquivos de log são utilizados na exportação de dados, este arquivo contém a
 No que tange a exportação de dados do escalonador, e possível também exportá-los em **.txt**, mas é importante ressaltar que o escalonador em seu estado atual não consegue consumir estas informações assim como o faz com arquivos **.log**.
 
 
-## Areá de Criação - Criando e editando arquivos
+## Área de Criação - Criando e editando arquivos
 A aba de Criação é dedicada a oferecer um ambiente propício a criação e edição de arquivos do tipo **.prb**.
 ### Criando novos processos
 Ao clicar em no botão `Adicionar` é gerado um novo processo com dados randômicos que mais tarde podem ser editados.
