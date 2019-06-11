@@ -272,7 +272,7 @@ public partial class MainWindow
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
-		this.Title = global::Mono.Unix.Catalog.GetString("Scherduler#");
+		this.Title = global::Mono.Unix.Catalog.GetString("Scheduler#");
 		this.Icon = global::Gdk.Pixbuf.LoadFromResource("SchedulerSharp.icon512.png");
 		this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 		this.DefaultWidth = 800;
