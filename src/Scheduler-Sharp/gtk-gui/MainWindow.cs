@@ -316,7 +316,7 @@ public partial class MainWindow
 		this.notebook1 = new global::Gtk.Notebook();
 		this.notebook1.CanFocus = true;
 		this.notebook1.Name = "notebook1";
-		this.notebook1.CurrentPage = 1;
+		this.notebook1.CurrentPage = 0;
 		// Container child notebook1.Gtk.Notebook+NotebookChild
 		this.simulatorBox = new global::Gtk.VBox();
 		this.simulatorBox.Name = "simulatorBox";
@@ -413,7 +413,7 @@ public partial class MainWindow
 		this.pauseButton.CanFocus = true;
 		this.pauseButton.Name = "pauseButton";
 		this.pauseButton.UseUnderline = true;
-		this.pauseButton.Label = global::Mono.Unix.Catalog.GetString("Pausa");
+		this.pauseButton.Label = global::Mono.Unix.Catalog.GetString("Pausa/Continue");
 		global::Gtk.Image w12 = new global::Gtk.Image();
 		w12.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-pause", global::Gtk.IconSize.Button);
 		this.pauseButton.Image = w12;

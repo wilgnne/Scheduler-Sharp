@@ -459,7 +459,7 @@ Benchmark</property>
                         <property name="CanFocus">True</property>
                         <property name="Type">TextAndIcon</property>
                         <property name="Icon">stock:gtk-media-pause Button</property>
-                        <property name="Label" translatable="yes">Pausa</property>
+                        <property name="Label" translatable="yes">Pausa/Continue</property>
                         <property name="UseUnderline">True</property>
                         <signal name="Clicked" handler="PauseEvent" />
                       </widget>
@@ -740,7 +740,7 @@ RR</property>
             <child>
               <widget class="Gtk.Label" id="label4">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;span size="x-large"&gt;&lt;b&gt;Sheduler-Sharp 1.0&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;span size="x-large"&gt;&lt;b&gt;Scheduler-Sharp 1.0&lt;/b&gt;&lt;/span&gt;</property>
                 <property name="UseMarkup">True</property>
                 <property name="Justify">Center</property>
               </widget>
