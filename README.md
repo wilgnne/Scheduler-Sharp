@@ -109,7 +109,7 @@ Você pode exportar o arquivo atual clicando em `Simulação` seguido de `Export
  - GTK-Sharp 2
 
 ### Instalação
-A instalação pode ser realizada a partir do código-fonte ou atravez do pacote [.deb](https://github.com/GabiFaria/Scheduler-Sharp/blob/master/docs/scheduler-sharp_1.0_amd64.deb).
+A instalação pode ser realizada a partir do código-fonte ou atravez do pacote [.deb](https://github.com/GabiFaria/Scheduler-Sharp/raw/master/docs/scheduler-sharp_1.0_amd64.deb).
 #### Por código-fonte
 - Mono e MonoDevelop
 
