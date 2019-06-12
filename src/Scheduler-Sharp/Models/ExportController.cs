@@ -51,7 +51,7 @@ namespace SchedulerSharp.Models
             }
         }
 
-        public static void LogJsonExport(List<PlotableProcess> fcfs, List<PlotableProcess> sjf, List<PlotableProcess> rr, double quantum)
+        public static void LogExport(List<PlotableProcess> fcfs, List<PlotableProcess> sjf, List<PlotableProcess> rr, double quantum)
         {
             if (fcfs != null && sjf != null && rr != null)
             {
@@ -180,6 +180,5 @@ namespace SchedulerSharp.Models
 
             return null;
         }
-
     }
 }
