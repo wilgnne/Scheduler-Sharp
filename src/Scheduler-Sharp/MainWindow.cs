@@ -199,10 +199,17 @@ public partial class MainWindow : Gtk.Window
 
     public void HelpEvent(object sender, EventArgs e)
     {
-        System.Threading.Thread thr = new System.Threading.Thread
-        (new System.Threading.ThreadStart(delegate {
+        try
+        {
+            System.Threading.Thread thr = new System.Threading.Thread
+            (new System.Threading.ThreadStart(delegate {
             System.Diagnostics.Process.Start("http://www.github.com/Wilgnne/Scheduler-Sharp");
             }));
-        thr.Start();
+            thr.Start();
+        }
+        catch
+        {
+            return;
+        }
     }
 }

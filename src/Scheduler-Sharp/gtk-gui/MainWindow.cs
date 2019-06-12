@@ -413,7 +413,7 @@ public partial class MainWindow
 		this.pauseButton.CanFocus = true;
 		this.pauseButton.Name = "pauseButton";
 		this.pauseButton.UseUnderline = true;
-		this.pauseButton.Label = global::Mono.Unix.Catalog.GetString("Pausa/Continue");
+		this.pauseButton.Label = global::Mono.Unix.Catalog.GetString("Pausar/Continuar");
 		global::Gtk.Image w12 = new global::Gtk.Image();
 		w12.Pixbuf = global::Stetic.IconLoader.LoadIcon(this, "gtk-media-pause", global::Gtk.IconSize.Button);
 		this.pauseButton.Image = w12;
