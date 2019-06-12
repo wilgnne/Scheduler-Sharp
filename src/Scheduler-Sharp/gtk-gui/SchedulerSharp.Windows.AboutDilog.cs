@@ -57,7 +57,7 @@ namespace SchedulerSharp.Windows
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.label4 = new global::Gtk.Label();
 			this.label4.Name = "label4";
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("<span size=\"x-large\"><b>Sheduler-Sharp 1.0</b></span>");
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString("<span size=\"x-large\"><b>Scheduler-Sharp 1.0</b></span>");
 			this.label4.UseMarkup = true;
 			this.label4.Justify = ((global::Gtk.Justification)(2));
 			this.vbox4.Add(this.label4);

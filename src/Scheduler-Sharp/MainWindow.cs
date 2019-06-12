@@ -151,7 +151,7 @@ public partial class MainWindow : Gtk.Window
     #endregion
 
     #region "Eventos de Exportagem"
-    protected void LogJsonEvent(object sender, EventArgs e) => ExportController.LogJsonExport(fcfs, sjf, rr, quantumScale.Value);
+    protected void LogJsonEvent(object sender, EventArgs e) => ExportController.LogExport(fcfs, sjf, rr, quantumScale.Value);
 
     protected void LogTxtEvent(object sender, EventArgs e) => ExportController.LogTXTExport(fcfs, sjf, rr, quantumScale.Value);
 

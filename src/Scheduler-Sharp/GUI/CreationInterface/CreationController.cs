@@ -82,14 +82,12 @@ namespace SchedulerSharp.GUI.CreationInterface
                 callback();
                 return true;
             }
-            else
-            {
-                Console.WriteLine("{0} nao existe", path);
-                historicStrings.Remove(path);
-                json = JsonController.ListToJson(historicStrings);
-                JsonController.SaveJson(json, historicPath);
-                ClearComboBox();
-            }
+
+            Console.WriteLine("{0} nao existe", path);
+            historicStrings.Remove(path);
+            json = JsonController.ListToJson(historicStrings);
+            JsonController.SaveJson(json, historicPath);
+            ClearComboBox();
             return false;
         }
 

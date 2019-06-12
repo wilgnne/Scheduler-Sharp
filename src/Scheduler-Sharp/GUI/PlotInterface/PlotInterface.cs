@@ -28,9 +28,7 @@ namespace SchedulerSharp.GUI.PlotInterface
         string title;
 
         AnimCallBack callBack;
-
         uint tagTrh;
-
 
         public PlotInterface(Container container, AnimCallBack callBack = null)
         {
@@ -46,9 +44,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             this.callBack = callBack;
 
             tagTrh = GLib.Timeout.Add(60, AnimationThr);
-            
 
-            //model.Series.Add(barSeries);
         }
 
         /// <summary>
@@ -75,7 +71,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             }
         }
 
-        public void CutListEndPlot (bool isAnim)
+        public void CutListAndPlot (bool isAnim)
         {
             List<PlotableProcess> processes = toPlot.GetRange(0, rangePlot);
             if (processes.Count > 0)
@@ -91,19 +87,12 @@ namespace SchedulerSharp.GUI.PlotInterface
 
         public bool AnimationThr ()
         {
-            if (toPlot != null)
+            if (toPlot != null && !paused)
             {
-                if (rangePlot < toPlot.Count && rangePlot >= 0)
+                if (rangePlot < toPlot.Count && rangePlot >= 0 && autoIncr)
                 {
-                    if (paused)
-                    {
-                        return true;
-                    }
-                    if (autoIncr)
-                    {
-                        rangePlot += 1;
-                        CutListEndPlot(true);
-                    }
+                    rangePlot += 1;
+                    CutListAndPlot(true);
                 }
             }
             return true;
@@ -132,7 +121,7 @@ namespace SchedulerSharp.GUI.PlotInterface
                 else
                 {
                     paused = true;
-                    CutListEndPlot(false);
+                    CutListAndPlot(false);
                 }
             }
         }
@@ -146,7 +135,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             else
                 rangePlot = 0;
 
-            CutListEndPlot(false);
+            CutListAndPlot(false);
         }
 
         public void Preview()
@@ -158,7 +147,7 @@ namespace SchedulerSharp.GUI.PlotInterface
             else
                 rangePlot = toPlot.Count - 1;
 
-            CutListEndPlot(false);
+            CutListAndPlot(false);
         }
 
         public void AnimateData (List<double> waitTime, List<double> turnaroundTime, List<double> responseTime, List<string> text, string Title = "Title")

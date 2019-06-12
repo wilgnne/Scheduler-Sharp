@@ -42,7 +42,9 @@ No que tange a exportação de dados do escalonador, e possível também export�
 
 
 ## Área de Criação - Criando e editando arquivos
+
 A aba de Criação é dedicada a oferecer um ambiente propício a criação e edição de arquivos do tipo **.prb**.
+
 ### Criando novos processos
 Ao clicar em no botão `Adicionar` é gerado um novo processo com dados randômicos que mais tarde podem ser editados.
 <p align="center">
@@ -78,7 +80,7 @@ Para abrir um arquivo de processos **.prb** encaminhe-se a aba de `Arquivos` seg
   <img width="538" height="460" src="https://raw.githubusercontent.com/Wilgnne/Scheduler-Sharp/master/docs/Pictures/Scherduler-Abrir.png">
 </p>
 
-## Areá de Simulação - Executando os escalonadores e gerando resultados
+## Área de Simulação - Executando os escalonadores e gerando resultados
 
 ### Selecionando um escalonador
 É possível selecionar qual escalonador se deseja visualizar no gráfico, esta seleção e feita a partir do `ComboBox` selecionando pelo nome o escalonador desejado.
