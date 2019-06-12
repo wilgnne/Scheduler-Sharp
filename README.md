@@ -7,8 +7,8 @@ Simulador de escalonamento de processos, escrito em C# com interface gráfica em
 
  - [Usando](https://github.com/Wilgnne/Scheduler-Sharp#usando)
 	 - [Arquivos](https://github.com/Wilgnne/Scheduler-Sharp#arquivos)
-	 - [Areá de Criação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
-	 - [Areá de Simulação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
+	 - [Área de Criação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
+	 - [Área de Simulação](https://github.com/Wilgnne/Scheduler-Sharp#are%C3%A1-de-cria%C3%A7%C3%A3o---criando-e-editando-arquivos)
 - [Instalação](https://github.com/Wilgnne/Scheduler-Sharp#c%C3%B3digo-fonte)
 
 # Usando
@@ -41,7 +41,7 @@ E possível apos a exportação de um arquivo **.log** consumi-lo novamente na f
 No que tange a exportação de dados do escalonador, e possível também exportá-los em **.txt**, mas importante ressaltar que o escalonador em seu estado atual não consegue consumir estas informações assim como o faz com arquivos **.log**.
 
 
-## Areá de Criação - Criando e editando arquivos
+## Área de Criação - Criando e editando arquivos
 A aba de Criação e dedicada a oferecer um ambiente propicio a criação e edição de arquivos do tipo **.prb**.
 ### Criando novos processos
 Ao clicar em no botão `Adicionar` e gerado um novo processo com dados randômicos que mais tarde podem ser editados.
@@ -78,7 +78,7 @@ Para abrir um arquivo de processos **.prb** encaminhe-se a aba de `Arquivos` seg
   <img width="538" height="460" src="https://raw.githubusercontent.com/Wilgnne/Scheduler-Sharp/master/docs/Pictures/Scherduler-Abrir.png">
 </p>
 
-## Areá de Simulação - Executando os escalonadores e gerando resultados
+## Área de Simulação - Executando os escalonadores e gerando resultados
 
 ### Selecionando um escalonador
 E possível selecionar qual escalonador se deseja visualizar no gráfico, esta seleção e feita a partir do `ComboBox` selecionando pelo nome o escalonador desejado.
